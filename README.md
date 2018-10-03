@@ -10,6 +10,7 @@ Team member:
 - Pham Minh Duc
 - Nguyen Dinh Manh
 
-To run the project, run these following command:
+To run the project, follow this steps:
 
+- Clone the repo
 - .... 
