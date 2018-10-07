@@ -13,4 +13,5 @@ Team member:
 To run the project, follow this steps:
 
 - Clone the repo
+- Run `bundle install`
 - .... 
