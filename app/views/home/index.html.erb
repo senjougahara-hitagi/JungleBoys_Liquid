@@ -1,0 +1,2 @@
+<h1> Hi <%= current_user.username %>, you are now logged in </h1>
+<%= link_to 'logout', destroy_user_session_path, method: :delete %>
