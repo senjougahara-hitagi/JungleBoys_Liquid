@@ -6,7 +6,7 @@ $dropDown       : false;
 .navbar {
   background-color: $bgDefault;
   .navbar-brand {
-    color: $colDefault;
+    color: $colDefault !important;
     &:hover, &:focus {
       color: $colHighlight; }}
   .navbar-text {
@@ -17,7 +17,7 @@ $dropDown       : false;
         color: $colHighlight; }}}
   .navbar-nav {
     .nav-link {
-      color: $colDefault;
+      color: $colDefault !important;
       border-radius: .25rem;
       margin: 0 0.25em;
       &:not(.disabled) {
