@@ -18,6 +18,20 @@
 .page-body{
     min-height: 650px;
 }
+.rated{
+ color:#fffa00;
+}
+.homepage-info{
+ display:inline-block;
+ li{
+  display:block;
+ }
+}
+@media (min-width: 1400px){
+ .new-room-display{
+  margin-top: -88px;
+ }
+}
  footer{
   background-color: #000000;
   color: #fff;
