@@ -1,7 +1,7 @@
 <div class="sign-form">
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <h2>サインイン</h2>
+  <h2>Sign in</h2>
   <!-- show flash in <div> -->
   <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
   <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
@@ -9,14 +9,14 @@
     <div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-user"></i></span>
-				<%= f.text_field :username, placeholder: "ユーザー名", autocomplete: "off", required: true, class: "form-control" %>
+				<%= f.text_field :username, placeholder: "Username", autocomplete: "off", required: true, class: "form-control" %>
 			</div>
     </div>
 
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-    			<%= f.password_field :password, placeholder: "パスワード", autocomplete: "off", required: true, class: "form-control" %>
+    			<%= f.password_field :password, placeholder: "Password", autocomplete: "off", required: true, class: "form-control" %>
 			</div>
     </div>
 
@@ -28,7 +28,7 @@
   <% end -%>
   
 	<div class="form-group">
-   <%= f.submit "サインイン", class: "btn btn-primary btn-block btn-lg" %>
+   <%= f.submit "Sign in", class: "btn btn-primary btn-block btn-lg" %>
   </div>
   <%= render "users/shared/links" %>
   <% end %>
