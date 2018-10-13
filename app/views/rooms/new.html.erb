@@ -1,0 +1,24 @@
+Create room
+
+<div class="container">
+    <div class="sign-form">	
+
+    <%= form_for :room do |f| %> //resource
+    <div class="form-group">
+        <div class="input-group">
+            <%= f.label :room_name, "Room name" %>
+            <%= f.text_field :room_name, class: "form-control" %>
+        </div>
+    </div>
+
+    <div class="field">
+            <%= f.label :cost_per_night, "Cost per night" %>
+            <%= f.number_field :cost_per_night, class: "form-control" %>
+    </div>
+    
+    <br>
+    
+    <%= f.submit "Create room", class: "btn btn-primary" %>
+</div>
+    <% end %>
+</div>
