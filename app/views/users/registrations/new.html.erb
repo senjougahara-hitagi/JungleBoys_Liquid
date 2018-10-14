@@ -2,26 +2,26 @@
 <div class="sign-form">	
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   		<%= devise_error_messages! %>
-		<h2>新規登録</h2>
+		<h2>Sign up</h2>
 		
         <div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-user"></i></span>
-				<%= f.text_field :username, placeholder: "ユーザー名", autocomplete: "off", required: true, class: "form-control" %>
+				<%= f.text_field :username, placeholder: "Username", autocomplete: "off", required: true, class: "form-control" %>
 			</div>
         </div>
         
         <div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-paper-plane"></i></span>
-				<%= f.email_field :email, autofocus: true, placeholder: "Eメールアドレス", autocomplete: "off", required: true, class: "form-control" %>
+				<%= f.email_field :email, autofocus: true, placeholder: "Email", autocomplete: "off", required: true, class: "form-control" %>
 			</div>
         </div>
 		
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-    			<%= f.password_field :password, placeholder: "パスワード", autocomplete: "off", required: true, class: "form-control" %>
+    			<%= f.password_field :password, placeholder: "Password", autocomplete: "off", required: true, class: "form-control" %>
 			</div>
         </div>
 		
@@ -31,12 +31,12 @@
 					<i class="fa fa-lock"></i>
 					<i class="fa fa-check"></i>
 				</span>
-				<%= f.password_field :password_confirmation, placeholder: "パスワードの確認", autocomplete: "off", required: true, class: "form-control" %>
+				<%= f.password_field :password_confirmation, placeholder: "Retype password", autocomplete: "off", required: true, class: "form-control" %>
 			</div>
         </div>        
 		
 		<div class="form-group">
-           <%= f.submit "登録する", class: "btn btn-primary btn-block btn-lg" %>
+           <%= f.submit "Register", class: "btn btn-primary btn-block btn-lg" %>
         </div>
         
   		<%= render "users/shared/links" %>
