@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="room-info-cover" style="background-image:url(<%= asset_path 'rooms/room1.jpg' %>)"></div>
+</div>
+<div class="row mt-3">
+    <div class="offset-md-1 col-md-4">
+        <h1>SuperSentai</h1>
+        <p><i class="far fa-address-book"></i> Keangnam Landmark Tower</p>
+        <div class="row">
+            <div class="col-md-3"><i class="fas fa-user-friends"></i> 1 guest </div>
+            <div class="col-md-3"><i class="fas fa-door-open"></i> 1 bedroom </div>
+            <div class="col-md-3"><i class="fas fa-bed"></i> 1 bed</div>
+            <div class="col-md-3"><i class="fas fa-bath"></i> 1 bath</div>
+        </div>
+    </div>
+    <div class="col-md-2 text-center">
+        <p>Owner: <a href="#">Quan dep trai</a></p>
+        <%= image_tag("profile-pictures/avatar.jpg", :height=>'100px', :style => 'border-radius: 50%') %>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="offset-md-1 col-md-6">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
+        sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        
+        <a href="#">Read more about the space <i class="fas fa-chevron-down"></i></a>
+        <hr />
+        <p style="font-weight: bold">Amentities</p>
+        <div class="row mb-1">
+            <div class="col-md-6"><i class="fas fa-utensils"></i> Kitchen</div>
+            <div class="col-md-6"><i class="fas fa-wifi"></i> Wifi</div>
+        </div>
+        <div class="row mb-1">
+            <div class="col-md-6"><i class="fas fa-tv"></i> TV</div>
+            <div class="col-md-6"></div>
+        </div>
+        <hr />
+        <h2>157 Reviews
+            <i class="fas fa-star rated"></i>
+            <i class="fas fa-star rated"></i>
+            <i class="fas fa-star rated"></i>
+            <i class="fas fa-star rated"></i>
+            <i class="fas fa-star"></i>
+        </h2>
+        <form class="form-inline">
+          <div class="form-group" style="width:85%">
+            <input type="text" class="form-control" style="width:100%" placeholder="Write a review">
+          </div>
+          <button type="submit" class="ml-auto btn btn-primary">Submit</button>
+        </form>
+        <hr />
+        <div class="comment">
+            <div class="row">
+                <div class="col-md-1"><%= image_tag("profile-pictures/avatar.jpg", :height=>'35px', :style => 'border-radius: 50%') %></div>
+                <div class="col-md-3">
+                    <a href="#" style="font-weight:bold">Quan dep trai</a>
+                    <p>September 12</p>
+                </div>
+                <div class="col-md-2 ml-auto">8 Helpfuls</div>
+            </div>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
+            sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+            <a href="#"></a>
+        </div>
+        <hr />
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <p><h3 class="mr-2" style="display:inline-block">$1000</h3><h5 style="display:inline-block">per night</h5></p>
+            <p>
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star"></i> 157
+            </p>
+            <hr />
+            <a href="#" class="btn contact">Contact to Host</a>
+            <hr />
+          </div>
+        </div>
+    </div>
+</div>
