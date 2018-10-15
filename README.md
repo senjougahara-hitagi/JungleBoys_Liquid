@@ -14,4 +14,6 @@ To run the project, follow this steps:
 
 - Clone the repo
 - Run `bundle install`
+- Run `rake db:migrate`
+- Run `rails db:seed`
 - .... 
