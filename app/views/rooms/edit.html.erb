@@ -1,1 +1,102 @@
-Create room
+<div class="container row">
+    <div class="col-md-3">
+    </div>
+    <div class="sign-form col-md-9">	
+        <h2>Edit room's infomation</h2>
+        
+        <%= form_for :room do |f| %>
+        
+        <div class="field">
+            <%= f.label :room_name, "Room name:" %>
+            <%= f.text_field :room_name, class: "form-control" %>
+        </div>
+    
+        <div class="field">
+            <%= f.label :cost_per_night, "Cost per night:" %>
+            <%= f.number_field :cost_per_night, class: "form-control" %>
+        </div>
+        
+        <br>
+        
+        <div class="field">
+            <%= f.label :type_of_room, "Type of room:" %>
+            <%= f.select :type_of_room, options_for_select([["Homestay", "t"], ["Hotel", "s"]]), class: "form-control" %>
+        </div>
+        
+        <br>
+        
+        <div class="field">
+            <%= f.label :number_of_guests, "Number of guests:" %>
+            <%= f.number_field :number_of_guests, class: "form-control" %>
+        </div>
+        
+        <div class="field">
+            <%= f.label :number_of_bedrooms, "Number of bedrooms:" %>
+            <%= f.number_field :number_of_bedrooms, class: "form-control" %>
+        </div>
+        
+        <div class="field">
+            <%= f.label :number_of_beds, "Number of beds:" %>
+            <%= f.number_field :number_of_beds, class: "form-control" %>
+        </div>
+        
+        <div class="field">
+            <%= f.label :number_of_bathrooms, "Number of bathrooms:" %>
+            <%= f.number_field :number_of_bathrooms, class: "form-control" %>
+        </div>
+        
+        <br>
+        
+        <div class="field">
+            <%= f.label :amentities, "Amentities:" %>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <%= label_tag(:gym, "Gym") %>
+                    <%= check_box_tag(:gym) %>
+                </div>
+                <div class="col-md-4">
+                    <%= label_tag(:wifi, "Wifi") %>
+                    <%= check_box_tag(:wifi) %>
+                </div>
+                <div class="col-md-4">
+                    <%= label_tag(:tv, "TV") %>
+                    <%= check_box_tag(:tv) %>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <%= label_tag(:kitchen, "Kitchen") %>
+                    <%= check_box_tag(:kitchen) %>
+                </div>
+                <div class="col-md-4">
+                    <%= label_tag(:air_conditioner, "Air conditioner") %>
+                    <%= check_box_tag(:air_conditioner) %>
+                </div>
+                <div class="col-md-4">
+                    <%= label_tag(:hot_water, "Hot water") %>
+                    <%= check_box_tag(:hot_water) %>
+                </div>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="field">
+            <%= f.label :pictures, "Pictures:" %>
+            <%= f.file_field :pictures, class: "form-control" %>
+        </div>
+        
+        <br>
+        
+        <div class="field">
+            <%= f.label :how_to_contact_host, "How to contact host:" %>
+            <%= f.text_area :how_to_contact_host, class: "form-control" %>
+        </div>
+        
+        <br>
+        
+        <%= f.submit "Edit room", class: "btn btn-primary" %>
+        <% end %>
+    </div>
+</div>
