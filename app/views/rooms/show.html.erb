@@ -1,8 +1,27 @@
 <div class="row">
-    <div class="room-info-cover" style="background-image:url(<%= asset_path 'rooms/room1.jpg' %>)"></div>
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="width:100%">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+            <%= image_tag("rooms/room1.jpg", :class=>'d-block room-info-cover img-responsive', :alt=>'First slide') %>
+        </div>
+        <div class="carousel-item">
+            <%= image_tag("rooms/room1.jpg", :class=>'d-block room-info-cover img-responsive', :alt=>'Second slide') %>
+        </div>
+        <div class="carousel-item">
+            <%= image_tag("rooms/room1.jpg", :class=>'d-block room-info-cover img-responsive', :alt=>'Third slide') %>
+        </div>
+        <div class="carousel-item">
+            <%= image_tag("rooms/room1.jpg", :class=>'d-block room-info-cover img-responsive', :alt=>'Forth slide') %>
+        </div>
+        <div class="carousel-item">
+            <%= image_tag("https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/2420162/1160/770/m1/fpnw/wm0/house-icon-.jpg?1489741718&s=b65af254de3b2032a8f63ba21b26445f", :class=>'d-block room-info-cover img-responsive', :alt=>'Fifth slide') %>
+        <!--default when there is no image-->
+        </div>
+      </div>
+    </div>
 </div>
 <div class="row mt-3">
-    <div class="offset-md-1 col-md-4">
+    <div class="offset-md-1 col-md-5">
         <h1>SuperSentai</h1>
         <p><i class="far fa-address-book"></i> Keangnam Landmark Tower</p>
         <div class="row">
@@ -19,7 +38,7 @@
 </div>
 <hr />
 <div class="row">
-    <div class="offset-md-1 col-md-6">
+    <div class="offset-md-1 col-md-7">
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
@@ -68,7 +87,7 @@
         </div>
         <hr />
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card">
           <div class="card-body">
             <p><h3 class="mr-2" style="display:inline-block">$1000</h3><h5 style="display:inline-block">per night</h5></p>
