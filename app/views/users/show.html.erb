@@ -25,7 +25,13 @@
        </tr>
        <tr>
          <td width="30%">Gender</td>
-         <td width="70%"><%= current_user.gender%></td>
+         <td width="70%">
+          <% if current_user.gender == true %>
+           <%= "Male"%>
+          <% else %>
+           <%= "Female"%>
+          <% end %>
+         </td>
        </tr>
        <tr>
          <td width="30%">Email</td>
