@@ -22,17 +22,17 @@
 </div>
 <div class="row mt-3">
     <div class="offset-md-1 col-md-5">
-        <h1>SuperSentai</h1>
-        <p><i class="far fa-address-book"></i> Keangnam Landmark Tower</p>
+        <h1> <%= @room.room_name %></h1>
+        <p><i class="far fa-address-book"></i> <%= @room.address %></p>
         <div class="row">
-            <div class="col-md-3"><i class="fas fa-user-friends"></i> 1 guest </div>
-            <div class="col-md-3"><i class="fas fa-door-open"></i> 1 bedroom </div>
-            <div class="col-md-3"><i class="fas fa-bed"></i> 1 bed</div>
-            <div class="col-md-3"><i class="fas fa-bath"></i> 1 bath</div>
+            <div class="col-md-3"><i class="fas fa-user-friends"></i> <%= @room.num_of_guests %> guest </div>
+            <div class="col-md-3"><i class="fas fa-door-open"></i> <%= @room.num_of_bedrooms %> bedroom </div>
+            <div class="col-md-3"><i class="fas fa-bed"></i> <%= @room.num_of_beds %> bed</div>
+            <div class="col-md-3"><i class="fas fa-bath"></i> <%= @room.num_of_baths %> bath</div>
         </div>
     </div>
     <div class="col-md-2 text-center">
-        <p>Owner: <a href="#">Quan dep trai</a></p>
+        <p>Owner: <%= link_to @room.user.username, user_path, id: @room.user_id %></p>
         <%= image_tag("profile-pictures/avatar.jpg", :height=>'100px', :style => 'border-radius: 50%') %>
     </div>
 </div>
