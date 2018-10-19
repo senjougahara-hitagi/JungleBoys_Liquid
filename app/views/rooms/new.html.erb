@@ -4,11 +4,16 @@
     <div class="sign-form col-md-9">	
         <h2>Register new room</h2>
         
-        <%= form_for :room do |f| %>
+        <%= form_for @room do |f| %>
         
         <div class="field">
             <%= f.label :room_name, "Room name:" %>
             <%= f.text_field :room_name, class: "form-control" %>
+        </div>
+        
+         <div class="field">
+            <%= f.label :address, "Address:" %>
+            <%= f.text_field :address, class: "form-control" %>
         </div>
     
         <div class="field">
@@ -26,30 +31,31 @@
         <br>
         
         <div class="field">
-            <%= f.label :number_of_guests, "Number of guests:" %>
-            <%= f.number_field :number_of_guests, class: "form-control" %>
+            <%= f.label :num_of_guests, "Number of guests:" %>
+            <%= f.number_field :num_of_guests, class: "form-control" %>
         </div>
         
         <div class="field">
-            <%= f.label :number_of_bedrooms, "Number of bedrooms:" %>
-            <%= f.number_field :number_of_bedrooms, class: "form-control" %>
+            <%= f.label :num_of_bedrooms, "Number of bedrooms:" %>
+            <%= f.number_field :num_of_bedrooms, class: "form-control" %>
         </div>
         
         <div class="field">
-            <%= f.label :number_of_beds, "Number of beds:" %>
-            <%= f.number_field :number_of_beds, class: "form-control" %>
+            <%= f.label :num_of_beds, "Number of beds:" %>
+            <%= f.number_field :num_of_beds, class: "form-control" %>
         </div>
         
         <div class="field">
-            <%= f.label :number_of_bathrooms, "Number of bathrooms:" %>
-            <%= f.number_field :number_of_bathrooms, class: "form-control" %>
+            <%= f.label :num_of_baths, "Number of bathrooms:" %>
+            <%= f.number_field :num_of_baths, class: "form-control" %>
         </div>
         
         <br>
         
         <div class="field">
             <%= f.label :amentities, "Amentities:" %>
-            
+            <%= f.text_field :amentities, class: "form-control" %>
+
             <div class="row">
                 <div class="col-md-4">
                     <%= label_tag(:gym, "Gym") %>
@@ -84,14 +90,14 @@
         
         <div class="field">
             <%= f.label :pictures, "Pictures:" %>
-            <%= f.file_field :pictures, class: "form-control" %>
+            <%= f.text_field :pictures, class: "form-control" %>
         </div>
         
         <br>
         
         <div class="field">
-            <%= f.label :how_to_contact_host, "How to contact host:" %>
-            <%= f.text_area :how_to_contact_host, class: "form-control" %>
+            <%= f.label :contact_host, "How to contact host:" %>
+            <%= f.text_area :contact_host, class: "form-control" %>
         </div>
         
         <br>
