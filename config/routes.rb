@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :rooms, :except => [:index]
-  get "users/show/:id", to: "users#show"
+  get 'users/:id' => 'users#show', as: 'user'
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',

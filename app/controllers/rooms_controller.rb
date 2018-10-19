@@ -18,11 +18,11 @@ class RoomsController < ApplicationController
     end
     
     def show
-        
+        @room = Room.find(params[:id])
     end
     
     def post_params
-      params.require(:room).permit(:room_name, :address, :cost_per_night,
+      params.require(:room).permit(:room_name, :user_id, :address, :cost_per_night,
                         :type_of_room, :num_of_bedrooms, :num_of_beds,
                         :num_of_guests, :num_of_baths, :amentities, :pictures, 
                         :contact_host)

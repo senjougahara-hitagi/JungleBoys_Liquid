@@ -11,6 +11,10 @@
             <%= f.text_field :room_name, class: "form-control" %>
         </div>
         
+        <div class="field">
+            <%= f.hidden_field :user_id, value: current_user.id, class: "form-control" %>
+        </div>
+        
          <div class="field">
             <%= f.label :address, "Address:" %>
             <%= f.text_field :address, class: "form-control" %>
