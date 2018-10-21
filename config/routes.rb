@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
 
   get 'home/index'
-  # get 'users'
-  resources :rooms, :except => [:index]
   root 'home#index'
-  get "users/show/:id", to: "users#show"
+
+  resources :rooms, :except => [:index]
+  get 'users/:id' => 'users#show', as: 'user', constraints: { id: /[0-9]+/ }
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
     # password: 'users/passwords'
   }
+  
+  namespace :admin do
+    controller :admin do
+      root 'admin#index'
+    end
+  end  
+  
+ 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
