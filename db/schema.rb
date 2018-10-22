@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20181009001838) do
   end
 
   create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "user_id",                                     null: false
     t.string  "room_name",       limit: 100,                 null: false
     t.string  "address",         limit: 100,                 null: false
     t.integer "cost_per_night",                              null: false
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 20181009001838) do
     t.string  "contact_host",    limit: 500,                 null: false
     t.string  "pictures",        limit: 500,                 null: false
     t.boolean "is_approved",                 default: false
+    t.index ["user_id"], name: "index_rooms_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -75,4 +77,5 @@ ActiveRecord::Schema.define(version: 20181009001838) do
   add_foreign_key "likes", "users", column: "users_id"
   add_foreign_key "ratings", "rooms", column: "rooms_id"
   add_foreign_key "ratings", "users", column: "users_id"
+  add_foreign_key "rooms", "users"
 end
