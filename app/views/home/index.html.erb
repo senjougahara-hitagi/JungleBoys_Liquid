@@ -10,81 +10,72 @@
     <% end %>
     <h2>New Rooms</h2>
     <div class="row">
-      <div class="col-md-6">
-        <div class="card" style="width: 100%;">
-          <div class="card-body">
-           <%= image_tag("rooms/room1.jpg", :alt=>'Room image', :width=>230, :class=>'new-room-display') %>
-           <ul class="homepage-info">
-            <h5>My Room</h5>
-            <li>Address: </li>
-            <li>Phone: </li>
-            <li>Review(10)</li>
-            <li><a href="#">More detail></a></li>
-          </ul>
-          <p class="card-text">
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star"></i>
-          </p>
+      
+      <% @rooms.each do |room| %>
+        <div class="col-md-4">
+          <div class="card" style="width: 100%;">
+            <div class="card-body">
+             <%= image_tag(room.pictures, :alt=>'Room image', :width=>230, :class=>'new-room-display') %>
+             <ul class="homepage-info">
+                <h5><%= room.room_name %></h5>
+                <li>Address: <%= room.address %></li>
+                <li>Phone: <%= room.contact_host %></li>
+                <li>Review(10)</li>
+                <li><a href="#">More detail></a></li>
+              </ul>
+              <p class="card-text">
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star"></i>
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
+      <% end %>
+      
+      
+      <!--<div class="col-md-6">-->
+      <!--  <div class="card" style="width: 100%;">-->
+      <!--    <div class="card-body">-->
+      <!--     <%= image_tag("rooms/room1.jpg", :alt=>'Room image', :width=>230, :class=>'new-room-display') %>-->
+      <!--     <ul class="homepage-info">-->
+      <!--        <h5>My Room</h5>-->
+      <!--        <li>Address: </li>-->
+      <!--        <li>Phone: </li>-->
+      <!--        <li>Review(10)</li>-->
+      <!--        <li><a href="#">More detail></a></li>-->
+      <!--      </ul>-->
+      <!--      <p class="card-text">-->
+      <!--        <i class="fas fa-star rated"></i>-->
+      <!--        <i class="fas fa-star rated"></i>-->
+      <!--        <i class="fas fa-star rated"></i>-->
+      <!--        <i class="fas fa-star rated"></i>-->
+      <!--        <i class="fas fa-star"></i>-->
+      <!--      </p>-->
+      <!--    </div>-->
+      <!--  </div>-->
+      <!--</div>-->
+      
+      
     </div>
-      <div class="col-md-6">
-        <div class="card" style="width: 100%;">
-          <div class="card-body">
-           <%= image_tag("rooms/room1.jpg", :alt=>'Room image', :width=>230, :class=>'new-room-display') %>
-           <ul class="homepage-info">
-            <h5>My Room</h5>
-            <li>Address: </li>
-            <li>Phone: </li>
-            <li>Review(10)</li>
-            <li><a href="#">More detail></a></li>
-          </ul>
-          <p class="card-text">
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star"></i>
-          </p>
-        </div>
+    <%= paginate @rooms %>
+  </div>
+  <div class="col-md-2">
+    <h2>Top</h2>
+    <div class="card" style="width: 100%;">
+      <%= image_tag("rooms/room1.jpg", :alt=>'Room image', :class => 'card-img-top') %>
+      <div class="card-body">
+        <h5 class="card-title"><a href="#">My room</a></h5>
+        <p class="card-text">
+          <i class="fas fa-star rated"></i>
+          <i class="fas fa-star rated"></i>
+          <i class="fas fa-star rated"></i>
+          <i class="fas fa-star rated"></i>
+          <i class="fas fa-star rated"></i>
+        </p>
       </div>
-    </div>
-</div>
-<ul class="pagination mt-3">
-  <li class="page-item">
-    <a class="page-link" href="#" aria-label="Previous">
-      <span aria-hidden="true">&laquo;</span>
-      <span class="sr-only">Previous</span>
-    </a>
-  </li>
-  <li class="page-item"><a class="page-link" href="#">1</a></li>
-  <li class="page-item"><a class="page-link" href="#">2</a></li>
-  <li class="page-item"><a class="page-link" href="#">3</a></li>
-  <li class="page-item">
-    <a class="page-link" href="#" aria-label="Next">
-      <span aria-hidden="true">&raquo;</span>
-      <span class="sr-only">Next</span>
-    </a>
-  </li>
-</ul>
-</div>
-<div class="col-md-2">
-  <h2>Top</h2>
-  <div class="card" style="width: 100%;">
-    <%= image_tag("rooms/room1.jpg", :alt=>'Room image', :class => 'card-img-top') %>
-    <div class="card-body">
-      <h5 class="card-title"><a href="#">My room</a></h5>
-      <p class="card-text">
-        <i class="fas fa-star rated"></i>
-        <i class="fas fa-star rated"></i>
-        <i class="fas fa-star rated"></i>
-        <i class="fas fa-star rated"></i>
-        <i class="fas fa-star rated"></i>
-      </p>
     </div>
   </div>
-</div>
 </div>
