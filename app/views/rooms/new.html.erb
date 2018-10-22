@@ -1,7 +1,5 @@
 <div class="container row">
-    <div class="col-md-3">
-    </div>
-    <div class="sign-form col-md-9">	
+    <div class="room-form offset-md-3 col-md-9">	
         <h2>Register new room</h2>
         
         <%= form_for @room do |f| %>
@@ -22,14 +20,14 @@
     
         <div class="field">
             <%= f.label :cost_per_night, "Cost per night:" %>
-            <%= f.number_field :cost_per_night, class: "form-control" %>
+            <%= f.number_field :cost_per_night, class: "form-control", :min=>0 %>
         </div>
         
         <br>
         
         <div class="field">
             <%= f.label :type_of_room, "Type of room:" %>
-            <%= f.select :type_of_room, options_for_select([["Homestay", 0], ["Hotel", 1]]), class: "form-control" %>
+            <%= f.select :type_of_room, options_for_select([["Homestay", 0], ["Hotel", 1]]), :class=>"form-control" %>
         </div>
         
         <br>
@@ -58,7 +56,6 @@
         
         <div class="field">
             <%= f.label :amentities, "Amentities:" %>
-            <%= f.text_field :amentities, class: "form-control" %>
 
             <div class="row">
                 <div class="col-md-4">
@@ -94,7 +91,11 @@
         
         <div class="field">
             <%= f.label :pictures, "Pictures:" %>
-            <%= f.file_field :pictures, class: "form-control" %>
+            <br>
+            <div class="upload-btn-wrapper">
+              <button class="add-img"><i class="fas fa-plus"></i></button>
+              <%= f.file_field :room_pictures %>
+            </div>
         </div>
         
         <br>
