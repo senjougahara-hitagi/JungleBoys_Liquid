@@ -17,7 +17,7 @@
         <div class="col-md-6">
           <div class="card" style="width: 100%;">
             <div class="card-body">
-             <%= image_tag("rooms/room1.jpg", :alt=>'Room image', :width=>375, :class=>'new-room-display') %>
+             <%= image_tag(room.pictures, :alt=>'Room image', :width=>375, :class=>'new-room-display') %>
              <ul class="homepage-info">
                 <h5><%= room.room_name %></h5>
                 <li>Address: <%= room.address %></li>
@@ -36,33 +36,11 @@
           </div>
         </div>
       <% end %>
-      <%= paginate @rooms, theme: 'twitter-bootstrap-3' %>
-
-      
-      <!--<div class="col-md-6">-->
-      <!--  <div class="card" style="width: 100%;">-->
-      <!--    <div class="card-body">-->
-      <!--     <%= image_tag("rooms/room1.jpg", :alt=>'Room image', :width=>230, :class=>'new-room-display') %>-->
-      <!--     <ul class="homepage-info">-->
-      <!--        <h5>My Room</h5>-->
-      <!--        <li>Address: </li>-->
-      <!--        <li>Phone: </li>-->
-      <!--        <li>Review(10)</li>-->
-      <!--        <li><a href="#">More detail></a></li>-->
-      <!--      </ul>-->
-      <!--      <p class="card-text">-->
-      <!--        <i class="fas fa-star rated"></i>-->
-      <!--        <i class="fas fa-star rated"></i>-->
-      <!--        <i class="fas fa-star rated"></i>-->
-      <!--        <i class="fas fa-star rated"></i>-->
-      <!--        <i class="fas fa-star"></i>-->
-      <!--      </p>-->
-      <!--    </div>-->
-      <!--  </div>-->
-      <!--</div>-->
-      
       
     </div>
+    <br>
+    <%= paginate @rooms, :themes => 'twitter-bootstrap-3' %>
+    <br>
   </div>
   <div class="col-md-2">
     <h2>Top</h2>

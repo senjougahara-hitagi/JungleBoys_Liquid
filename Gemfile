@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'kaminari'       # gíup phân trang
-gem 'ransack'        # tạo form tìm kiếm
-gem 'bootstrap-kaminari-views' #giao diện đẹp cho phân trang
+gem 'kaminari'
+gem 'ransack'
+gem 'bootstrap-kaminari-views'
 gem 'paperclip'
 gem 'dropzonejs-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
