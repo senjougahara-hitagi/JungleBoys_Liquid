@@ -1,5 +1,5 @@
 class Room < ApplicationRecord
-    mount_uploader :pictures, RoomImageUploader
-    
+    mount_uploaders :pictures, RoomImageUploader
     belongs_to :user
+    serialize :pictures, JSON
 end

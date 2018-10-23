@@ -17,13 +17,14 @@
         <div class="col-md-6">
           <div class="card" style="width: 100%;">
             <div class="card-body">
-             <%= image_tag(room.pictures, :alt=>'Room image', :width=>"100%", :height=>300, :class=>'img-responsive') %>
+             <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :height=>300, :class=>'img-responsive') %>
              <ul class="homepage-info">
                 <h5><%= room.room_name %></h5>
                 <li>Address: <%= room.address %></li>
                 <li>Phone: <%= room.contact_host %></li>
                 <li>Review(10)</li>
-                <li><a href="#">More detail></a></li>
+                 <!--to fix-->
+                <li><%= link_to "More detail", room_path(room.id) %></li>
               </ul>
               <p class="card-text">
                 <i class="fas fa-star rated"></i>
