@@ -21,10 +21,22 @@ class RoomsController < ApplicationController
         @room = Room.find(params[:id])
     end
     
+    def edit
+        @room = Room.find(params[:id])
+        # if @room.update_attributes(post_params)
+        #     redirect_to home_index_path
+        # else
+        #     render :edit
+        # end
+    end
+    
+    private
+    
     def post_params
       params.require(:room).permit(:room_name, :user_id, :address, :cost_per_night,
                         :type_of_room, :num_of_bedrooms, :num_of_beds,
-                        :num_of_guests, :num_of_baths, :amentities, :pictures, 
+                        :num_of_guests, :num_of_baths, :amentities, {pictures: []}, 
                         :contact_host)
-    end    
+    end
+   
 end

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-     $('input[type="checkbox"]').prop("checked", false);
+    $('input[type="checkbox"]').prop("checked", false);
     
     $("#submit").click(function(){
     // alert("The paragraph was clicked.");
@@ -18,9 +18,37 @@ $(document).ready(function(){
         if ($("#tv").prop("checked") == true)
             amentities_arr.push("tv");
             
-        amentities_str = amentities_arr.join(",");
+        var amentities_str = amentities_arr.join(",");
         $("#room_amentities").val(amentities_str);
         var a =  $("#room_amentities").val();
-        alert(a);
+        // alert(a);
     });
+    
+    $(function() {
+    // Multiple images preview in browser
+    var imagesPreview = function(input, placeToInsertImagePreview) {
+
+        if (input.files) {
+            var filesAmount = input.files.length;
+            // alert(filesAmount);
+                
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onload = function(event) {
+                    $($.parseHTML('<img height="30%" width="30%">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
+                    alert(input.files.name);
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+
+    };
+    
+    $('#room_pictures').on('change', function() {
+        $('#pictures_preview').html("");
+        imagesPreview(this, '#pictures_preview');
+    });
+});
 });

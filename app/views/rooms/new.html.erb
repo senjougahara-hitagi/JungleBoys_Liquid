@@ -1,5 +1,12 @@
 <div class="container row">
-    <div class="room-form offset-md-3 col-md-9">	
+    <div class="room-form offset-md-3 col-md-9">
+        
+        <% if @room.errors.any? %>
+            <% @room.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+        <% end %>
+        	
         <h2>Register new room</h2>
         
         <%= form_for @room do |f| %>
@@ -95,8 +102,12 @@
             <br>
             <div class="upload-btn-wrapper">
               <button class="add-img"><i class="fas fa-plus"></i></button>
-              <%= f.file_field :pictures %>
+              <%= f.file_field :pictures, multiple: true %>
             </div>
+        </div>
+        
+        <div class="row" id="pictures_preview">
+            
         </div>
         
         <br>

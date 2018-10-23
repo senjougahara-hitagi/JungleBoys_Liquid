@@ -2,10 +2,10 @@
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="width:100%">
       <div class="carousel-inner">
         <div class="carousel-item active">
-            <%= image_tag("rooms/room1.jpg", :class=>'d-block room-info-cover img-responsive', :alt=>'First slide') %>
+            <%= image_tag(@room.pictures[0], :class=>'d-block room-info-cover img-responsive', :alt=>'First slide') %>
         </div>
         <div class="carousel-item">
-            <%= image_tag("rooms/room1.jpg", :class=>'d-block room-info-cover img-responsive', :alt=>'Second slide') %>
+            <%= image_tag(@room.pictures[1], :class=>'d-block room-info-cover img-responsive', :alt=>'Second slide') %>
         </div>
         <div class="carousel-item">
             <%= image_tag("rooms/room1.jpg", :class=>'d-block room-info-cover img-responsive', :alt=>'Third slide') %>
@@ -90,7 +90,7 @@
     <div class="col-md-3">
         <div class="card">
           <div class="card-body">
-            <p><h3 class="mr-2" style="display:inline-block">$1000</h3><h5 style="display:inline-block">per night</h5></p>
+            <p><h3 class="mr-2" style="display:inline-block">$<%= @room.cost_per_night %></h3><h5 style="display:inline-block">per night</h5></p>
             <p>
                 <i class="fas fa-star rated"></i>
                 <i class="fas fa-star rated"></i>
