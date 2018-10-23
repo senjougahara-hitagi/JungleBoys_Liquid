@@ -12,7 +12,7 @@ class CreateRooms < ActiveRecord::Migration[5.0]
       t.integer:num_of_baths,     limit: 1,     null: false
       t.string:amentities,        limit: 500,   null: false
       t.string:contact_host,      limit: 500,   null: false
-      t.string:pictures,          limit: 500,   null: false
+      t.text:pictures,          limit: 500,   null: false
       t.boolean:is_approved,                                  default: false
     end
   end
