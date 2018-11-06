@@ -4,5 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, password_length: 8..30
   
-  has_many :rooms       
+  has_many :rooms
+  mount_uploader :user_pic, AvatarUploader
+  serialize :user_pic, JSON
 end

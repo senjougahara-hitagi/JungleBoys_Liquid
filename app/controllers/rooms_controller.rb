@@ -30,6 +30,11 @@ class RoomsController < ApplicationController
         # end
     end
     
+    def search
+        @room = Room.find()
+        # https://viblo.asia/p/full-text-search-don-gian-trong-ruby-on-rails-voi-gem-search-cop-QpmleAXklrd
+    end
+    
     private
     
     def post_params
