@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   get 'home/index'
   root 'home#index'
 
-  resources :rooms, :except => [:index]
+  resources :rooms, :except => [:index] do 
+    resources :comments, :except => [:index]
+  end
+  
   get 'users/:id' => 'users#show', as: 'user', constraints: { id: /[0-9]+/ }
 
   devise_for :users, controllers: {
@@ -11,6 +14,8 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     # password: 'users/passwords'
   }
+  
+  # post 'rooms/:id' => 'comments#create'
   
   namespace :admin do
     controller :admin do

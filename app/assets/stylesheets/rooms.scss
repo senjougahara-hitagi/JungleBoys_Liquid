@@ -3,8 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .room-info-cover{
   width: 100%;
-  height: 300px;
+  max-height: 480px;
 }
+
+.comment-box{
+	width: 100%;
+}
+
 .contact{
   color:#fff;
   background-color:#ff7c90;
