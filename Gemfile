@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'kaminari'
 gem 'ransack'
+gem 'config'
 gem 'bootstrap-kaminari-views'
 gem 'paperclip'
 gem 'dropzonejs-rails'

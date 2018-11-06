@@ -13,27 +13,28 @@
 ActiveRecord::Schema.define(version: 20181009001838) do
 
   create_table "comments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "users_id",                 null: false
-    t.integer "rooms_id",                 null: false
-    t.string  "text_content", limit: 500, null: false
-    t.time    "time",                     null: false
-    t.index ["rooms_id"], name: "index_comments_on_rooms_id", using: :btree
-    t.index ["users_id"], name: "index_comments_on_users_id", using: :btree
+    t.integer  "user_id",                  null: false
+    t.integer  "room_id",                  null: false
+    t.string   "text_content", limit: 500, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["room_id"], name: "index_comments_on_room_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
   create_table "likes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "users_id",    null: false
-    t.integer "comments_id", null: false
-    t.index ["comments_id"], name: "index_likes_on_comments_id", using: :btree
-    t.index ["users_id"], name: "index_likes_on_users_id", using: :btree
+    t.integer "user_id",    null: false
+    t.integer "comment_id", null: false
+    t.index ["comment_id"], name: "index_likes_on_comment_id", using: :btree
+    t.index ["user_id"], name: "index_likes_on_user_id", using: :btree
   end
 
   create_table "ratings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "users_id", null: false
-    t.integer "rooms_id", null: false
-    t.integer "stars",    null: false
-    t.index ["rooms_id"], name: "index_ratings_on_rooms_id", using: :btree
-    t.index ["users_id"], name: "index_ratings_on_users_id", using: :btree
+    t.integer "user_id", null: false
+    t.integer "room_id", null: false
+    t.integer "stars",   null: false
+    t.index ["room_id"], name: "index_ratings_on_room_id", using: :btree
+    t.index ["user_id"], name: "index_ratings_on_user_id", using: :btree
   end
 
   create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -71,11 +72,11 @@ ActiveRecord::Schema.define(version: 20181009001838) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "comments", "rooms", column: "rooms_id"
-  add_foreign_key "comments", "users", column: "users_id"
-  add_foreign_key "likes", "comments", column: "comments_id"
-  add_foreign_key "likes", "users", column: "users_id"
-  add_foreign_key "ratings", "rooms", column: "rooms_id"
-  add_foreign_key "ratings", "users", column: "users_id"
+  add_foreign_key "comments", "rooms"
+  add_foreign_key "comments", "users"
+  add_foreign_key "likes", "comments"
+  add_foreign_key "likes", "users"
+  add_foreign_key "ratings", "rooms"
+  add_foreign_key "ratings", "users"
   add_foreign_key "rooms", "users"
 end
