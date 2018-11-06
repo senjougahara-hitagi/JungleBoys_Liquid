@@ -5,9 +5,6 @@
             <%= image_tag(@room.pictures[0], :class=>'d-block room-info-cover img-responsive', :alt=>'First slide') %>
         </div>
         <div class="carousel-item">
-            <%= image_tag(@room.pictures[1], :class=>'d-block room-info-cover img-responsive', :alt=>'Second slide') %>
-        </div>
-        <div class="carousel-item">
             <%= image_tag("rooms/room1.jpg", :class=>'d-block room-info-cover img-responsive', :alt=>'Third slide') %>
         </div>
         <div class="carousel-item">
@@ -32,7 +29,7 @@
         </div>
     </div>
     <div class="col-md-2 text-center">
-        <p>Owner: <%= link_to @room.user.username, user_path, id: @room.user_id %></p>
+        <p>Owner: <%= link_to @room.user.username, user_path(@room.user_id) %></p>
         <%= image_tag("profile-pictures/avatar.jpg", :height=>'100px', :style => 'border-radius: 50%') %>
     </div>
 </div>

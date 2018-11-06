@@ -37,7 +37,7 @@ $(document).ready(function(){
 
                 reader.onload = function(event) {
                     $($.parseHTML('<img height="30%" width="30%">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                    alert(input.files.name);
+                    // alert(input.files.name);
                 }
 
                 reader.readAsDataURL(input.files[i]);
