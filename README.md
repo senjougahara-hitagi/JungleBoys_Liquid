@@ -17,3 +17,9 @@ To run the project, follow this steps:
 - Run `rake db:migrate`
 - Run `rails db:seed`
 - .... 
+
+on c9 :
+
+mysql-ctl start
+
+rails s -b $IP -p $PORT
