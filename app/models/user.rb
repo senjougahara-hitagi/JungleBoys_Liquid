@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, password_length: 8..30
   
   has_many :rooms
+  has_many :comments
   mount_uploader :user_pic, AvatarUploader
   serialize :user_pic, JSON
 end

@@ -4,17 +4,6 @@
         <div class="carousel-item active">
             <%= image_tag(@room.pictures[0], :class=>'d-block room-info-cover img-responsive', :alt=>'First slide') %>
         </div>
-        <div class="carousel-item">
-            <%= image_tag(@room.pictures[1], :class=>'d-block room-info-cover img-responsive', :alt=>'Second slide') %>
-        </div>
-        <div class="carousel-item">
-            <%= image_tag("rooms/room1.jpg", :class=>'d-block room-info-cover img-responsive', :alt=>'Third slide') %>
-        </div>
-        <div class="carousel-item">
-            <%= image_tag("rooms/room1.jpg", :class=>'d-block room-info-cover img-responsive', :alt=>'Forth slide') %>
-        </div>
-        <div class="carousel-item">
-            <%= image_tag("https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/2420162/1160/770/m1/fpnw/wm0/house-icon-.jpg?1489741718&s=b65af254de3b2032a8f63ba21b26445f", :class=>'d-block room-info-cover img-responsive', :alt=>'Fifth slide') %>
         <!--default when there is no image-->
         </div>
       </div>
@@ -33,7 +22,11 @@
     </div>
     <div class="col-md-2 text-center">
         <p>Owner: <%= link_to @room.user.username, user_path, id: @room.user_id %></p>
-        <%= image_tag("profile-pictures/avatar.jpg", :height=>'100px', :style => 'border-radius: 50%') %>
+        <% if @room.user.user_pic.present? %>
+        <%= image_tag(@room.user.user_pic, :height=>'50px', :style => 'border-radius: 50%') %>
+        <% else %>
+        <%= image_tag("/user.png", :height=>'50px', :style => 'border-radius: 50%') %>
+        <% end %>        
     </div>
 </div>
 <hr />
@@ -56,35 +49,45 @@
             <div class="col-md-6"></div>
         </div>
         <hr />
-        <h2>157 Reviews
+        <h2><%= @comments.size == 0 ? 0 : @comments.size %> Reviews
             <i class="fas fa-star rated"></i>
             <i class="fas fa-star rated"></i>
             <i class="fas fa-star rated"></i>
             <i class="fas fa-star rated"></i>
             <i class="fas fa-star"></i>
         </h2>
-        <form class="form-inline">
-          <div class="form-group" style="width:85%">
-            <input type="text" class="form-control" style="width:100%" placeholder="Write a review">
-          </div>
-          <button type="submit" class="ml-auto btn btn-primary">Submit</button>
-        </form>
-        <hr />
+        
+        <%= form_for [@room, @comment], html: {class: "form-inline"} do |f| %>
+        <div class="form-group" style="width:85%">
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.hidden_field :room_id, value: @room.id %>
+            <%= f.text_field :text_content, :class => "comment-box form-control", placeholder: "Write a review" %>
+        </div>
+        <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
+
+        <% end %>
+
+        <br>       
+        
+        <% @comments.each do |comment| %>
         <div class="comment">
             <div class="row">
-                <div class="col-md-1"><%= image_tag("profile-pictures/avatar.jpg", :height=>'35px', :style => 'border-radius: 50%') %></div>
-                <div class="col-md-3">
-                    <a href="#" style="font-weight:bold">Quan dep trai</a>
-                    <p>September 12</p>
+                <div class="col-md-1">
+                    <% if comment.user.user_pic.present? %>
+                    <%= image_tag(comment.user.user_pic, :height=>'50px', :style => 'border-radius: 50%') %>
+                    <% else %>
+                    <%= image_tag("/user.png", :height=>'50px', :style => 'border-radius: 50%') %>
+                    <% end %>
                 </div>
-                <div class="col-md-2 ml-auto">8 Helpfuls</div>
+                <div class="col-md-3">
+                    <a href="#" style="font-weight:bold"><%= comment.user.username %></a>
+                    <p><%= comment.created_at %></p>
+                </div>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-            sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+            <p><%= comment.text_content %></p>
             <a href="#"></a>
         </div>
+        <% end %>
         <hr />
     </div>
     <div class="col-md-3">
