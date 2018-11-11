@@ -56,17 +56,18 @@
             <i class="fas fa-star rated"></i>
             <i class="fas fa-star"></i>
         </h2>
-        
-        <%= form_for [@room, @comment], html: {class: "form-inline"} do |f| %>
-        <div class="form-group" style="width:85%">
-            <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.hidden_field :room_id, value: @room.id %>
-            <%= f.text_field :text_content, :class => "comment-box form-control", placeholder: "Write a review" %>
-        </div>
-        <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
 
+        <% if user_signed_in? %>
+            <%= form_for [@room, @comment], html: {class: "form-inline"} do |f| %>
+            <div class="form-group" style="width:85%">
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.hidden_field :room_id, value: @room.id %>
+                <%= f.text_field :text_content, :class => "comment-box form-control", placeholder: "Write a review" %>
+            </div>
+            <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
+    
+            <% end %>
         <% end %>
-
         <br>       
         
         <% @comments.each do |comment| %>

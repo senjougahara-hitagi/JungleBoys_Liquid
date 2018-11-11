@@ -21,6 +21,7 @@ class RoomsController < ApplicationController
         @room = Room.find(params[:id])
         @comments = @room.comments
         @comment = Comment.new
+        @rating = Rating.new
     end
     
     def edit
