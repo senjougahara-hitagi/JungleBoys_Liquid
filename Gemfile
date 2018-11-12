@@ -5,6 +5,10 @@ gem 'ransack'
 gem 'bootstrap-kaminari-views'
 gem 'paperclip'
 gem 'dropzonejs-rails'
+
+gem 'elasticsearch-model', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: '5.x'
+gem 'elasticsearch-rails'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 # Use sqlite3 as the database for Active Record

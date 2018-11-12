@@ -1,0 +1,19 @@
+<h1>Tasks</h1>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <% @rooms.each do |room| %>
+        <div class='room'>
+            <strong> <%= room.room_name %> </strong>
+        </div>
+        <%= link_to 'Edit', edit_room_path(room) %>
+      <% end %>
+     </tr>       
+  </tbody>
+</table>
