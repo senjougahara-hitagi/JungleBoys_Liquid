@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
     
     def show
         @room = Room.find(params[:id])
-        @comments = @room.comments
+        @comments = @room.comments.order(id: :desc)
         @comment = Comment.new
         @rating = Rating.new
     end
