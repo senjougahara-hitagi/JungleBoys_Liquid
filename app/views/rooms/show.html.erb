@@ -1,14 +1,30 @@
-<div class="row">
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style="width:100%">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-            <%= image_tag(@room.pictures[0], :class=>'d-block room-info-cover img-responsive', :alt=>'First slide') %>
-        </div>
-
-        <!--default when there is no image-->
-      </div>
+<!-- Room's images slide -->
+<div id="MyCarousel" class="carousel slide" data-ride="carousel">
+  <ul class="carousel-indicators">
+     <% @room.pictures.each_with_index do |photo, n| %>
+       <li data-target='#MyCarousel' data-slide-to="#{n}" class="#{'active' if n == 0}"></li>
+     <% end %>
+  </ul>
+  
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <%= image_tag(@room.pictures.first, :style=>'object-fit:cover;height:500px;width:100%;') %>
     </div>
-</div>
+    <% @room.pictures.drop(1).each do |photo| %>
+       <div class="carousel-item">
+         <%= image_tag(photo, :style=>'object-fit:cover;height:500px;width:100%;') %>
+       </div>
+    <% end %>
+  </div>
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#MyCarousel" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#MyCarousel" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+  </div>
+
 <div class="row mt-3">
     <div class="offset-md-1 col-md-5">
         <h1> <%= @room.room_name %></h1>
@@ -49,24 +65,26 @@
             <div class="col-md-6"></div>
         </div>
         <hr />
-        <h2><%= @comments.size == 0 ? 0 : @comments.size %> Reviews
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star"></i>
+        <h2 id="your_rating"><%= @comments.size == 0 ? 0 : @comments.size %> Reviews
+            <i id="1" class="fas fa-star"></i>
+            <i id="2" class="fas fa-star"></i>
+            <i id="3" class="fas fa-star"></i>
+            <i id="4" class="fas fa-star"></i>
+            <i id="5" class="fas fa-star"></i>
         </h2>
-        
-        <%= form_for [@room, @comment], html: {class: "form-inline"} do |f| %>
-        <div class="form-group" style="width:85%">
-            <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.hidden_field :room_id, value: @room.id %>
-            <%= f.text_field :text_content, :class => "comment-box form-control", placeholder: "Write a review" %>
-        </div>
-        <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
+        <p id="value"></p>
 
+        <% if user_signed_in? %>
+            <%= form_for [@room, @comment], html: {class: "form-inline"} do |f| %>
+            <div class="form-group" style="width:85%">
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.hidden_field :room_id, value: @room.id %>
+                <%= f.text_field :text_content, :class => "comment-box form-control", placeholder: "Write a review" %>
+                <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
+            </div>
+    
+            <% end %>
         <% end %>
-
         <br>       
         
         <% @comments.each do |comment| %>

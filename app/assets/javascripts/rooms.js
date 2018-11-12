@@ -46,33 +46,91 @@ $(document).on('turbolinks:load', function(){
 
     };
     
-    $('#room_pictures').on('change', function() {
+    $('#room_pictures').on('change', function(e) {
+        e.preventDefault();
         $('#pictures_preview').html("");
         imagesPreview(this, '#pictures_preview');
         });
     });
-
-    $('#new_comment').on("submit", function(e){
+    
+    var rating_children = $('#your_rating').children();
+    var current_value = 0;
+    
+    rating_children.click(function(e){
         e.preventDefault();
-        $.ajax({
-          method: 'POST',
-          url: '/rooms/1/comments',
-          data: { 
-            // 'authenticity_token': $('#authenticity_token').val(),
-            'user_id': $('#comment_user_id').val(),
-            'room_id': $('#comment_room_id').val(),
-            'text_content': $('#comment_content').val()
-          },
-        //   dataType: 'json',
-          success: function(data){
-            alert('success');
-          },
-            error: function (data,xhr, ajaxOptions, thrownError) {
-                    //   alert(xhr.status);
-                    //   alert(thrownError);
-                      console.log(data);
-            },
- 
-        });
+        id = $(this).attr('id');
+
+        for (i = 0; i < 5; i ++){
+            if (!$(rating_children[i]).hasClass('rated')){
+                $(rating_children[i]).toggleClass('rated');
+            }
+        
+            if (i >= id){
+                $(rating_children[i]).removeClass('rated');
+                
+            }
+        }
+        
+        current_value = id;
+        $('#value').append(current_value)
     });
+    
+    rating_children.mouseover(function(e){
+        e.preventDefault();
+        id = $(this).attr('id');
+        
+        for (i = 0; i < 5; i ++){
+            if (!$(rating_children[i]).hasClass('rated')){
+                $(rating_children[i]).toggleClass('rated');
+            }
+        
+            if (i >= id){
+                $(rating_children[i]).removeClass('rated');
+                
+            }
+        }
+        
+    })
+    
+    $("h2#your_rating").mouseleave(function(e){
+        console.log(current_value);
+        for (i = 0; i < 5; i ++){
+            if (!$(rating_children[i]).hasClass('rated')){
+                $(rating_children[i]).toggleClass('rated');
+            }
+        
+            if (i >= current_value){
+                $(rating_children[i]).removeClass('rated');
+                
+            }
+        }
+    });
+    
+    
+
+    // $('#new_comment').on("submit", function(e){
+    //     e.preventDefault();
+    //     $.ajax({
+    //       method: 'POST',
+    //       url: '/rooms/1/comments',
+    //       data: { 
+    //         // 'authenticity_token': $('#authenticity_token').val(),
+    //         // 'user_id': $('#comment_user_id').val(),
+    //         // 'room_id': $('#comment_content').val(),
+    //         // 'text_content': $('#comment_content').val()
+    //       },
+    //     //   dataType: 'json',
+    //       success: function(data){
+    //         alert('success');
+    //       },
+    //         error: function (data,xhr, ajaxOptions, thrownError) {
+    //                 //   alert(xhr.status);
+    //                 //   alert(thrownError);
+    //                   console.log(data);
+    //         },
+ 
+    //     });
+    // });
+    
+    
 });

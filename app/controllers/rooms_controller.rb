@@ -19,10 +19,11 @@ class RoomsController < ApplicationController
     
     def show
         @room = Room.find(params[:id])
-        @comments = @room.comments
+        @comments = @room.comments.order(id: :desc)
         @comment = Comment.new
+        @rating = Rating.new
     end
-    
+
     def edit
         @room = Room.find(params[:id])
         # if @room.update_attributes(post_params)
@@ -31,19 +32,24 @@ class RoomsController < ApplicationController
         #     render :edit
         # end
     end
-    
+
     def search
-        @room = Room.find()
-        # https://viblo.asia/p/full-text-search-don-gian-trong-ruby-on-rails-voi-gem-search-cop-QpmleAXklrd
+        @rooms=Room.where('room_name LIKE ?', "%#{params[:room_name]}%").order('id DESC')
+        # @room.show
     end
-    
+
     private
     
     def post_params
-      params.require(:room).permit(:room_name, :user_id, :address, :cost_per_night,
+      params.required(:room).permit(:room_name, :user_id, :address, :cost_per_night,
                         :type_of_room, :num_of_bedrooms, :num_of_beds,
                         :num_of_guests, :num_of_baths, :amentities, {pictures: []}, 
                         :contact_host)
     end
-   
+    
+    def get_params 
+      params.permit(:room_name, :address, :cost_per_night,
+                        :type_of_room)
+    end
+
 end

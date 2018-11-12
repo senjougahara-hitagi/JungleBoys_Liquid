@@ -1,0 +1,36 @@
+<h1>Found <%= @rooms.size %> result(s)</h1>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @rooms.each do |room| %>
+        <div class="col-md-6">
+          <div class="card" style="width: 100%;">
+            <div class="card-body">
+             <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class=>'img-responsive') %>
+             <ul class="homepage-info">
+                <h5><%= room.room_name %></h5>
+                <li>Address: <%= room.address %></li>
+                <li>Phone: <%= room.contact_host %></li>
+                <li>Review(10)</li>
+                 <!--to fix-->
+                <li><%= link_to "More detail", room_path(room.id) %></li>
+              </ul>
+              <p class="card-text">
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star rated"></i>
+                <i class="fas fa-star"></i>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+     </tr>       
+  </tbody>
+</table>
