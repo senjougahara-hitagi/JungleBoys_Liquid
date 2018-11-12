@@ -65,24 +65,26 @@
             <div class="col-md-6"></div>
         </div>
         <hr />
-        <h2><%= @comments.size == 0 ? 0 : @comments.size %> Reviews
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star rated"></i>
-            <i class="fas fa-star"></i>
+        <h2 id="your_rating"><%= @comments.size == 0 ? 0 : @comments.size %> Reviews
+            <i id="1" class="fas fa-star"></i>
+            <i id="2" class="fas fa-star"></i>
+            <i id="3" class="fas fa-star"></i>
+            <i id="4" class="fas fa-star"></i>
+            <i id="5" class="fas fa-star"></i>
         </h2>
-        
-        <%= form_for [@room, @comment], html: {class: "form-inline"} do |f| %>
-        <div class="form-group" style="width:85%">
-            <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.hidden_field :room_id, value: @room.id %>
-            <%= f.text_field :text_content, :class => "comment-box form-control", placeholder: "Write a review" %>
-        </div>
-        <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
+        <p id="value"></p>
 
+        <% if user_signed_in? %>
+            <%= form_for [@room, @comment], html: {class: "form-inline"} do |f| %>
+            <div class="form-group" style="width:85%">
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.hidden_field :room_id, value: @room.id %>
+                <%= f.text_field :text_content, :class => "comment-box form-control", placeholder: "Write a review" %>
+                <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
+            </div>
+    
+            <% end %>
         <% end %>
-
         <br>       
         
         <% @comments.each do |comment| %>
