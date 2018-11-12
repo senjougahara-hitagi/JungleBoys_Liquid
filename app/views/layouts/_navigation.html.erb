@@ -6,10 +6,12 @@
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <!--<form class="form-inline mr-auto">-->
-        <div class="form-inline mr-auto" ><%= form_tag(rooms_path, method: :get ) do %>
-        <%= text_field_tag :room_name, params[:room_name] %>
-        <%= submit_tag 'Search', name:nil %>
-        <% end %></div>
+        <div class="form-inline mr-auto" >
+          <%= form_tag(rooms_path, method: :get ) do %>
+            <%= text_field_tag :room_name, params[:room_name], :class => "form-control" %>
+            <%= submit_tag 'Search', :class => "btn btn-light", name:nil %>
+          <% end %>
+        </div>
         <!--</form>-->
 
         <ul class="navbar-nav">
