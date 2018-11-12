@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="col-md-2 text-center">
-        <p>Owner: <%= link_to @room.user.username, user_path, id: @room.user_id %></p>
+        <p>Owner: <%= link_to @room.user.username, user_path(:id => @room.user_id) %></p>
         <% if @room.user.user_pic.present? %>
         <%= image_tag(@room.user.user_pic, :height=>'50px', :style => 'border-radius: 50%') %>
         <% else %>
@@ -75,17 +75,22 @@
         <p id="value"></p>
 
         <% if user_signed_in? %>
-            <%= form_for [@room, @comment], html: {class: "form-inline"} do |f| %>
+            <%= form_for [@room, @comment], html: {class: "form-inline"}, remote:true do |f| %>
             <div class="form-group" style="width:85%">
                 <%= f.hidden_field :user_id, value: current_user.id %>
                 <%= f.hidden_field :room_id, value: @room.id %>
-                <%= f.text_field :text_content, :class => "comment-box form-control", placeholder: "Write a review" %>
+                <%= f.text_field :text_content, :class => "comment-box form-control", 
+                    :required => true, :autocomplete => 'off', placeholder: "Write a review" %>
+                
                 <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
             </div>
     
             <% end %>
         <% end %>
         <br>       
+        <div id="comments">
+            
+        </div>
         
         <% @comments.each do |comment| %>
         <div class="comment">
