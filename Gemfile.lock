@@ -8,6 +8,14 @@ GIT
       elasticsearch (~> 5)
       hashie
 
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: 923d726a642c9c7ceb51b869d4ef3619b6686759
+  branch: master
+  specs:
+    faker (1.9.1)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -261,6 +269,7 @@ DEPENDENCIES
   dropzonejs-rails
   elasticsearch-model!
   elasticsearch-rails
+  faker!
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
