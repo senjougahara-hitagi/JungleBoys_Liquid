@@ -13,8 +13,8 @@ class CommentsController < ApplicationController
         
         respond_to do |format|
             if @comment.save
-                format.html { redirect_to room_path(1), notice: 'Comment được tạo thành công' }
-                format.js   { render :layout => false }
+                format.html { redirect_to @comment, notice: 'Comment được tạo thành công' }
+                format.js   { }
                 format.json { render :show, status: :created, location: @comment }
             else
                 format.html { render :new }
