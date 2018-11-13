@@ -5,14 +5,16 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-require 'faker'
+Room.destroy_all
+User.destroy_all
 
-for i in 0..5
+20.times do
    User.create([
-       {name: Faker::Name.name}, 
-       {email: Faker::Internet.email},
-       {password: '123456789'}, 
-       {password_confirmation: '123456789'},
-       {user_pic: 'profile-pictures/'+i+'jpg'},
+       username: Faker::Name.name,
+       fullname: Faker::Name.name, 
+       email: Faker::Internet.email,
+       password: '123456789', 
+       password_confirmation: '123456789',
+       user_pic: 'profile-pictures/default-user-blank.jpg',
        ])
 end
