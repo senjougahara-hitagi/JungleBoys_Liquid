@@ -105,32 +105,5 @@ $(document).on('turbolinks:load', function(){
             }
         }
     });
-    
-    
 
-    // $('#new_comment').on("submit", function(e){
-    //     e.preventDefault();
-    //     $.ajax({
-    //       method: 'POST',
-    //       url: '/rooms/1/comments',
-    //       data: { 
-    //         // 'authenticity_token': $('#authenticity_token').val(),
-    //         // 'user_id': $('#comment_user_id').val(),
-    //         // 'room_id': $('#comment_content').val(),
-    //         // 'text_content': $('#comment_content').val()
-    //       },
-    //     //   dataType: 'json',
-    //       success: function(data){
-    //         alert('success');
-    //       },
-    //         error: function (data,xhr, ajaxOptions, thrownError) {
-    //                 //   alert(xhr.status);
-    //                 //   alert(thrownError);
-    //                   console.log(data);
-    //         },
- 
-    //     });
-    // });
-    
-    
 });
