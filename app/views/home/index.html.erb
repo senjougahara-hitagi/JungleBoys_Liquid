@@ -11,6 +11,13 @@
 <div class="row">
   <div class="col-md-8 offset-md-1">
     <h2>New Rooms</h2>
+    <!---->
+    <%= search_form_for @search, url: home_index_path do |f|%>
+      <%= f.label :show_limit, "Show limit:" %>
+      <%= select_tag :limit, options_from_collection_for_select(Settings.show_limit, :second, :second, selected: params[:limit] || Settings.show_limit.limit),id: "show-limit"%>
+      <%= f.submit "search", class: "btn btn-info", style: "display: none; margin-right: 10px"%>
+    <% end %>
+    <!---->
     <div class="row">
       
       <% @rooms.each do |room| %>
@@ -21,7 +28,7 @@
              <ul class="homepage-info">
                 <h5><%= room.room_name %></h5>
                 <li>Address: <%= room.address %></li>
-                <li>Phone: <%= room.contact_host %></li>
+                <li>Contact: <%= room.contact_host %></li>
                 <li>Review(10)</li>
                  <!--to fix-->
                 <li><%= link_to "More detail", room_path(room.id) %></li>
@@ -40,7 +47,7 @@
       
     </div>
     <br>
-    <%= paginate @rooms, :themes => 'twitter-bootstrap-3' %>
+    <%= paginate @rooms, theme: 'twitter-bootstrap-3' %>
     <br>
   </div>
   <div class="col-md-2">

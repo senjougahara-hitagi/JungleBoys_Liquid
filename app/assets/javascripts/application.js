@@ -17,3 +17,9 @@
 //= require_tree .
 //= require popper
 //= require bootstrap
+
+$(function(){
+  $("#show-limit").on("change", function(){
+    $(this).closest("form").trigger("submit");
+  });
+});
