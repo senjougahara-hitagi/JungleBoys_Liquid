@@ -18,6 +18,12 @@ class CommentsController < ApplicationController
             end
         end
     end
+    
+    def destroy
+        @comment = Comment.find(params[:id])
+        @comment.rating.destroy
+        @comment.destroy
+    end
 
     private
     def post_params

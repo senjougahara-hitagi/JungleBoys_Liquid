@@ -65,16 +65,21 @@
             <div class="col-md-6"></div>
         </div>
         <hr />
-        <h2 id="your_rating"><%= @comments.size == 0 ? 0 : @comments.size %> Reviews
-            <i id="1" class="fas fa-star"></i>
-            <i id="2" class="fas fa-star"></i>
-            <i id="3" class="fas fa-star"></i>
-            <i id="4" class="fas fa-star"></i>
-            <i id="5" class="fas fa-star"></i>
-        </h2>
-        <p id="value"></p>
 
+        <h2><%= @comments.size == 0 ? 0 : @comments.size %> Reviews</h2>
+    
         <% if user_signed_in? %>
+            <% if current_user.comments.where(:room_id => @room.id).blank? %>
+            <h2 id="your_rating">
+                <i id="1" class="fas fa-star"></i>
+                <i id="2" class="fas fa-star"></i>
+                <i id="3" class="fas fa-star"></i>
+                <i id="4" class="fas fa-star"></i>
+                <i id="5" class="fas fa-star"></i>
+            </h2>
+            
+            <p id="value"></p>
+            
             <%= form_for [@room, @comment], html: {class: "form-inline"}, remote:true do |f| %>
                 
             <div class="form-group" style="width:85%">
@@ -91,7 +96,7 @@
                     <% end %>
                 <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
             </div>
-    
+            <% end %>
             <% end %>
         <% end %>
         <br>       
@@ -101,6 +106,10 @@
         
         <% @comments.each do |comment| %>
         <div class="comment">
+            <% if user_signed_in? && current_user.id == comment.user_id %>
+            <%= link_to 'Delete', room_comment_path(@room, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Edit', edit_room_comment_path(@room, comment), method: :update %>
+            <% end %>
             <div class="row">
                 <div class="col-md-1">
                     <% if comment.user.user_pic.present? %>
@@ -127,23 +136,28 @@
             <p><%= comment.text_content %></p>
             <a href="#"></a>
         </div>
-        <% end %>
         <hr />
+        <% end %>
     </div>
     <div class="col-md-3">
         <div class="card">
           <div class="card-body">
             <p><h3 class="mr-2" style="display:inline-block">$<%= @room.cost_per_night %></h3><h5 style="display:inline-block">per night</h5></p>
             <p>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star"></i> 157
+                <% if !@room.ratings.blank? %>
+                <% for i in 1..5 %>
+                    <% if i > @room.ratings.average(:stars) %>
+                    <i class="fas fa-star"></i>
+                    <% else %>
+                    <i class="fas fa-star rated"></i>
+                    <% end %>
+                <% end %>
+                <%= number_with_precision(@room.ratings.average(:stars), :precision => 1) %> by <%= @room.ratings.count %> users.
+                <% else %>
+                <p>No ratings.</p>
+                <% end %>
             </p>
-            <hr />
-            <a href="#" class="btn contact">Contact to Host</a>
-            <hr />
+
           </div>
         </div>
     </div>
