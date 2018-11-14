@@ -66,10 +66,11 @@
         </div>
         <hr />
 
-        <h2><%= @comments.size == 0 ? 0 : @comments.size %> Reviews</h2>
+    <h2><%= @comments.size == 0 ? 0 : @comments.size %> Reviews</h2>
     
-        <% if user_signed_in? %>
-            <% if current_user.comments.where(:room_id => @room.id).blank? %>
+    <div id="comment_form">
+    <% if user_signed_in? %>
+        <% if current_user.comments.where(:room_id => @room.id).blank? %>
             <h2 id="your_rating">
                 <i id="1" class="fas fa-star"></i>
                 <i id="2" class="fas fa-star"></i>
@@ -97,17 +98,16 @@
                 <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
             </div>
             <% end %>
-            <% end %>
         <% end %>
-        <br>       
-        <div id="comments">
+    <% end %>
+    </div>
+    <br>       
             
-        </div>
-        
+    <div id="comments">
         <% @comments.each do |comment| %>
-        <div class="comment">
+        <div id="comment_<%= comment.id %>">
             <% if user_signed_in? && current_user.id == comment.user_id %>
-            <%= link_to 'Delete', room_comment_path(@room, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Delete', room_comment_path(@room, comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
             <%= link_to 'Edit', edit_room_comment_path(@room, comment), method: :update %>
             <% end %>
             <div class="row">
@@ -139,6 +139,8 @@
         <hr />
         <% end %>
     </div>
+
+    </div>
     <div class="col-md-3">
         <div class="card">
           <div class="card-body">
@@ -162,3 +164,4 @@
         </div>
     </div>
 </div>
+

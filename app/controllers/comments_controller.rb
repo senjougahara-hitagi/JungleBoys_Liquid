@@ -21,8 +21,12 @@ class CommentsController < ApplicationController
     
     def destroy
         @comment = Comment.find(params[:id])
-        @comment.rating.destroy
-        @comment.destroy
+        respond_to do |format|
+            if @comment.rating.destroy && @comment.destroy
+                format.html { redirect_to room_path(@comment.room_id) }
+                format.js   { }
+            end
+        end
     end
 
     private
