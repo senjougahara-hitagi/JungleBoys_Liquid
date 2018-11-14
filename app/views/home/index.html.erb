@@ -45,10 +45,11 @@
   </div>
   <div class="col-md-2">
     <h2>Top</h2>
+    <% @top.each do |top| %>
     <div class="card" style="width: 100%;">
-      <%= image_tag("rooms/room1.jpg", :alt=>'Room image', :class => 'card-img-top') %>
+      <%= image_tag(top.pictures[0], :alt=>'Room image', :class => 'card-img-top') %>
       <div class="card-body">
-        <h5 class="card-title"><a href="#">My room</a></h5>
+        <h5 class="card-title"><a href="#"><% top.room_name %></a></h5>
         <p class="card-text">
           <i class="fas fa-star rated"></i>
           <i class="fas fa-star rated"></i>
@@ -58,5 +59,7 @@
         </p>
       </div>
     </div>
+    <% end %>
+    
   </div>
 </div>
