@@ -7,6 +7,7 @@ GIT
       activesupport (> 3)
       elasticsearch (~> 5)
       hashie
+    elasticsearch-rails (5.1.0)
 
 GIT
   remote: https://github.com/stympy/faker.git
@@ -131,7 +132,6 @@ GEM
       elasticsearch-transport (= 5.0.5)
     elasticsearch-api (5.0.5)
       multi_json
-    elasticsearch-rails (6.0.0)
     elasticsearch-transport (5.0.5)
       faraday
       multi_json
@@ -323,4 +323,4 @@ DEPENDENCIES
   web-console (~> 2.0)
 
 BUNDLED WITH
-   1.16.6
+   1.15.4

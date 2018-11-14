@@ -1,15 +1,11 @@
 class CommentsController < ApplicationController
     def new
         @comment = Comment.new
+        @comment.rating.build
     end
     
     def create
-        # @room = Room.find(params[:id])
-        # @comment = @room.comments.build(params[:comment])
         @comment = Comment.new(post_params)
-        # if @comment.save
-        #     redirect_to root
-        # end
         
         respond_to do |format|
             if @comment.save
@@ -22,9 +18,15 @@ class CommentsController < ApplicationController
             end
         end
     end
+    
+    def destroy
+        @comment = Comment.find(params[:id])
+        @comment.rating.destroy
+        @comment.destroy
+    end
 
     private
     def post_params
-        params.require(:comment).permit(:room_id, :user_id, :text_content)
+        params.require(:comment).permit(:room_id, :user_id, :text_content, rating_attributes: [:room_id, :comment_id, :stars])
     end
 end
