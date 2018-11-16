@@ -21,11 +21,10 @@
     <div class="row">
       
       <% @rooms.each do |room| %>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="card" style="width: 100%;">
             <!--<div class="card-body">-->
              <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img") %>
-             <br>
              <ul class="homepage-info">
                 <h5 style="font-weight: bold"><%= room.room_name %></h5>
                 <li><%= room.address %></li>
@@ -33,8 +32,9 @@
                  <!--to fix-->
                 <li><%= link_to "More detail", room_path(room.id) %></li>
                 
-              </ul>
-              <p class="card-text offset-sm-1">
+              <br>
+              
+              <li>
                 <% if !room.ratings.blank? %>
                   <% for i in 1..5 %>
                       <% if i > room.ratings.average(:stars) %>
@@ -47,8 +47,8 @@
                   <% else %>
                 No ratings.
                 <% end %>
-              </p>
-              <br>
+              </li>
+              </ul>
             <!--</div>-->
           </div>
         </div>
