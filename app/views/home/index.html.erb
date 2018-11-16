@@ -18,6 +18,9 @@
       <%= f.submit "search", class: "btn btn-info", style: "display: none; margin-right: 10px"%>
     <% end %>
     <!---->
+    <br>
+    <%= paginate @rooms, theme: 'twitter-bootstrap-3' %>
+    <br>
     <div class="row">
       
       <% @rooms.each do |room| %>
