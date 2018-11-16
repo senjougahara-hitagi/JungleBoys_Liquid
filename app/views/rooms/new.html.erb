@@ -20,7 +20,12 @@
             <%= f.hidden_field :user_id, value: current_user.id, class: "form-control" %>
         </div>
         
-         <div class="field">
+        <div class="field">
+            <%= f.label :room_info, "Room info:" %>
+            <%= f.text_field :room_info, class: "form-control" %>
+        </div>
+        
+        <div class="field">
             <%= f.label :address, "Address:" %>
             <%= f.text_field :address, class: "form-control" %>
         </div>

@@ -11,7 +11,6 @@ class CommentsController < ApplicationController
             if @comment.save
                 format.html { redirect_to @comment, notice: 'Comment được tạo thành công' }
                 format.js   { }
-                format.json { render :show, status: :created, location: @comment }
             else
                 format.html { render :new }
                 format.json { render json: @comment.errors, status: :unprocessable_entity }
