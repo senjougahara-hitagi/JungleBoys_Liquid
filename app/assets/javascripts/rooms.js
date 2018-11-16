@@ -5,18 +5,19 @@ $(document).on('turbolinks:load', function(){
     // alert("The paragraph was clicked.");
         var amentities_arr = [];
 
-        if ($("#gym").prop("checked") == true)
-            amentities_arr.push("gym");
         if ($("#kitchen").prop("checked") == true)
-            amentities_arr.push("kitchen");
+            amentities_arr.push("Kitchen");
         if ($("#wifi").prop("checked") == true)
-            amentities_arr.push("wifi");
-        if ($("#air_conditioner").prop("checked") == true)
-            amentities_arr.push("air_conditioner");
-        if ($("#hot_water").prop("checked") == true)
-            amentities_arr.push("hot_water");
+            amentities_arr.push("Wifi");
         if ($("#tv").prop("checked") == true)
-            amentities_arr.push("tv");
+            amentities_arr.push("TV");
+        if ($("#gym").prop("checked") == true)
+            amentities_arr.push("Gym");
+        if ($("#air_conditioner").prop("checked") == true)
+            amentities_arr.push("Air conditioner");
+        if ($("#hot_water").prop("checked") == true)
+            amentities_arr.push("Hot water");
+        
             
         var amentities_str = amentities_arr.join(",");
         $("#room_amentities").val(amentities_str);
@@ -106,4 +107,8 @@ $(document).on('turbolinks:load', function(){
         }
     });
 
+    $("#comments").children().mouseenter(function(e){
+        e.preventDefault();
+        
+    });
 });
