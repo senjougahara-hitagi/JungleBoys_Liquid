@@ -1,1 +1,2 @@
-$("#comments").prepend("<%= escape_javascript(render @comment) %>");
+$('#comment_form').hide();
+$("#comments").prepend("<%= escape_javascript(render partial: 'show', locals: {comment: @comment}) %>");

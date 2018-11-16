@@ -24,26 +24,35 @@
     <div class="row">
       
       <% @rooms.each do |room| %>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <div class="card" style="width: 100%;">
-            <div class="card-body">
-             <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class=>'img-responsive') %>
+            <!--<div class="card-body">-->
+             <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img") %>
              <ul class="homepage-info">
-                <h5><%= room.room_name %></h5>
-                <li>Address: <%= room.address %></li>
-                <li>Contact: <%= room.contact_host %></li>
-                <li>Review(10)</li>
+                <h5 style="font-weight: bold"><%= room.room_name %></h5>
+                <li><%= room.address %></li>
+                <li><%= room.comments.count %> Reviews</li>
                  <!--to fix-->
                 <li><%= link_to "More detail", room_path(room.id) %></li>
+                
+              <br>
+              
+              <li>
+                <% if !room.ratings.blank? %>
+                  <% for i in 1..5 %>
+                      <% if i > room.ratings.average(:stars) %>
+                      <i class="fas fa-star"></i>
+                      <% else %>
+                      <i class="fas fa-star rated"></i>
+                      <% end %>
+                  <% end %>
+                  <%= number_with_precision(room.ratings.average(:stars), :precision => 1) %>
+                  <% else %>
+                No ratings.
+                <% end %>
+              </li>
               </ul>
-              <p class="card-text">
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star"></i>
-              </p>
-            </div>
+            <!--</div>-->
           </div>
         </div>
       <% end %>
@@ -55,18 +64,29 @@
   </div>
   <div class="col-md-2">
     <h2>Top</h2>
+    <% @top.each do |top| %>
     <div class="card" style="width: 100%;">
-      <%= image_tag("rooms/room1.jpg", :alt=>'Room image', :class => 'card-img-top') %>
+      <%= image_tag(top.pictures[0], :alt=>'Room image', :class => 'index-top-img') %>
       <div class="card-body">
-        <h5 class="card-title"><a href="#">My room</a></h5>
+        <h5 class="card-title"><%= link_to top.room_name, room_path(top) %></a></h5>
         <p class="card-text">
-          <i class="fas fa-star rated"></i>
-          <i class="fas fa-star rated"></i>
-          <i class="fas fa-star rated"></i>
-          <i class="fas fa-star rated"></i>
-          <i class="fas fa-star rated"></i>
+          <% if !top.ratings.blank? %>
+                <% for i in 1..5 %>
+                    <% if i > top.ratings.average(:stars) %>
+                    <i class="fas fa-star"></i>
+                    <% else %>
+                    <i class="fas fa-star rated"></i>
+                    <% end %>
+                <% end %>
+                <%= number_with_precision(top.ratings.average(:stars), :precision => 1) %>
+                <% else %>
+                No ratings.
+          <% end %>
         </p>
       </div>
     </div>
+    <br>
+    <% end %>
+    
   </div>
 </div>

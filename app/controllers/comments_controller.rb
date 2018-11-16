@@ -11,10 +11,19 @@ class CommentsController < ApplicationController
             if @comment.save
                 format.html { redirect_to @comment, notice: 'Comment được tạo thành công' }
                 format.js   { }
-                format.json { render :show, status: :created, location: @comment }
             else
                 format.html { render :new }
                 format.json { render json: @comment.errors, status: :unprocessable_entity }
+            end
+        end
+    end
+    
+    def destroy
+        @comment = Comment.find(params[:id])
+        respond_to do |format|
+            if @comment.rating.destroy && @comment.destroy
+                format.html { redirect_to room_path(@comment.room_id) }
+                format.js   { }
             end
         end
     end

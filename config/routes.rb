@@ -19,8 +19,6 @@ Rails.application.routes.draw do
     # password: 'users/passwords'
   }
   
-  # post 'rooms/:id' => 'comments#create'
-  
   namespace :admin do
     controller :admin do
       root 'admin#index'

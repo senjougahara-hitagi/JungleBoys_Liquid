@@ -48,33 +48,42 @@
 <hr />
 <div class="row">
     <div class="offset-md-1 col-md-7">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
-        sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        <p><%= @room.room_info %></p>
         
         <a href="#">Read more about the space <i class="fas fa-chevron-down"></i></a>
         <hr />
         <p style="font-weight: bold">Amentities</p>
-        <div class="row mb-1">
-            <div class="col-md-6"><i class="fas fa-utensils"></i> Kitchen</div>
-            <div class="col-md-6"><i class="fas fa-wifi"></i> Wifi</div>
-        </div>
-        <div class="row mb-1">
-            <div class="col-md-6"><i class="fas fa-tv"></i> TV</div>
-            <div class="col-md-6"></div>
-        </div>
+            <div id="amentities">
+            <div id="am_row_1" class="row mb-1">
+                <div class="col-md-6"><i class="fas fa-utensils"></i> Kitchen</div>
+                <div class="col-md-6"><i class="fas fa-wifi"></i> Wifi</div>
+            </div>
+            <div id="am_row_2" class="row mb-1">
+                <div class="col-md-6"><i class="fas fa-tv"></i> TV</div>
+                <div class="col-md-6"><i class="fas fa-dumbbell"></i> Gym</div>
+            </div>
+            <div id="am_row_3" class="row mb-1">
+                <div class="col-md-6"><i class="far fa-snowflake"></i> Air conditioner</div>
+                <div class="col-md-6"><i class="fas fa-hot-tub"></i> Hot water</div>
+            </div>
+            </div>
         <hr />
-        <h2 id="your_rating"><%= @comments.size == 0 ? 0 : @comments.size %> Reviews
-            <i id="1" class="fas fa-star"></i>
-            <i id="2" class="fas fa-star"></i>
-            <i id="3" class="fas fa-star"></i>
-            <i id="4" class="fas fa-star"></i>
-            <i id="5" class="fas fa-star"></i>
-        </h2>
-        <p id="value"></p>
 
-        <% if user_signed_in? %>
+    <h2><%= @comments.size == 0 ? 0 : @comments.size %> Reviews</h2>
+    
+    <div id="comment_form">
+    <% if user_signed_in? %>
+        <% if current_user.comments.where(:room_id => @room.id).blank? %>
+            <h2 id="your_rating">
+                <i id="1" class="fas fa-star"></i>
+                <i id="2" class="fas fa-star"></i>
+                <i id="3" class="fas fa-star"></i>
+                <i id="4" class="fas fa-star"></i>
+                <i id="5" class="fas fa-star"></i>
+            </h2>
+            
+            <p id="value"></p>
+            
             <%= form_for [@room, @comment], html: {class: "form-inline"}, remote:true do |f| %>
                 
             <div class="form-group" style="width:85%">
@@ -91,17 +100,17 @@
                     <% end %>
                 <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
             </div>
-    
             <% end %>
         <% end %>
-        <br>       
-        <div id="comments">
+    <% end %>
+    </div>
+    <br>       
             
-        </div>
-        
+    <div id="comments">
         <% @comments.each do |comment| %>
-        <div class="comment">
+        <div id="comment_<%= comment.id %>">
             <div class="row">
+                
                 <div class="col-md-1">
                     <% if comment.user.user_pic.present? %>
                     <%= image_tag(comment.user.user_pic, :height=>'50px', :style => 'border-radius: 50%') %>
@@ -109,11 +118,12 @@
                     <%= image_tag("/user.png", :height=>'50px', :style => 'border-radius: 50%') %>
                     <% end %>
                 </div>
-                <div class="col-md-3">
-                    <a href="#" style="font-weight:bold"><%= comment.user.username %></a>
-                    <p><%= comment.created_at %></p>
-                </div>
                 <div class="col-md-5">
+                    <a href="#" style="font-weight:bold"><%= comment.user.username %></a>
+                    <br>
+                    <p style="font-size: 0.9rem"><%= comment.created_at %><p>
+                </div>
+                <div class="col-md-4">
                     <% for i in 1..5 %>
                         <% if i > comment.rating.stars %>
                             <i class="fas fa-star"></i>
@@ -123,25 +133,47 @@
                     <% end %>
     
                 </div>
+                <div class="col-md-2">
+                    <% if user_signed_in? && current_user.id == comment.user_id %>
+                        <i class="fas fa-edit right-corner">
+                            <%= link_to 'Edit', edit_room_comment_path(@room, comment), class: "right-corner", method: :update %>
+                        </i>
+                        <i class="fas fa-trash-alt right-corner">
+                            <%= link_to 'Delete', room_comment_path(@room, comment), method: :delete,
+                            remote: true, data: { confirm: 'Are you sure?' } %>
+                        </i>
+                    <% end %>
+                </div>
             </div>
             <p><%= comment.text_content %></p>
             <a href="#"></a>
         </div>
-        <% end %>
         <hr />
+        <% end %>
+    </div>
+
     </div>
     <div class="col-md-3">
         <div class="card">
           <div class="card-body">
             <p><h3 class="mr-2" style="display:inline-block">$<%= @room.cost_per_night %></h3><h5 style="display:inline-block">per night</h5></p>
             <p>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star"></i> 157
+                <% if !@room.ratings.blank? %>
+                <% for i in 1..5 %>
+                    <% if i > @room.ratings.average(:stars) %>
+                    <i class="fas fa-star"></i>
+                    <% else %>
+                    <i class="fas fa-star rated"></i>
+                    <% end %>
+                <% end %>
+                <%= number_with_precision(@room.ratings.average(:stars), :precision => 1) %> by <%= @room.ratings.count %> users.
+                <% else %>
+                <p>No ratings.</p>
+                <% end %>
             </p>
-            </div>
+
+          </div>
         </div>
     </div>
 </div>
+
