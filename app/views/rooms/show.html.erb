@@ -53,23 +53,27 @@
         <a href="#">Read more about the space <i class="fas fa-chevron-down"></i></a>
         <hr />
         <p style="font-weight: bold">Amentities</p>
-            <div id="amentities">
-            <div id="am_row_1" class="row mb-1">
+            <!-- FIX THIS MESS -->
+            <% a = show_amentities(@room.amentities) %>
+            <% for i in 0..(a.size-1) do %>
+                <% if a[i] == 'Kitchen'%>
                 <div class="col-md-6"><i class="fas fa-utensils"></i> Kitchen</div>
+                <% elsif a[i] == 'Wifi'%>
                 <div class="col-md-6"><i class="fas fa-wifi"></i> Wifi</div>
-            </div>
-            <div id="am_row_2" class="row mb-1">
+                <% elsif a[i] == 'TV'%>
                 <div class="col-md-6"><i class="fas fa-tv"></i> TV</div>
+                <% elsif a[i] == 'Gym' %>
                 <div class="col-md-6"><i class="fas fa-dumbbell"></i> Gym</div>
-            </div>
-            <div id="am_row_3" class="row mb-1">
+                <% elsif a[i] == 'Air conditioner' %>
                 <div class="col-md-6"><i class="far fa-snowflake"></i> Air conditioner</div>
+                <% elsif a[i] == 'Hot water'%>
                 <div class="col-md-6"><i class="fas fa-hot-tub"></i> Hot water</div>
-            </div>
-            </div>
+                <% end %>
+            <% end %>
+            <!-- -->
         <hr />
 
-    <h2><%= @comments.size == 0 ? 0 : @comments.size %> Reviews</h2>
+    <h2 id="review_amount"><%= @comments.size == 0 ? 0 : @comments.size %> Reviews</h2>
     
     <div id="comment_form">
     <% if user_signed_in? %>
@@ -145,10 +149,9 @@
                     <% end %>
                 </div>
             </div>
-            <p><%= comment.text_content %></p>
-            <a href="#"></a>
-        </div>
+            <p class="offset-md-1"><%= comment.text_content %></p>
         <hr />
+        </div>
         <% end %>
     </div>
 
