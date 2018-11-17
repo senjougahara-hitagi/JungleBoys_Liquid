@@ -1,2 +1,3 @@
 $('#comment_<%= @comment.id %>').remove();
 $('#comment_form').show();
+$("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
