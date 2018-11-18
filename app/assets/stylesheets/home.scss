@@ -25,3 +25,30 @@
 T.card {
     border: none ;
 }
+
+.pagination_container {
+    position:relative;
+}
+
+.pagination_container ul{
+    position:relative;
+    right:-37%;
+    display: flex;
+}
+
+.pagination_container li {
+    padding: 0px 5px 0px;
+}
+
+.pagination_container a{
+    width: 100%;
+    border:1px solid;
+    padding:2px 10px 2px 10px;
+    text-align:center;
+    background:#F7F7F7;
+}
+
+.pagination_container a:hover{
+    color:red;
+    background:#f2f2f2;
+}
