@@ -1,4 +1,4 @@
-<%= sort_link(@q, :room_name) %>
+<%= sort_link(@q, :cost_per_night) %>
   <br>
   
   <div class="row">
@@ -8,6 +8,7 @@
         <!--<div class="card-body">-->
          <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img") %>
          <ul class="homepage-info">
+            <p class="right-corner" style="font-size: 1rem; font-weight: bold">$<%= room.cost_per_night %>/night </p>
             <h5 style="font-weight: bold"><%= room.room_name %></h5>
             <li><%= room.address %></li>
             <li><%= room.comments.count %> Reviews</li>
