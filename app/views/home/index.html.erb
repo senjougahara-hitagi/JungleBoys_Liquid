@@ -13,11 +13,13 @@
   <div class="col-md-8 offset-md-1">
     <h2>New Rooms</h2>
     <!---->
-    <%= search_form_for @search, url: home_index_path do |f|%>
-      <%= f.label :show_limit, "Show limit:" %>
-      <%= select_tag :limit, options_from_collection_for_select(Settings.show_limit, :second, :second, selected: params[:limit] || Settings.show_limit.limit),id: "show-limit"%>
-      <%= f.submit "search", class: "btn btn-info", style: "display: none; margin-right: 10px"%>
-    <% end %>
+    <div style="text-align: right;">
+      <%= search_form_for @search, url: home_index_path do |f|%>
+        <%= f.label :show_limit, "Show limit:" %>
+        <%= select_tag :limit, options_from_collection_for_select(Settings.show_limit, :second, :second, selected: params[:limit] || Settings.show_limit.limit),id: "show-limit"%>
+        <%= f.submit "search", class: "btn btn-info", style: "display: none; margin-right: 10px"%>
+      <% end %>
+    </div>
     <!---->
     <br>
     <%= paginate @rooms, theme: 'twitter-bootstrap-3' %>
