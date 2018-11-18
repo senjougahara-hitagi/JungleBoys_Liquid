@@ -13,3 +13,4 @@ $("#comment_form").submit(function(){
 
 $("#average_rating").empty();
 $("#average_rating").append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");
+

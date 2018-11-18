@@ -126,4 +126,5 @@ $(document).on('turbolinks:load', function(){
             $("p#value").text("error");
         }
     });
+    
 });

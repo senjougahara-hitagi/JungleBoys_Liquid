@@ -8,5 +8,7 @@ $("#comment_<%= @comment.id %> #edit_button").click(function(e){
 $("#comment_<%= @comment.id %> #edit_cancel_button").click(function(e){
     $("#comment_<%= @comment.id %>").show();
 });
+
 $("#average_rating").empty();
 $("#average_rating").append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");
+

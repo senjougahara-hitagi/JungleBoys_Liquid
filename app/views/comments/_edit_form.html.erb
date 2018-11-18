@@ -5,6 +5,7 @@
                 <%= f.hidden_field :room_id, value: @comment.room.id %>
                 <%= f.text_field :text_content, :class => "comment-box form-control", 
                     :required => true, :autocomplete => 'off', placeholder: "Edit comment" %>
+
                 <h2 id="your_rating">
                     <i id="1" class="fas fa-star"></i>
                     <i id="2" class="fas fa-star"></i>
@@ -14,6 +15,7 @@
                 </h2>
             
                 <p id="value"></p>    
+
                 <button id="edit_cancel_button" type="button" class="btn btn-danger">Cancel</button>    
                 <%= f.submit "Edit", id: "submit", class: "ml-auto btn btn-primary" %>
             </div>
