@@ -1,2 +1,4 @@
 $('#comment_<%= @comment.id %>').remove();
 $("#comments").prepend("<%= escape_javascript(render partial: 'show', locals: {comment: @comment}) %>");
+$("#average_rating").empty();
+$("#average_rating").append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");

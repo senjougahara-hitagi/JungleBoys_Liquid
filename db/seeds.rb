@@ -30,7 +30,7 @@ end
       num_of_guests: 1,
       num_of_bedrooms: 2,
       num_of_beds: 5,
-      amentities: 'wifi',
+      amentities: 'Wifi',
       contact_host: Faker::PhoneNumber.phone_number,
       pictures: 'rooms/room1.jpg',
       ])
