@@ -1,0 +1,12 @@
+<%= form_for [@comment.room, @comment], method: :put, html: {class: "form-inline"}, remote:true do |f| %>
+                
+            <div class="form-group" style="width:85%">
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.hidden_field :room_id, value: @comment.room.id %>
+                <%= f.text_field :text_content, :class => "comment-box form-control", 
+                    :required => true, :autocomplete => 'off', placeholder: "Edit comment" %>
+                    
+                <button id="edit_cancel_button" type="button" class="btn btn-danger">Cancel</button>    
+                <%= f.submit "Edit", id: "submit", class: "ml-auto btn btn-primary" %>
+            </div>
+<% end %>

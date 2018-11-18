@@ -139,13 +139,13 @@
                 </div>
                 <div class="col-md-2">
                     <% if user_signed_in? && current_user.id == comment.user_id %>
-                        <i class="fas fa-edit right-corner">
-                            <%= link_to 'Edit', edit_room_comment_path(@room, comment), class: "right-corner", method: :update %>
-                        </i>
-                        <i class="fas fa-trash-alt right-corner">
+                        <!--<i class="fas fa-edit right-corner">-->
+                            <button id="edit_button">a</button>
+                        <!--</i>-->
+                        <!--<i class="fas fa-trash-alt right-corner">-->
                             <%= link_to 'Delete', room_comment_path(@room, comment), method: :delete,
                             remote: true, data: { confirm: 'Are you sure?' } %>
-                        </i>
+                        <!--</i>-->
                     <% end %>
                 </div>
             </div>
