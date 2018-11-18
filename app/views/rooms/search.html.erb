@@ -1,25 +1,39 @@
-<h1>Found <%= @rooms.size %> result(s)</h1>
-      <% @rooms.each do |room| %>
-        <div class="col-md-6">
-          <div class="card" style="width: 100%;">
-            <div class="card-body">
-             <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class=>'img-responsive') %>
-             <ul class="homepage-info">
-                <h5><%= room.room_name %></h5>
-                <li>Address: <%= room.address %></li>
-                <li>Phone: <%= room.contact_host %></li>
-                <li>Review(10)</li>
-                 <!--to fix-->
-                <li><%= link_to "More detail", room_path(room.id) %></li>
-              </ul>
-              <p class="card-text">
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star rated"></i>
-                <i class="fas fa-star"></i>
-              </p>
-            </div>
-          </div>
-        </div>
-      <% end %>
+<%= sort_link(@q, :room_name) %>
+  <br>
+  
+  <div class="row">
+  <% @rooms.each do |room| %>
+    <div class="col-md-4">
+      <div class="card border-0" style="width: 100%;">
+        <!--<div class="card-body">-->
+         <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img") %>
+         <ul class="homepage-info">
+            <h5 style="font-weight: bold"><%= room.room_name %></h5>
+            <li><%= room.address %></li>
+            <li><%= room.comments.count %> Reviews</li>
+             <!--to fix-->
+            <li><%= link_to "More detail", room_path(room.id) %></li>
+            
+          <br>
+          
+          <li>
+            <% if !room.ratings.blank? %>
+              <% for i in 1..5 %>
+                  <% if i > room.ratings.average(:stars) %>
+                  <i class="fas fa-star"></i>
+                  <% else %>
+                  <i class="fas fa-star rated"></i>
+                  <% end %>
+              <% end %>
+              <%= number_with_precision(room.ratings.average(:stars), :precision => 1) %>
+              <% else %>
+            No ratings.
+            <% end %>
+          </li>
+          </ul>
+        <!--</div>-->
+      </div>
+    </div>
+  <% end %>
+  
+</div>

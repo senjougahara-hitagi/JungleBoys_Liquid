@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
     def index
         # if current_user.is_admin
         # end
+       
     end
     
     def new
@@ -34,8 +35,10 @@ class RoomsController < ApplicationController
     end
 
     def search
-        @rooms=Room.where('room_name LIKE ?', "%#{params[:room_name]}%").order('id DESC')
-        # @room.show
+        # @rooms=Room.where('room_name LIKE ?', "%#{params[:room_name]}%").order('id DESC')
+        # # @room.show
+        @q = Room.ransack(params[:q])
+        @rooms = @q.result
     end
 
     private
