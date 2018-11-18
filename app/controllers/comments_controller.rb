@@ -34,6 +34,7 @@ class CommentsController < ApplicationController
         
         respond_to do |format|
             if @comment.update(update_params)
+                this.new
                 format.html { redirect_to room_path(@comment.room_id) }
                 format.js   { }     
             end

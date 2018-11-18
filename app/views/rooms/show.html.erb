@@ -112,46 +112,7 @@
             
     <div id="comments">
         <% @comments.each do |comment| %>
-        <div id="comment_<%= comment.id %>">
-            <div class="row">
-                
-                <div class="col-md-1">
-                    <% if comment.user.user_pic.present? %>
-                    <%= image_tag(comment.user.user_pic, :height=>'50px', :width=>'50px', :style => 'border-radius: 50%') %>
-                    <% else %>
-                    <%= image_tag("/user.png", :height=>'50px', :width=>'50px', :style => 'border-radius: 50%') %>
-                    <% end %>
-                </div>
-                <div class="col-md-5">
-                    <a href="#" style="font-weight:bold"><%= comment.user.username %></a>
-                    <br>
-                    <p style="font-size: 0.9rem"><%= comment.created_at %><p>
-                </div>
-                <div class="col-md-4">
-                    <% for i in 1..5 %>
-                        <% if i > comment.rating.stars %>
-                            <i class="fas fa-star"></i>
-                            <% next %>                        
-                        <% end %>
-                        <i class="fas fa-star rated"></i>
-                    <% end %>
-    
-                </div>
-                <div class="col-md-2">
-                    <% if user_signed_in? && current_user.id == comment.user_id %>
-                        <!--<i class="fas fa-edit right-corner">-->
-                            <button id="edit_button">a</button>
-                        <!--</i>-->
-                        <!--<i class="fas fa-trash-alt right-corner">-->
-                            <%= link_to 'Delete', room_comment_path(@room, comment), method: :delete,
-                            remote: true, data: { confirm: 'Are you sure?' } %>
-                        <!--</i>-->
-                    <% end %>
-                </div>
-            </div>
-            <p class="offset-md-1"><%= comment.text_content %></p>
-        <hr />
-        </div>
+            <%= render partial: 'comments/show', locals: {comment: comment} %>
         <% end %>
     </div>
 
@@ -160,7 +121,7 @@
         <div class="card">
           <div class="card-body">
             <p><h3 class="mr-2" style="display:inline-block">$<%= @room.cost_per_night %></h3><h5 style="display:inline-block">per night</h5></p>
-            <p>
+            <p id="average_rating">
                 <% if !@room.ratings.blank? %>
                 <% for i in 1..5 %>
                     <% if i > @room.ratings.average(:stars) %>

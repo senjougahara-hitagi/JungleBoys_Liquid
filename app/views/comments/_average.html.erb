@@ -1,0 +1,14 @@
+<p id="average_rating">
+    <% if !@comment.room.ratings.blank? %>
+    <% for i in 1..5 %>
+        <% if i > @comment.room.ratings.average(:stars) %>
+        <i class="fas fa-star"></i>
+        <% else %>
+        <i class="fas fa-star rated"></i>
+        <% end %>
+    <% end %>
+    <%= number_with_precision(@comment.room.ratings.average(:stars), :precision => 1) %> by <%= @comment.room.ratings.count %> users.
+    <% else %>
+    <p>No ratings.</p>
+    <% end %>
+</p>

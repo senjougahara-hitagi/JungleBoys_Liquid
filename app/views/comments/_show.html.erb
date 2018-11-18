@@ -1,15 +1,18 @@
 <div id="comment_<%= comment.id %>">
     <% if user_signed_in? && current_user.id == comment.user_id %>
+    <div class="right-corner">
         <%= link_to 'Delete', room_comment_path(comment.room_id, comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
         <button id="edit_button">Edit</button>
+    </div>
+
     <% end %>
 
     <div class="row">
         <div class="col-md-1">
             <% if comment.user.user_pic.present? %>
-                <%= image_tag(comment.user.user_pic, :height=>'50px', :style => 'border-radius: 50%') %>
+                <%= image_tag(comment.user.user_pic, :height=>'50px', :width=>'50px', :style => 'border-radius: 50%') %>
             <% else %>
-                <%= image_tag("/user.png", :height=>'50px', :style => 'border-radius: 50%') %>
+                <%= image_tag("/user.png", :height=>'50px', :width=>'50px',:style => 'border-radius: 50%') %>
             <% end %>
         </div>
         <div class="col-md-5">

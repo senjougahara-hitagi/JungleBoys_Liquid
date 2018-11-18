@@ -1,4 +1,16 @@
 $('#comment_<%= @comment.id %>').remove();
-$('#comment_form').show();
 $("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
-<!--$("#comment_form").prepend("<%= escape_javascript(render partial: 'form', locals: {comment: @comment}) %>");-->
+$('#comment_form').empty();
+$("#comment_form").prepend("<%= escape_javascript(render partial: 'form', locals: {comment: @comment}) %>");
+$("#comment_text_content").text('');
+current_value = 0;
+
+$("#comment_form").submit(function(){
+    if ($("#comment_rating_attributes_stars").val() == ''){
+        $("p#value").text("error");
+    }
+});
+
+$("#average_rating").empty();
+$("#average_rating").append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");
+
