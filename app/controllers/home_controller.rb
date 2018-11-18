@@ -1,8 +1,16 @@
 class HomeController < ApplicationController
+  $limit = 6
   def index
     @search = Room.order(id: :desc).ransack params[:q]
-    @rooms = @search.result.page(params[:page]).per params[:limit]
-  # 	@rooms = Room.order(id: :desc).page(params[:page]).per(4)
+    
+    if (params[:limit].nil?)
+      params[:limit] = $limit
+  	  @rooms = @search.result.page(params[:page]).per $limit
+    else
+      $limit = params[:limit]
+      @rooms = @search.result.page(params[:page]).per params[:limit]
+    end
+    
     @top = Room.top_rated
   end
 end

@@ -39,9 +39,9 @@
     <div class="col-md-2 text-center">
         <p>Owner: <%= link_to @room.user.username, user_path(:id => @room.user_id) %></p>
         <% if @room.user.user_pic.present? %>
-        <%= image_tag(@room.user.user_pic, :height=>'50px', :style => 'border-radius: 50%') %>
+        <%= image_tag(@room.user.user_pic, :height=>'50px', :width=>'50px', :style => 'border-radius: 50%') %>
         <% else %>
-        <%= image_tag("/user.png", :height=>'50px', :style => 'border-radius: 50%') %>
+        <%= image_tag("/user.png", :height=>'50px', :width=>'50px', :style => 'border-radius: 50%') %>
         <% end %>        
     </div>
 </div>
@@ -117,9 +117,9 @@
                 
                 <div class="col-md-1">
                     <% if comment.user.user_pic.present? %>
-                    <%= image_tag(comment.user.user_pic, :height=>'50px', :style => 'border-radius: 50%') %>
+                    <%= image_tag(comment.user.user_pic, :height=>'50px', :width=>'50px', :style => 'border-radius: 50%') %>
                     <% else %>
-                    <%= image_tag("/user.png", :height=>'50px', :style => 'border-radius: 50%') %>
+                    <%= image_tag("/user.png", :height=>'50px', :width=>'50px', :style => 'border-radius: 50%') %>
                     <% end %>
                 </div>
                 <div class="col-md-5">

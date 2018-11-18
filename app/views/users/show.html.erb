@@ -2,7 +2,7 @@
 <div class="container"> 
  <div class ="row">
   <div class="col-md-12">
-   <h1 class="text-center">Hi, <%= current_user.username %></h1>
+   <h1 class="text-center">Hi, <%= @user.username %></h1>
    <br><br>
   </div>
  </div>
@@ -10,7 +10,14 @@
   <div class="row">        
    <div class="col-md-3">          
     <div class="profile-sidebar">                          
-     <div class="profile-userpic">  <%= image_tag(current_user.user_pic, :height=>'200px', :width=>'200px', :style => 'margin-right: 5px;border-radius: 10%') unless current_user.user_pic.blank? %>        
+     <div class="profile-userpic">
+     <% if @user.user_pic.blank? %> 
+          <%= image_tag("/user.png", :height=>'200px', :width=>'200px', :style => 'margin-right: 5px;border-radius: 10%') %>
+
+     <% else %>
+          <%= image_tag(@user.user_pic, :height=>'200px', :width=>'200px', :style => 'margin-right: 5px;border-radius: 10%') %>
+
+     <% end %>
      </div>                                            
                                                
                      
@@ -21,12 +28,12 @@
      <table width="100%">
        <tr>
          <td width="30%">Fullname</td>
-         <td width="70%"><%= current_user.fullname%></td>
+         <td width="70%"><%= @user.fullname%></td>
        </tr>
        <tr>
          <td width="30%">Gender</td>
          <td width="70%">
-          <% if current_user.gender == true %>
+          <% if @user.gender == true %>
            <%= "Male"%>
           <% else %>
            <%= "Female"%>
@@ -35,11 +42,11 @@
        </tr>
        <tr>
          <td width="30%">Email</td>
-         <td width="70%"><%= current_user.email%></td>
+         <td width="70%"><%= @user.email%></td>
        </tr>
        <tr>
          <td width="30%">Address</td>
-         <td width="70%"><%= current_user.address%></td>
+         <td width="70%"><%= @user.address%></td>
        </tr>
      </table>
     </div>
@@ -48,6 +55,8 @@
  </div>
  <br><br>
  
+ <% if user_signed_in? %>
+ <% if (current_user.id == @user.id) %>
  <div class ="row">
   <div class="offset-md-5 col-md-2">
    
@@ -55,10 +64,8 @@
    Edit Profile</a>
   </div>
  </div>
- 
- <div class="row">
-   <div class="offset-md-3 col-md-8">
-    a 
-   </div>
- </div>
+ <% end %>
+ <% end %>
+
+   <!--<div class="offset-md-3 col-md-8">-->
 </div>
