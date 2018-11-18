@@ -19,6 +19,11 @@
       <%= f.submit "search", class: "btn btn-info", style: "display: none; margin-right: 10px"%>
     <% end %>
     <!---->
+    <br>
+    <div class="pagination_container">
+      <%= paginate @rooms, theme: 'twitter-bootstrap-3'%>
+    </div>
+    <br>
     <div class="row">
       
       <% @rooms.each do |room| %>
@@ -57,7 +62,9 @@
       
     </div>
     <br>
-    <%= paginate @rooms, theme: 'twitter-bootstrap-3' %>
+    <div class="pagination_container">
+      <%= paginate @rooms, theme: 'twitter-bootstrap-3'%>
+    </div>
     <br>
   </div>
   <div class="col-md-2">
