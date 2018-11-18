@@ -1,0 +1,31 @@
+<% if user_signed_in? %>
+        <% if current_user.comments.where(:room_id => @comment.room.id).blank? %>
+            <h2 id="your_rating">
+                <i id="1" class="fas fa-star"></i>
+                <i id="2" class="fas fa-star"></i>
+                <i id="3" class="fas fa-star"></i>
+                <i id="4" class="fas fa-star"></i>
+                <i id="5" class="fas fa-star"></i>
+            </h2>
+            
+            <p id="value"></p>
+            
+            <%= form_for [@comment.room, @comment], html: {class: "form-inline"}, remote:true do |f| %>
+                
+            <div class="form-group" style="width:85%">
+                <%= f.hidden_field :user_id, value: current_user.id %>
+                <%= f.hidden_field :room_id, value: @comment.room.id %>
+                <%= f.text_field :text_content, :class => "comment-box form-control", 
+                    :required => true, :autocomplete => 'off', placeholder: "Write a review" %>
+                    <%= f.fields_for :rating, Rating.new do |rating_form| %>
+                    <p>
+                        <%= rating_form.hidden_field :user_id, value: current_user.id %>
+                        <%= rating_form.hidden_field :room_id, value: @comment.room.id %>    
+                        <%= rating_form.hidden_field :stars %>                    
+                    </p>
+                    <% end %>
+                <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
+            </div>
+            <% end %>
+        <% end %>
+    <% end %>

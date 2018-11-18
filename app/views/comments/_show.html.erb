@@ -1,7 +1,7 @@
 <div id="comment_<%= comment.id %>">
     <% if user_signed_in? && current_user.id == comment.user_id %>
         <%= link_to 'Delete', room_comment_path(comment.room_id, comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
-        <%= link_to 'Edit', edit_room_comment_path(comment.room_id, comment), method: :update %>
+        <button id="edit_button">Edit</button>
     <% end %>
 
     <div class="row">
