@@ -32,5 +32,36 @@
     </div>
     
     <p class="offset-md-1"><%= comment.text_content %></p>
+    <div style="display:none" id="edit_form">
+    <%= form_for [comment.room, comment], method: :patch, html: {class: "form-inline"}, remote:true do |f| %>
+                
+            <div class="form-group" style="width:100%">
+                <%= f.hidden_field :id, value: comment.id %>
+                <%= f.hidden_field :room_id, value: comment.room.id %>
+                <%= f.text_field :text_content, :class => "comment-box form-control", 
+                    :required => true, :autocomplete => 'off', placeholder: "Edit comment" %>
+                <%= f.fields_for :rating, update_ratings_path do |rating_form| %>
+                    <p>
+                        <%= rating_form.hidden_field :id, value: comment.rating.id %>
+                        <%= rating_form.hidden_field :comment_id, value: comment.id %>
+                        <%= rating_form.hidden_field :room_id, value: comment.room.id %>    
+                        <%= rating_form.hidden_field :stars %>                    
+                    </p>
+                    <% end %>
+                <h2 id="your_rating">
+                    <i id="1" class="fas fa-star"></i>
+                    <i id="2" class="fas fa-star"></i>
+                    <i id="3" class="fas fa-star"></i>
+                    <i id="4" class="fas fa-star"></i>
+                    <i id="5" class="fas fa-star"></i>
+                </h2>
+            
+                <p id="value"></p>    
+
+                <button id="edit_cancel_button" type="button" class="ml-auto btn btn-danger">Cancel</button>    
+                <%= f.submit "Edit", id: "submit", class: "ml-auto btn btn-primary" %>
+            </div>
+        <% end %>
+        </div>
     <hr />
 </div>

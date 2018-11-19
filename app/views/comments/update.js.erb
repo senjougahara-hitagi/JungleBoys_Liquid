@@ -3,3 +3,9 @@ $("#comments").prepend("<%= escape_javascript(render partial: 'show', locals: {c
 $("#average_rating").empty();
 $("#average_rating").append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");
 
+$("#comment_<%= @comment.id %> #edit_button").click(function(e){
+    $("#edit_form").fadeIn(500);
+});
+$("#comment_<%= @comment.id %> #edit_cancel_button").click(function(e){
+    $("#edit_form").fadeOut(500);
+});

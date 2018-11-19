@@ -30,11 +30,10 @@ class CommentsController < ApplicationController
     
     def update
         @comment = Comment.find(params[:id])
-        # @comment.text_content = params[:text_content]
-        
+        # @comment.rating.update(params[:rating_attributes])
+
         respond_to do |format|
-            if @comment.update(update_params)
-                this.new
+            if @comment.update(post_params)
                 format.html { redirect_to room_path(@comment.room_id) }
                 format.js   { }     
             end
@@ -42,10 +41,7 @@ class CommentsController < ApplicationController
     end
     private
     def post_params
-        params.require(:comment).permit(:room_id, :user_id, :text_content, rating_attributes: [:room_id, :comment_id, :stars])
+        params.require(:comment).permit(:room_id, :user_id, :text_content, rating_attributes: [:id, :room_id, :comment_id, :stars])
     end
     
-    def update_params
-        params.require(:comment).permit(:text_content)
-    end
 end

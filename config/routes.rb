@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root 'home#index'
 
   post 'rating', as: 'ratings', action: 'create', controller: 'ratings'
+  put 'rating', as: 'update_ratings', action: 'update', controller: 'ratings'
 
+  
   resources :rooms, :except => [:index] do 
     resources :comments, :except => [:index] do
     end

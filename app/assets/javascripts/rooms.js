@@ -113,17 +113,82 @@ $(document).on('turbolinks:load', function(){
         }
     });
 
-//   $("#comments").on('mouseenter', $('#comments').children(), function(e) {
-//         $('comments').children().find("#right_corner").hide();
-//   });
+    // $('#comments').on('click', $('#comments').children().find('#edit_button'), function(e) {
+    //     var comment = $('#comments').children();
+    //     comment.find('#edit_form').show();
+    // });
+    
+    $('#comments').children().each(function(e){
+        $(this).find('#edit_button').click(function(e){
+            $(this).parent().parent().find('#edit_form').show();
+        })
+    })
    
-//   $("#comments").on('mouseleave', $('#comments').children(), function(e) {
-//         // console.log('a');
-//   });
+    // $('#comments').on('click', $('#comments').children().find('#edit_cancel_button'), function(e) {
+    //     var comment = $('#comments').children();
+    //     comment.find('#edit_form').hide();
+    // });
    
     $("#comment_form").submit(function(){
         if ($("comment_rating_attributes_stars").val() == ''){
             $("p#value").text("error");
+        }
+    });
+    
+    
+    $('body').on('click', '#edit_form i', function(e){
+        var rating_children = $('#edit_form #your_rating').children();
+        e.preventDefault();
+        id = $(this).attr('id');
+            console.log(id);
+                for (i = 0; i < 5; i ++){
+            if (!$(rating_children[i]).hasClass('rated')){
+                $(rating_children[i]).toggleClass('rated');
+            }
+        
+            if (i >= id){
+                $(rating_children[i]).removeClass('rated');
+                
+            }
+        }
+        
+        current_value = id;
+        $('#edit_form #comment_rating_attributes_stars').val(current_value);
+    });
+
+    $('body').on('mouseover', '#edit_form i', function(e){
+        e.preventDefault();
+        var rating_children = $('#your_rating').children();
+
+        id = $(this).attr('id');
+        
+        for (i = 0; i < 5; i ++){
+            if (!$(rating_children[i]).hasClass('rated')){
+                $(rating_children[i]).toggleClass('rated');
+            }
+        
+            if (i >= id){
+                $(rating_children[i]).removeClass('rated');
+                
+            }
+        }
+        
+        // console.log(id);
+    });
+    
+    $('body').on('mouseleave', '#edit_form h2#your_rating', function(e){
+        var rating_children = $('#your_rating').children();
+
+        // console.log(current_value);
+        for (i = 0; i < 5; i ++){
+            if (!$(rating_children[i]).hasClass('rated')){
+                $(rating_children[i]).toggleClass('rated');
+            }
+        
+            if (i >= current_value){
+                $(rating_children[i]).removeClass('rated');
+                
+            }
         }
     });
     

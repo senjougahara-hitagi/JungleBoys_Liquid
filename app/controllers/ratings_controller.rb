@@ -19,9 +19,14 @@ class RatingsController < ApplicationController
         end
     end
     
+    def update
+        # @rating = Rating.find(:comment_id)
+        @rating.update(post_params)
+    end
+    
     private
     
     def post_params
-        params.require(:rating).permit(:user_id, :room_id, :stars)
+        params.require(:rating).permit(:id, :user_id, :comment_id, :room_id, :stars)
     end
 end
