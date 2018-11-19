@@ -22,7 +22,7 @@ $(document).on('turbolinks:load', function(){
         var amentities_str = amentities_arr.join(",");
         $("#room_amentities").val(amentities_str);
         var a =  $("#room_amentities").val();
-        alert(a);
+        // alert(a);
     });
     
     $(function() {
