@@ -39,7 +39,13 @@
         <%= image_tag(@room.user.user_pic, :height=>'50px', :width=>'50px', :style => 'border-radius: 50%') %>
         <% else %>
         <%= image_tag("/user.png", :height=>'50px', :width=>'50px', :style => 'border-radius: 50%') %>
-        <% end %>        
+        <% end %>
+        <br>
+        <% if user_signed_in? && current_user.id == @room.user_id %>
+        <div class="btn btn-primary">
+            <%= link_to "Edit room", edit_room_path(@room), style: "color: white" %>
+        </div>
+        <% end %>
     </div>
 </div>
 <hr />
