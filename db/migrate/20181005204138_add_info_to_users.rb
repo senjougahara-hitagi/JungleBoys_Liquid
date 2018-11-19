@@ -4,6 +4,6 @@ class AddInfoToUsers < ActiveRecord::Migration[5.0]
     add_column :users, :fullname, :string, null: true, default: nil, limit: 50
     add_column :users, :gender, :boolean, null: true, default: nil
     add_column :users, :address, :string, null: true, default: nil, limit: 255
-    add_column :users, :user_pic, :string, null: true, default: nil, limit: 20
+    add_column :users, :user_pic, :string, null: true, default: nil, limit: 200
   end
 end

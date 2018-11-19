@@ -1,0 +1,3 @@
+$('#bookmark-icon-room-<%= @room.id.to_s %>').
+  html('<%= j render "rooms/bookmark_icon", {is_bookmarked: @is_bookmarked, room: @room} %>');
+console.log("delete");

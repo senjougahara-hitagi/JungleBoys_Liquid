@@ -64,6 +64,61 @@
    Edit Profile</a>
   </div>
  </div>
+ 
+ 
+ <div class="profile-tab">
+  <nav>
+   <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
+     <a class="nav-item nav-link active mr-auto" id="nav-saved-tab" data-toggle="tab" href="#nav-saved" role="tab" aria-controls="nav-saved" aria-selected="true">Bookmarks</a>
+   </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-saved" role="tabpanel" aria-labelledby="nav-saved-tab">
+     <div class="row">
+      <% @saved.each do |save| %>
+       <div class="col-md-4">
+          <div class="card border-0" style="width: 100%;">
+            <!--<div class="card-body">-->
+             <%= image_tag(save.room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img") %>
+             <ul class="homepage-info">
+               <div class="row">
+                <h5 style="font-weight: bold; text-overflow: ellipsis; white-space: nowrap;
+                overflow: hidden;" class="col-md-9"><%= save.room.room_name %></h5>
+                <h6 class="col-md-3 right-corner" style="white-space: nowrap; font-weight: bold">
+                  $<%= save.room.cost_per_night %></h6>
+                </div>
+                <li><%= save.room.address %></li>
+                <li><%= save.room.comments.count %> Reviews</li>
+                 <!--to fix-->
+                <li><%= link_to "More detail", room_path(save.room.id) %></li>
+                
+              <br>
+              
+              <li>
+                <% if !save.room.ratings.blank? %>
+                  <% for i in 1..5 %>
+                      <% if i > save.room.ratings.average(:stars) %>
+                      <i class="fas fa-star"></i>
+                      <% else %>
+                      <i class="fas fa-star rated"></i>
+                      <% end %>
+                  <% end %>
+                  <%= number_with_precision(save.room.ratings.average(:stars), :precision => 1) %>
+                  <% else %>
+                No ratings.
+                <% end %>
+              </li>
+              </ul>
+            <!--</div>-->
+          </div>
+        </div>
+      <% end %>
+     </div>
+    </div>
+  </div>
+ </div>
+ 
+ 
  <% end %>
  <% end %>
 

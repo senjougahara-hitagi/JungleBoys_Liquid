@@ -47,6 +47,11 @@
         </div>
         <% end %>
     </div>
+    <% if user_signed_in? %>
+        <div id="bookmark-icon-room-<%= @room.id.to_s %>" class="col-md-2">
+            <%= render "bookmark_icon", {is_bookmarked: @room.is_bookmarked(current_user), room: @room} %>
+        </div>
+    <% end %>
 </div>
 <hr />
 <div class="row">
