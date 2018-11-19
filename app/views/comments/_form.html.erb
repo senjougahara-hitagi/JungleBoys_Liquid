@@ -16,7 +16,7 @@
                 <%= f.hidden_field :user_id, value: current_user.id %>
                 <%= f.hidden_field :room_id, value: @comment.room.id %>
                 <%= f.text_field :text_content, :class => "comment-box form-control", 
-                    :required => true, :autocomplete => 'off', placeholder: "Write a review" %>
+                    :required => true, :style=> "width: 85%", :autocomplete => 'off', placeholder: "Write a review" %>
                     <%= f.fields_for :rating, Rating.new do |rating_form| %>
                     <p>
                         <%= rating_form.hidden_field :user_id, value: current_user.id %>
