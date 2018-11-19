@@ -4,4 +4,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # before_action :authenticate_user!
 
+  before_filter :set_global_search_variable
+
+  def set_global_search_variable
+    @q = Room.ransack(params[:q])
+  end
 end

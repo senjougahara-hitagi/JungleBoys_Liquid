@@ -1,3 +1,14 @@
-$('#comment_form').hide();
+$('#comment_form').empty();
 $("#comments").prepend("<%= escape_javascript(render partial: 'show', locals: {comment: @comment}) %>");
 $("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
+$("#comment_<%= @comment.id %> #edit_button").click(function(e){
+    $("#comment_<%= @comment.id %>").hide();
+    $("#comments").prepend("<%= escape_javascript(render partial: 'edit_form', locals: {comment: @comment}) %>");
+});
+$("#comment_<%= @comment.id %> #edit_cancel_button").click(function(e){
+    $("#comment_<%= @comment.id %>").show();
+});
+
+$("#average_rating").empty();
+$("#average_rating").append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");
+
