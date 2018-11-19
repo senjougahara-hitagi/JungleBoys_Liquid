@@ -62,6 +62,7 @@
         
         <div class="field">
             <%= f.label :amentities, "Amentities:" %>
+            <%= f.hidden_field :amentities %>
 
             <div class="row">
                 <div class="col-md-4">
@@ -100,10 +101,12 @@
             <br>
             <div class="upload-btn-wrapper">
               <button class="add-img"><i class="fas fa-plus"></i></button>
-              <%= f.file_field :room_pictures %>
+              <%= f.file_field :pictures, multiple: true %>
             </div>
         </div>
         
+        <div class="row" id="pictures_preview"> </div>
+
         <br>
         
         <div class="field">
@@ -113,7 +116,7 @@
         
         <br>
         
-        <%= f.submit "Edit room", class: "btn btn-primary" %>
+        <%= f.submit "Edit room", id: "submit", class: "btn btn-primary" %>
         <% end %>
     </div>
 </div>

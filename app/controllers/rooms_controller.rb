@@ -45,7 +45,7 @@ class RoomsController < ApplicationController
         @room = Room.find(params[:id])
         if @room.update(post_params)
             redirect_to room_path(@room)
-            flash[:error] = "Updated successfully." 
+            flash[:notice] = "Updated successfully." 
         else
            flash[:error] = "Update error." 
         end
