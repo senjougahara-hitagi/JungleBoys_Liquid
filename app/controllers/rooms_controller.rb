@@ -40,6 +40,16 @@ class RoomsController < ApplicationController
         @q = Room.ransack(params[:q])
         @rooms = @q.result
     end
+    
+    def update
+        @room = Room.find(params[:id])
+        if @room.update(post_params)
+            redirect_to room_path(@room)
+            flash[:error] = "Updated successfully." 
+        else
+           flash[:error] = "Update error." 
+        end
+    end
 
     private
     

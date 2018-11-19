@@ -2,7 +2,8 @@
     <div class="room-form offset-md-3 col-md-9">	
         <h2>Edit room information</h2>
         
-        <%= form_for :room do |f| %>
+        <%= form_for :room, 
+            url: { controller: "rooms", action: "update", id: @room.id }, method: :put do |f| %>
         
         <div class="field">
             <%= f.label :room_name, "Room name:" %>
