@@ -52,7 +52,9 @@ $(document).on('turbolinks:load', function(){
         $('#pictures_preview').html("");
         imagesPreview(this, '#pictures_preview');
         });
+    
     });
+     
     
     
     var current_value = 0;

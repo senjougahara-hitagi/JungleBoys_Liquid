@@ -35,7 +35,12 @@
             <!--<div class="card-body">-->
              <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img") %>
              <ul class="homepage-info">
-                <h5 style="font-weight: bold"><%= room.room_name %></h5>
+               <div class="row">
+                <h5 style="font-weight: bold; text-overflow: ellipsis; white-space: nowrap;
+                overflow: hidden;" class="col-md-9"><%= room.room_name %></h5>
+                <h6 class="col-md-3 right-corner" style="white-space: nowrap; font-weight: bold">
+                  $<%= room.cost_per_night %></h6>
+                </div>
                 <li>Address: <%= room.address %></li>
                 <li>Contact: <%= room.contact_host %></li>
                 <li>Reviews: <%= room.comments.count %></li>
