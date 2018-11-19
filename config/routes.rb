@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :rooms, :except => [:index] do 
     resources :comments, :except => [:index] do
     end
+    resources :bookmarks, only: [:create, :destroy], shallow: true
   end
   
   get 'users/:id' => 'users#show', as: 'user', constraints: { id: /[0-9]+/ }

@@ -1,0 +1,9 @@
+<% if is_bookmarked.present? %>
+  <%= link_to bookmark_path(is_bookmarked), method: :delete, remote: true do %>
+      <%= image_tag "bookmarks/bookmarked.png", width: "48px", height: "48px" %>
+  <% end %>
+<% else %>
+  <%= link_to room_bookmarks_path(room), method: :post, remote: true do %>
+      <%= image_tag "bookmarks/bookmark.png", width: "48px", height: "48px" %>
+  <% end %>
+<% end %>
