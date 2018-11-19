@@ -1,29 +1,26 @@
-<!-- Room's images slide -->
-<div id="MyCarousel" class="carousel slide" data-ride="carousel">
-  <ul class="carousel-indicators">
-     <% @room.pictures.each_with_index do |photo, n| %>
-       <li data-target='#MyCarousel' data-slide-to="#{n}" class="#{'active' if n == 0}"></li>
-     <% end %>
-  </ul>
-  
+<!--  Room's images slide -->
+<div id="RoomImageSlide" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <% @room.pictures.each.with_index(0) do |photo, index| %>
+      <li data-target="#RoomImageSlide" data-slide-to="<%= index %>" class="<%= index.zero? ? 'active' : '' %>"></li>
+    <% end %>
+  </ol>
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <%= image_tag(@room.pictures.first, :style=>'object-fit:cover;height:500px;width:100%;') %>
-    </div>
-    <% @room.pictures.drop(1).each do |photo| %>
-       <div class="carousel-item">
-         <%= image_tag(photo, :style=>'object-fit:cover;height:500px;width:100%;') %>
-       </div>
+    <% @room.pictures.each.with_index(0) do |photo, index| %>
+      <div class="carousel-item <%= index.zero? ? 'active' : '' %>">
+        <%= image_tag(photo, :style=>'object-fit:cover;height:500px;width:100%;') %>
+      </div>
     <% end %>
   </div>
-  <!-- Left and right controls -->
-  <a class="carousel-control-prev" href="#MyCarousel" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
+  <a class="carousel-control-prev" href="#RoomImageSlide" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#MyCarousel" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
+  <a class="carousel-control-next" href="#RoomImageSlide" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
   </a>
-  </div>
+</div>
 
 <div class="row mt-3">
     <div class="offset-md-1 col-md-5">
@@ -39,9 +36,9 @@
     <div class="col-md-2 text-center">
         <p>Owner: <%= link_to @room.user.username, user_path(:id => @room.user_id) %></p>
         <% if @room.user.user_pic.present? %>
-        <%= image_tag(@room.user.user_pic, :height=>'50px', :width=>'50px', :style => 'border-radius: 50%') %>
+        <%= image_tag(@room.user.user_pic, :height=>'50px', :style => 'border-radius: 50%') %>
         <% else %>
-        <%= image_tag("/user.png", :height=>'50px', :width=>'50px', :style => 'border-radius: 50%') %>
+        <%= image_tag("/user.png", :height=>'50px', :style => 'border-radius: 50%') %>
         <% end %>        
     </div>
 </div>
@@ -112,7 +109,46 @@
             
     <div id="comments">
         <% @comments.each do |comment| %>
-            <%= render partial: 'comments/show', locals: {comment: comment} %>
+        <div id="comment_<%= comment.id %>">
+            <div class="row">
+                
+                <div class="col-md-1">
+                    <% if comment.user.user_pic.present? %>
+                    <%= image_tag(comment.user.user_pic, :height=>'50px', :style => 'border-radius: 50%') %>
+                    <% else %>
+                    <%= image_tag("/user.png", :height=>'50px', :style => 'border-radius: 50%') %>
+                    <% end %>
+                </div>
+                <div class="col-md-5">
+                    <a href="#" style="font-weight:bold"><%= comment.user.username %></a>
+                    <br>
+                    <p style="font-size: 0.9rem"><%= comment.created_at %><p>
+                </div>
+                <div class="col-md-4">
+                    <% for i in 1..5 %>
+                        <% if i > comment.rating.stars %>
+                            <i class="fas fa-star"></i>
+                            <% next %>                        
+                        <% end %>
+                        <i class="fas fa-star rated"></i>
+                    <% end %>
+    
+                </div>
+                <div class="col-md-2">
+                    <% if user_signed_in? && current_user.id == comment.user_id %>
+                        <i class="fas fa-edit right-corner">
+                            <%= link_to 'Edit', edit_room_comment_path(@room, comment), class: "right-corner", method: :update %>
+                        </i>
+                        <i class="fas fa-trash-alt right-corner">
+                            <%= link_to 'Delete', room_comment_path(@room, comment), method: :delete,
+                            remote: true, data: { confirm: 'Are you sure?' } %>
+                        </i>
+                    <% end %>
+                </div>
+            </div>
+            <p class="offset-md-1"><%= comment.text_content %></p>
+        <hr />
+        </div>
         <% end %>
     </div>
 
@@ -121,7 +157,7 @@
         <div class="card">
           <div class="card-body">
             <p><h3 class="mr-2" style="display:inline-block">$<%= @room.cost_per_night %></h3><h5 style="display:inline-block">per night</h5></p>
-            <p id="average_rating">
+            <p>
                 <% if !@room.ratings.blank? %>
                 <% for i in 1..5 %>
                     <% if i > @room.ratings.average(:stars) %>
