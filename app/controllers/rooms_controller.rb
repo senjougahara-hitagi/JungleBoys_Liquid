@@ -23,6 +23,7 @@ class RoomsController < ApplicationController
         @comments = @room.comments.order(id: :desc)
         @comment = Comment.new
         @rating = Rating.new
+        @is_bookmarked = @room.is_bookmarked(current_user)
     end
 
     def edit

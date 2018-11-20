@@ -6,6 +6,7 @@ class User < ApplicationRecord
   
   has_many :rooms
   has_many :comments
+  has_many :bookmarks
   mount_uploader :user_pic, AvatarUploader
   serialize :user_pic, JSON
 end
