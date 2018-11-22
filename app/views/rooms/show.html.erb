@@ -56,7 +56,7 @@
 <hr />
 <div class="row">
     <div class="offset-md-1 col-md-7">
-        <p><%= @room.room_info %></p>
+        <p style="white-space: pre-wrap"><%= @room.room_info %></p>
         
         <a href="#">Read more about the space <i class="fas fa-chevron-down"></i></a>
         <hr />
@@ -141,7 +141,7 @@
                 <% end %>
                 <%= number_with_precision(@room.ratings.average(:stars), :precision => 1) %> by <%= @room.ratings.count %> users.
                 <% else %>
-                <p>No ratings.</p>
+                No ratings.
                 <% end %>
             </p>
 

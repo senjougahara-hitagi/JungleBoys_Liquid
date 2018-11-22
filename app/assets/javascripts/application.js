@@ -14,9 +14,10 @@
 //= require jquery
 //= require turbolinks
 //= require jquery_ujs
-//= require_tree .
 //= require popper
 //= require bootstrap
+//= require jquery-fileupload/basic
+//= require_tree .
 
 $(function(){
   $("#show-limit").on("change", function(){

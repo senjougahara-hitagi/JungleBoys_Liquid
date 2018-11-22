@@ -1,10 +1,9 @@
 $(document).on('turbolinks:load', function(){
     $('input[type="checkbox"]').prop("checked", false);
     
-    $("#submit").click(function(){
-    // alert("The paragraph was clicked.");
+    function checkAmentities(){
         var amentities_arr = [];
-
+        
         if ($("#kitchen").prop("checked") == true)
             amentities_arr.push("Kitchen");
         if ($("#wifi").prop("checked") == true)
@@ -18,8 +17,18 @@ $(document).on('turbolinks:load', function(){
         if ($("#hot_water").prop("checked") == true)
             amentities_arr.push("Hot water");
         
-            
-        var amentities_str = amentities_arr.join(",");
+        return amentities_arr;
+    }
+    
+    $('#room_amentities').on('ready', function(){
+        var arr = $('#room_amentities').split(',');
+        $("#room_amentities").val(amentities_str);
+    })
+    
+    $("#submit").click(function(){
+    // alert("The paragraph was clicked.");
+        
+        var amentities_str = checkAmentities().join(",");
         $("#room_amentities").val(amentities_str);
         var a =  $("#room_amentities").val();
         // alert(a);
@@ -31,14 +40,15 @@ $(document).on('turbolinks:load', function(){
 
         if (input.files) {
             var filesAmount = input.files.length;
-            // alert(filesAmount);
+            // alert(filessAmount);
                 
             for (i = 0; i < filesAmount; i++) {
                 var reader = new FileReader();
 
                 reader.onload = function(event) {
-                    $($.parseHTML('<img height="30%" width="30%">')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
-                    // alert(input.files.name);
+                    $($.parseHTML('<img style="object-fit:cover" height="150px" width="150px">'))
+                        .attr('src', event.target.result)
+                        .appendTo(placeToInsertImagePreview);
                 }
 
                 reader.readAsDataURL(input.files[i]);
@@ -55,7 +65,7 @@ $(document).on('turbolinks:load', function(){
     
     });
      
-    
+    // star ratings
     
     var current_value = 0;
   
@@ -115,16 +125,34 @@ $(document).on('turbolinks:load', function(){
         }
     });
 
-    // $('#comments').on('click', $('#comments').children().find('#edit_button'), function(e) {
-    //     var comment = $('#comments').children();
-    //     comment.find('#edit_form').show();
-    // });
-    
-    $('#comments').children().each(function(e){
+    var edit_button = $('#comments').children('#edit_button');
+
+    $('#comments').children().each(function(e) {
+        
         $(this).find('#edit_button').click(function(e){
-            $(this).parent().parent().find('#edit_form').show();
-        })
-    })
+            console.log('edit');
+            $(this).parentsUntil('#comments')
+                   .find('#edit_form')
+                   .fadeIn(500);
+        });
+        
+        $(this).find('#edit_cancel_button').click(function(e){
+            console.log('cancel');
+            $(this).parentsUntil('#comments')
+                   .find('#edit_form')
+                   .fadeOut(500);
+        });
+        
+    });
+    
+    // $('#comments').children().each(function(e){
+    //     var edit_button = $(this).find('#edit_button');
+        
+    //     edit_button.click(function(e){
+    //         console.log($(this).parent().parent().find('#edit_form'));
+    //         $(this).parent().parent().find('#edit_form').show();
+    //     })
+    // })
    
     // $('#comments').on('click', $('#comments').children().find('#edit_cancel_button'), function(e) {
     //     var comment = $('#comments').children();
@@ -133,8 +161,10 @@ $(document).on('turbolinks:load', function(){
    
     $("#comment_form").submit(function(){
         if ($("comment_rating_attributes_stars").val() == ''){
-            $("p#value").text("error");
+            $("p#value").text("Rating not available.");
         }
+        
+        $("comment_rating_attributes_stars").val('');
     });
     
     
