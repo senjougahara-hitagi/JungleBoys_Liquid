@@ -130,15 +130,40 @@ $(document).on('turbolinks:load', function(){
     $('#comments').children().each(function(e) {
         
         $(this).find('#edit_button').click(function(e){
+            e.preventDefault();
             console.log('edit');
+            var reply_form = $(this).parentsUntil('#comments')
+                   .find('#reply_form');
+                   
+            if (reply_form.is(':visible')){
+                
+                $(this).parentsUntil('#comments')
+                       .find('#reply_form')
+                       .toggle('200');
+            }
             $(this).parentsUntil('#comments')
                    .find('#edit_form')
                    .toggle('200');
+        });
+        
+        $(this).find('#reply_button').click(function(e){
+            e.preventDefault();
+            var edit_form = $(this).parentsUntil('#comments')
+                   .find('#edit_form');
+                   
+            if (edit_form.is(':visible')){
+                
+                $(this).parentsUntil('#comments')
+                       .find('#edit_form')
+                       .toggle('200');
+            }
             
             $(this).parentsUntil('#comments')
                    .find('#reply_form')
-                   .toggle('200');       
+                   .toggle('200');
+
         });
+
         
         // $(this).find('#edit_cancel_button').click(function(e){
         //     console.log('cancel');
@@ -150,6 +175,7 @@ $(document).on('turbolinks:load', function(){
     });
     
     $('#show_link').click(function(e){
+        e.preventDefault();
         $(this).parent().find('#room_info').toggleClass('room-info-hide');
     });
     
