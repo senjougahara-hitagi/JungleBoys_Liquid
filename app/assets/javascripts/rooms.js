@@ -133,16 +133,24 @@ $(document).on('turbolinks:load', function(){
             console.log('edit');
             $(this).parentsUntil('#comments')
                    .find('#edit_form')
-                   .fadeIn(500);
-        });
-        
-        $(this).find('#edit_cancel_button').click(function(e){
-            console.log('cancel');
+                   .toggle('200');
+            
             $(this).parentsUntil('#comments')
-                   .find('#edit_form')
-                   .fadeOut(500);
+                   .find('#reply_form')
+                   .toggle('200');       
         });
         
+        // $(this).find('#edit_cancel_button').click(function(e){
+        //     console.log('cancel');
+        //     $(this).parentsUntil('#comments')
+        //           .find('#edit_form')
+        //           .fadeOut(500);
+        // });
+        
+    });
+    
+    $('#show_link').click(function(e){
+        $(this).parent().find('#room_info').toggleClass('room-info-hide');
     });
     
     // $('#comments').children().each(function(e){
