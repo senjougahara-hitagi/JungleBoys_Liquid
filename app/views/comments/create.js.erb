@@ -1,6 +1,6 @@
 <% if @comment.parent_id == nil %>
 $('#comment_form').empty();
-$("#comments").prepend("<%= escape_javascript(render partial: 'show', locals: {comment: @comment}) %>");
+$("#comments").prepend("<%= escape_javascript(render partial: 'comment', locals: {comment: @comment}) %>");
 $("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
 $("#edit_form").hide();
 $("#comment_<%= @comment.id %> #edit_button").click(function(e){
