@@ -23,14 +23,26 @@
         </div>
         <div class="col-md-2">
             <% if user_signed_in? && current_user.id == comment.user_id %>
-            <%= link_to 'Delete', room_comment_path(comment.room_id, comment), method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
-            <button id="edit_button">Edit</button>
+            <a href="javascript:void(0)" id="edit_button">
+                <i class="fa fa-edit" aria-hidden="true"></i>
+                <!--<span class="tooltiptext">Edit review</span>-->
+            </a>
+            <%= link_to room_comment_path(comment.room_id, comment),
+                method: :delete, remote: true, data: { confirm: 'Are you sure?' } do %>
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <!--<span class="tooltiptext">Remove</span>-->
+            <% end %>  
            <% end %>
         </div>
     </div>
-    
+
+    <% if user_signed_in? %>    
+
     <p class="offset-md-1"><%= comment.text_content %></p>
-    <div style="display:none" id="edit_form">
+    
+    <!-- load form to edit review-->
+    <% if current_user.id == comment.user_id %>
+    <div style="display:none" class="offset-md-1" id="edit_form">
     <%= form_for [comment.room, comment], method: :patch, html: {class: "form-inline"}, remote:true do |f| %>
                 
             <div class="form-group" style="width:100%">
@@ -56,14 +68,12 @@
             
                 <p id="value"></p>    
 
-                <button id="edit_cancel_button" type="button" class="btn btn-danger">Cancel</button>    
                 <%= f.submit "Edit", id: "submit", class: "btn btn-primary" %>
             </div>
         <% end %>
         </div>
+    <% end %>   
         
-        
-    <% if user_signed_in? %>    
     <div class="offset-md-1" id="reply_form">
     <%= form_for [comment.room, Comment.new], html: {class: "form-inline"}, remote:true do |f| %>
                 
