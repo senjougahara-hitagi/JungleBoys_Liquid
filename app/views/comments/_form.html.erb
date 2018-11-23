@@ -1,5 +1,5 @@
 <% if user_signed_in? %>
-        <% if current_user.comments.where(:room_id => @comment.room.id).blank? %>
+        <% if current_user.comments.where(:parent_id => nil, :room_id => @comment.room.id).blank? %>
             <h2 id="your_rating">
                 <i id="1" class="fas fa-star"></i>
                 <i id="2" class="fas fa-star"></i>

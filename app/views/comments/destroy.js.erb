@@ -2,9 +2,10 @@ $('#comment_<%= @comment.id %>').remove();
 $('#replies_<%= @comment.id %>').remove();
 $("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
 $('#comment_form').empty();
-$("#comment_form").prepend("<%= escape_javascript(render partial: 'form', locals: {comment: Comment.new}) %>");
+console.log('delete');
+$("#comment_form").prepend("<%= escape_javascript(render partial: 'form',
+    locals: {comment: Comment.new}) %>");
 $("#comment_text_content").text('');
-current_value = 0;
 
 $("#comment_form").submit(function(){
     if ($("#comment_rating_attributes_stars").val() == ''){
@@ -13,5 +14,6 @@ $("#comment_form").submit(function(){
 });
 
 $("#average_rating").empty();
-$("#average_rating").append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");
+$("#average_rating").append("<%= escape_javascript(render partial: 'average',
+    locals: {comment: @comment}) %>");
 
