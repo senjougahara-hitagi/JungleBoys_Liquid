@@ -1,5 +1,11 @@
 class Room < ApplicationRecord
     
+    # validates :room_info, presence: 
+    
+    validate do |record|
+        record.validate_photo_quota
+    end
+    
     mount_uploaders :pictures, RoomImageUploader
     belongs_to :user
     serialize :pictures, JSON
@@ -19,5 +25,12 @@ class Room < ApplicationRecord
         if user
             Bookmark.find_by(user_id: user.id, room_id: id) 
         end
+    end
+    
+    def validate_photo_quota
+      return unless self.user
+      if self.pictures.count > 5
+        errors.add(:error, "Over quota")
+      end
     end
 end

@@ -6,6 +6,7 @@ gem 'config'
 gem 'bootstrap-kaminari-views'
 gem 'paperclip'
 gem 'dropzonejs-rails'
+gem 'jquery-fileupload-rails'
 
 gem 'elasticsearch-model', git: 'git://github.com/elastic/elasticsearch-rails.git', branch: '5.x'
 gem 'elasticsearch-rails'

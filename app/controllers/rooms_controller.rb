@@ -1,8 +1,6 @@
 class RoomsController < ApplicationController
     def index
-        # if current_user.is_admin
-        # end
-       
+        
     end
     
     def new
@@ -12,9 +10,9 @@ class RoomsController < ApplicationController
     def create
         @room = Room.new(post_params)
         if @room.save
-            redirect_to home_index_path
+            redirect_to room_path(@room)
         else
-            render :new
+            flash[:error] = "Can't create room."
         end
     end
     
@@ -28,16 +26,9 @@ class RoomsController < ApplicationController
 
     def edit
         @room = Room.find(params[:id])
-        # if @room.update_attributes(post_params)
-        #     redirect_to home_index_path
-        # else
-        #     render :edit
-        # end
     end
 
     def search
-        # @rooms=Room.where('room_name LIKE ?', "%#{params[:room_name]}%").order('id DESC')
-        # # @room.show
         @q = Room.ransack(params[:q])
         @rooms = @q.result
     end
@@ -48,7 +39,8 @@ class RoomsController < ApplicationController
             redirect_to room_path(@room)
             flash[:notice] = "Updated successfully." 
         else
-           flash[:error] = "Update error." 
+            redirect_to edit_room_path(@room)
+            flash[:error] = "Update error." 
         end
     end
 

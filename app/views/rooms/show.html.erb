@@ -56,9 +56,11 @@
 <hr />
 <div class="row">
     <div class="offset-md-1 col-md-7">
-        <p><%= @room.room_info %></p>
+        <p id="room_info" style="white-space: pre-line" class="room-info-hide">
+            <%= @room.room_info %>
+        </p>
         
-        <a href="#">Read more about the space <i class="fas fa-chevron-down"></i></a>
+        <a href="javascript:void(0)" id="show_link">Read more about the space <i class="fas fa-chevron-down"></i></a>
         <hr />
         <p style="font-weight: bold">Amentities</p>
             <!-- FIX THIS MESS -->
@@ -81,11 +83,15 @@
             <!-- -->
         <hr />
 
-    <h2 id="review_amount"><%= @comments.size == 0 ? 0 : @comments.size %> Reviews</h2>
+    <h2 id="review_amount">
+        <%= parent_comments(@comments).size == 0 ? 
+            0 : parent_comments(@comments).size %> Reviews
+    </h2>
     
-    <div id="comment_form">
     <% if user_signed_in? %>
-        <% if current_user.comments.where(:room_id => @room.id).blank? %>
+        <!-- FIX THIS -->
+        <% if current_user.comments.where(:parent_id => nil).blank? %>
+        <div id="comment_form">
             <h2 id="your_rating">
                 <i id="1" class="fas fa-star"></i>
                 <i id="2" class="fas fa-star"></i>
@@ -113,14 +119,22 @@
                 <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
             </div>
             <% end %>
+        </div>
         <% end %>
     <% end %>
-    </div>
     <br>       
             
     <div id="comments">
         <% @comments.each do |comment| %>
+            <% if comment.parent_id == nil %>
             <%= render partial: 'comments/show', locals: {comment: comment} %>
+            <div id="replies_<%= comment.id %>" style="padding-top: 10px">
+                <% comment.replies.each do |reply| %>
+                    <%= render partial: 'comments/reply', locals: {comment: reply} %>
+                <% end %>
+            </div>
+            <% end %>
+            
         <% end %>
     </div>
 
@@ -141,7 +155,7 @@
                 <% end %>
                 <%= number_with_precision(@room.ratings.average(:stars), :precision => 1) %> by <%= @room.ratings.count %> users.
                 <% else %>
-                <p>No ratings.</p>
+                No ratings.
                 <% end %>
             </p>
 
