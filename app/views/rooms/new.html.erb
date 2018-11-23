@@ -1,5 +1,5 @@
 <div class="container row">
-    <div class="room-form offset-md-3 col-md-9">
+    <div class="room-form offset-md-2 col-md-9">
         
         <% if @room.errors.any? %>
             <% @room.errors.full_messages.each do |message| %>
@@ -22,7 +22,7 @@
         
         <div class="field">
             <%= f.label :room_info, "Room info:" %>
-            <%= f.text_field :room_info, class: "form-control" %>
+            <%= f.text_area :room_info, class: "form-control" %>
         </div>
         
         <div class="field">
@@ -105,20 +105,20 @@
         <div class="field">
             <%= f.label :pictures, "Pictures:" %>
             <br>
-            <div class="upload-btn-wrapper">
-              <button class="add-img"><i class="fas fa-plus"></i></button>
+            <!--<div class="upload-btn-wrapper">-->
+              <!--<button class="add-img"></button>-->
               <%= f.file_field :pictures, multiple: true %>
-            </div>
+              <%= f.hidden_field :pictures_cache %>
+              
+              <% if @room.pictures %>
+              <%= @room.pictures %>
+              <% end %>
+            <!--</div>-->
         </div>
         
         <div class="row" id="pictures_preview">
             
         </div>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>-->
-        <!--<form id="form1" runat="server">-->
-        <!--<input type='file' id="imgInp" />-->
-        <!--<img id="blah" src="#" alt="your image" />-->
-        <!--</form>-->
         
         <br>
         

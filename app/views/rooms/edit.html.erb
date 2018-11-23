@@ -1,5 +1,5 @@
 <div class="container row">
-    <div class="room-form offset-md-3 col-md-9">	
+    <div class="room-form offset-md-2 col-md-9">	
         <h2>Edit room information</h2>
         
         <%= form_for :room, 
@@ -16,7 +16,7 @@
         
         <div class="field">
             <%= f.label :room_info, "Room info:" %>
-            <%= f.text_field :room_info, class: "form-control" %>
+            <%= f.text_area :room_info, rows: 5, class: "form-control" %>
         </div>
         
          <div class="field">
@@ -105,7 +105,14 @@
             </div>
         </div>
         
-        <div class="row" id="pictures_preview"> </div>
+        <div class="row" id="pictures_preview">
+            <% for i in 0..max_index(@room) do %>
+                <div class="card">
+                <%= image_tag(@room.pictures[i], :style=>"object-fit:cover",
+                    :width => '150px', :height => '150px') %>
+                </div>
+            <% end %>
+        </div>
 
         <br>
         

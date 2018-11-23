@@ -9,4 +9,8 @@ class User < ApplicationRecord
   has_many :bookmarks
   mount_uploader :user_pic, AvatarUploader
   serialize :user_pic, JSON
+  
+  def rated(room)
+    Rating.find_by(room_id: room.id)
+  end
 end
