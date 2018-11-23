@@ -41,7 +41,8 @@ class CommentsController < ApplicationController
     end
     private
     def post_params
-        params.require(:comment).permit(:room_id, :user_id, :text_content, rating_attributes: [:id, :room_id, :comment_id, :stars])
+        params.require(:comment).permit(:room_id, :parent_id, :user_id, :text_content,
+            rating_attributes: [:id, :room_id, :comment_id, :stars])
     end
     
 end

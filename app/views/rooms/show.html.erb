@@ -81,11 +81,13 @@
             <!-- -->
         <hr />
 
-    <h2 id="review_amount"><%= @comments.size == 0 ? 0 : @comments.size %> Reviews</h2>
+    <h2 id="review_amount"><%= parent_comments(@comments).size == 0 ? 
+        0 : parent_comments(@comments).size %> Reviews</h2>
     
-    <div id="comment_form">
     <% if user_signed_in? %>
-        <% if current_user.comments.where(:room_id => @room.id).blank? %>
+        <!-- FIX THIS -->
+        <% if current_user.comments.where(:parent_id => nil).blank? %>
+        <div id="comment_form">
             <h2 id="your_rating">
                 <i id="1" class="fas fa-star"></i>
                 <i id="2" class="fas fa-star"></i>
@@ -113,14 +115,22 @@
                 <%= f.submit "Comment", id: "submit", class: "ml-auto btn btn-primary" %>
             </div>
             <% end %>
+        </div>
         <% end %>
     <% end %>
-    </div>
     <br>       
             
     <div id="comments">
         <% @comments.each do |comment| %>
+            <% if comment.parent_id == nil %>
             <%= render partial: 'comments/show', locals: {comment: comment} %>
+            <div id="replies_<%= comment.id %>">
+                <% comment.replies.each do |reply| %>
+                    <%= render partial: 'comments/reply', locals: {comment: reply} %>
+                <% end %>
+            </div>
+            <% end %>
+            
         <% end %>
     </div>
 

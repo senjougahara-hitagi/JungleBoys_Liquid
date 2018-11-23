@@ -1,3 +1,4 @@
+<% if @comment.parent_id == nil %>
 $('#comment_form').empty();
 $("#comments").prepend("<%= escape_javascript(render partial: 'show', locals: {comment: @comment}) %>");
 $("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
@@ -11,4 +12,7 @@ $("#comment_<%= @comment.id %> #edit_cancel_button").click(function(e){
 
 $("#average_rating").empty();
 $("#average_rating").append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");
+<% else %>
+$('#replies_<%= @comment.parent_id %>').prepend("<%= j render 'reply', {comment: @comment}%>");
 
+<% end %>
