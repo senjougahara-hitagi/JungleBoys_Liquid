@@ -148,6 +148,7 @@ $(document).on('turbolinks:load', function(){
         
         $(this).find('#reply_button').click(function(e){
             e.preventDefault();
+            console.log('edit');
             var edit_form = $(this).parentsUntil('#comments')
                    .find('#edit_form');
                    
@@ -174,25 +175,16 @@ $(document).on('turbolinks:load', function(){
         
     });
     
+    // $('#reply_form').submit(function(e) {
+    //     e.preventDefault();
+    //     $(this).fadeOut('200');
+    // })
+    
     $('#show_link').click(function(e){
         e.preventDefault();
         $(this).parent().find('#room_info').toggleClass('room-info-hide');
     });
     
-    // $('#comments').children().each(function(e){
-    //     var edit_button = $(this).find('#edit_button');
-        
-    //     edit_button.click(function(e){
-    //         console.log($(this).parent().parent().find('#edit_form'));
-    //         $(this).parent().parent().find('#edit_form').show();
-    //     })
-    // })
-   
-    // $('#comments').on('click', $('#comments').children().find('#edit_cancel_button'), function(e) {
-    //     var comment = $('#comments').children();
-    //     comment.find('#edit_form').hide();
-    // });
-   
     $("#comment_form").submit(function(){
         if ($("comment_rating_attributes_stars").val() == ''){
             $("p#value").text("Rating not available.");

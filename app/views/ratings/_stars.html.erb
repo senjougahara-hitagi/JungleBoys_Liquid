@@ -1,0 +1,9 @@
+<div id="comment_stars" style="display:inline-block">
+    <% for i in 1..5 %>
+    <% if i > comment.rating.stars %>
+        <i class="fas fa-star"></i>
+        <% next %>                        
+    <% end %>
+    <i class="fas fa-star rated"></i>
+<% end %>
+</div>

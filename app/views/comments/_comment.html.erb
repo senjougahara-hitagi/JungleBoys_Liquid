@@ -10,16 +10,9 @@
         </div>
         <div class="col-md-9">
             <a href="#" style="font-weight:bold"><%= comment.user.username %></a>
-            <p><%= comment.created_at %>
-             <% for i in 1..5 %>
-                <% if i > comment.rating.stars %>
-                    <i class="fas fa-star"></i>
-                    <% next %>                        
-                <% end %>
-                <i class="fas fa-star rated"></i>
-            <% end %>
-
-            </p>
+            <div><%= comment.created_at %>
+            <%= render 'ratings/stars', {comment: comment} %>
+            </div>
         </div>
         <div class="col-md-2">
             <% if user_signed_in? && current_user.id == comment.user_id %>
@@ -36,15 +29,16 @@
         </div>
     </div>
 
+    <p class="offset-md-1" id="comment_content"><%= comment.text_content %></p>
+
     <!-- check to load form--> 
     <% if user_signed_in? %>    
 
-    <p class="offset-md-1"><%= comment.text_content %></p>
     <!-- display reply button-->
     <a class="offset-md-1" href="javascript:void(0)" id="reply_button">
         <i class="fa fa-reply" aria-hidden="true"></i> 
         <!-- FIX: add replies number-->
-        Replies
+        Reply
         <!--<span class="tooltiptext">Edit review</span>-->
     </a>     
     
@@ -97,5 +91,5 @@
     <% end %>
     </div>    
     <% end %>
-</div>    
+</div>
 <% end %>
