@@ -9,18 +9,18 @@ Room.destroy_all
 User.destroy_all
 
 20.times do
-   User.create([
+   User.create(
        username: Faker::Name.name,
        fullname: Faker::Name.name, 
        email: Faker::Internet.email,
        password: '123456789', 
        password_confirmation: '123456789',
        user_pic: 'profile-pictures/default-user-blank.jpg',
-       ])
+       )
 end
 
 100.times do
-  Room.create([
+  Room.create(
       user_id: User.ids.sample, 
       room_name: Faker::NatoPhoneticAlphabet.code_word,
       address: Faker::Address.full_address,
@@ -32,6 +32,7 @@ end
       num_of_beds: 5,
       amentities: 'Wifi',
       contact_host: Faker::PhoneNumber.phone_number,
-      pictures: 'rooms/room1.jpg',
-      ])
+      pictures: File.open(Rails.root + "app/assets/images/rooms/room1.jpg"),
+      room_info: "Lorem",
+      )
 end
