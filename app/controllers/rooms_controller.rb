@@ -47,7 +47,7 @@ class RoomsController < ApplicationController
     private
     
     def post_params
-      params.required(:room).permit(:room_name, :user_id, :room_info, :address, :cost_per_night,
+      params.required(:room).permit(:room_name, :user_id, :room_info, :province, :address, :cost_per_night,
                         :type_of_room, :num_of_bedrooms, :num_of_beds,
                         :num_of_guests, :num_of_baths, :amentities, {pictures: []}, 
                         :contact_host)

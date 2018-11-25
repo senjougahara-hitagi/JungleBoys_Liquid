@@ -1,6 +1,23 @@
-<%= sort_link(@q, :cost_per_night) %>  |
-<%= sort_link(@q, :room_name) %> |
+<h2> Find Rooms</h2>
 <br>
+<div class="row">
+<%= search_form_for @q do |f| %>
+  <div class="form-group">
+  <%= f.label :cost_per_night_lteq, "Max cost" %>
+  <%= f.search_field :cost_per_night_lteq %>
+  <%= f.label :cost_per_night_lteq, "Min cost" %>
+  <%= f.search_field :cost_per_night_gteq %>
+  <div>
+  <%= f.label :type_of_room_eq, "Type of room:" %>
+  <%= f.select :type_of_room_eq, options_for_select([["Homestay", 0], ["Hotel", 1]], params[:q][:type_of_room_eq]), :include_blank => true, :class=>"form-control" %>
+  <%= f.label :province_cont, "Province or City" %> 
+  <%= f.select :province_cont, options_for_select($CITYS, :selected => params[:q][:province_cont]), :include_blank => true, :class=>"form-control" %>
+  <%= f.submit "OK", class: 'btn btn-default' %>
+<% end %>
+</div>
+<br>
+<%= sort_link(@q, :cost_per_night) %>
+<%= sort_link(@q, :id) %>
   
 <div class="row">
   <% @rooms.each do |room| %>

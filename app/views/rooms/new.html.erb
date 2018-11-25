@@ -25,9 +25,16 @@
             <%= f.text_area :room_info, class: "form-control" %>
         </div>
         
+ 		 <div class="field">
+            <%= f.label :province, "Province or City" %> 
+            <%= f.select :province, options_for_select($CITYS), :class=>"form-control" %>
+        </div>
+    
+        <br>
+        
         <div class="field">
             <%= f.label :address, "Address:" %>
-            <%= f.text_field :address, class: "form-control" %>
+            <%= f.text_field :address, class: "form-control", :required => true %>
         </div>
     
         <div class="field">
