@@ -87,8 +87,9 @@
                 <h6 class="col-md-3 right-corner" style="white-space: nowrap; font-weight: bold">
                   $<%= save.room.cost_per_night %></h6>
                 </div>
-                <li><%= save.room.address %></li>
-                <li><%= save.room.comments.count %> Reviews</li>
+                <li>Address: <%= save.room.address %></li>
+                <li>Contact: <%= save.room.contact_host %></li>
+                <li>Reviews: <%= save.room.comments.count %></li>
                  <!--to fix-->
                 <li><%= link_to "More detail", room_path(save.room.id) %></li>
                 
