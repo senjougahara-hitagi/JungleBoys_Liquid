@@ -6,7 +6,7 @@ class Room < ApplicationRecord
         record.validate_photo_quota
     end
     
-    mount_uploaders :pictures, RoomImageUploader
+    mount_uploader :pictures, RoomImageUploader
     belongs_to :user
     serialize :pictures, JSON
     
@@ -28,9 +28,9 @@ class Room < ApplicationRecord
     end
     
     def validate_photo_quota
-      return unless self.user
-      if self.pictures.count > 5
-        errors.add(:error, "Over quota")
-      end
+    #   return unless self.user
+    #   if self.pictures.count > 5
+    #     errors.add(:error, "Over quota")
+    #   end
     end
 end
