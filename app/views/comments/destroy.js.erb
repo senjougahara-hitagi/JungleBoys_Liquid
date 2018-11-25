@@ -3,8 +3,7 @@ $('#replies_<%= @comment.id %>').remove();
 $("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
 $('#comment_form').empty();
 console.log('delete');
-$("#comment_form").prepend("<%= escape_javascript(render partial: 'form',
-    locals: {comment: Comment.new}) %>");
+$("#comment_form").prepend("<%= escape_javascript(render partial: 'form', locals: {comment: @comment}) %>");
 $("#comment_text_content").text('');
 
 $("#comment_form").submit(function(){

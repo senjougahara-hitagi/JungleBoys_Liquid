@@ -1,11 +1,9 @@
-$('#comment_<%= @comment.id %>').remove();
-$("#comments").prepend("<%= escape_javascript(render partial: 'comment', locals: {comment: @comment}) %>");
+$('#comment_<%= @comment.id %> #comment_content')
+    .html('<%= @comment.text_content %>');
+$('#comment_<%= @comment.id %> #comment_stars')
+    .empty();
+$('#comment_<%= @comment.id %> #comment_stars')
+    .append("<%= escape_javascript(render partial: 'ratings/stars', locals: {comment: @comment}) %>")
 $("#average_rating").empty();
-$("#average_rating").append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");
-
-$("#comment_<%= @comment.id %> #edit_button").click(function(e){
-    $("#edit_form").fadeIn(500);
-});
-$("#comment_<%= @comment.id %> #edit_cancel_button").click(function(e){
-    $("#edit_form").fadeOut(500);
-});
+$("#average_rating")
+    .append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");

@@ -1,18 +1,25 @@
 <% if @comment.parent_id == nil %>
+console.log('review');
 $('#comment_form').empty();
 $("#comments").prepend("<%= escape_javascript(render partial: 'comment', locals: {comment: @comment}) %>");
 $("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
 $("#edit_form").hide();
 $("#comment_<%= @comment.id %> #edit_button").click(function(e){
-    $("#edit_form").fadeIn(500);
+    $("#comment_<%= @comment.id %> #edit_form").toggle(500);
+    <!--if $("#comment_<%= @comment.id %> #reply_form").is(':visible'){-->
+    <!--    $("#reply_form").toggle(500);-->
+    <!--}-->
 });
-$("#comment_<%= @comment.id %> #edit_cancel_button").click(function(e){
-    $("#edit_form").fadeOut(500);
+$("#comment_<%= @comment.id %> #reply_button").click(function(e){
+    $("#comment_<%= @comment.id %> #reply_form").toggle(500);
+<!--    if $("#comment_<%= @comment.id %> #edit_form").is(':visible'){-->
+<!--        $("#edit_form").toggle(500);-->
+<!--    }-->
 });
 
 $("#average_rating").empty();
 $("#average_rating").append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");
 <% else %>
-$('#replies_<%= @comment.parent_id %>').prepend("<%= j render 'reply', {comment: @comment}%>");
+$('#comment_<%= @comment.parent_id %>').append("<%= escape_javascript(render partial: 'reply', locals: {comment: @comment}) %>");
 
 <% end %>

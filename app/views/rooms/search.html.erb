@@ -1,7 +1,8 @@
-<%= sort_link(@q, :cost_per_night) %>
-  <br>
+<%= sort_link(@q, :cost_per_night) %>  |
+<%= sort_link(@q, :room_name) %> |
+<br>
   
-  <div class="row">
+<div class="row">
   <% @rooms.each do |room| %>
     <div class="col-md-4">
       <div class="card border-0" style="width: 100%;">
