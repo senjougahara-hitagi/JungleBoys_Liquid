@@ -2,7 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .btn-add-room{
-    margin: 10px 10px 10px 20px;
+    margin-top: 10px;
+    width: 100%;
 }
 
 .index-room-img {
@@ -44,4 +45,74 @@ T.card {
 .pagination_container a:hover{
     color:red;
     background:#DBD9D9;
+}
+
+.banner {
+    position: relative;
+    height: 500px;
+    padding: 7em 0 5em;
+}
+#RoomImageSlide {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+#intro-slogan {
+    z-index: 1;
+    position: relative;
+}
+#intro-slogan .container {
+    margin-right: auto;
+    margin-left: 0;
+    padding-left: 15%;
+    padding-right: 15px;
+    display: flex;
+}
+
+#intro-slogan .container .intro {
+    display: inline-block;
+    width: 60%;
+    vertical-align: middle;
+    padding-right: 10px;
+}
+#intro-slogan .container .intro h1 {
+    color: white;
+    text-shadow: 0 0.04em 0.8em rgba(0,0,0,0.9);
+    font-weight: 600;
+    font-size: 3.1em;
+    line-height: 1.4em;
+}
+#intro-slogan .container .intro h2 {
+    color: white;
+    text-shadow: 0 0.04em 0.8em rgba(0,0,0,0.7);
+    font-weight: 400;
+    margin-top: 1.5em;
+    font-size: 1.5em;
+    line-height: 1.4em;
+}
+.carousel-control-prev,.carousel-control-next {
+    z-index: 3;
+}
+#intro-slogan .container .add-room {
+    width: 40%;
+    margin: 0;
+    background-color: rgba(0,0,0,0.5);
+    display: inline-block;
+    vertical-align: middle;
+}
+#intro-slogan .container .add-room .form-background {
+    padding: 15px;
+    width: 100%;
+}
+#intro-slogan .container .add-room .form-background * {
+    color: white;
+}
+#intro-slogan .container .add-room .form-background h4 {
+    font-weight: 600;
+}
+#intro-slogan .container .add-room .form-background h5 {
+    font-size: 1em;
+    line-height: 1.6em;
 }

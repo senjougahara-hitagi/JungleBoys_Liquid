@@ -1,19 +1,58 @@
-<br>
-
-<% if user_signed_in? %>
-    <div class="row">
-      <div class="offset-md-1">
-      <%= link_to new_room_path(), class: "btn btn-info btn-lg btn-add-room" do %>
-          <span class="glyphicon glyphicon-plus-sign"></span>
-          Add new room <i class="fas fa-plus-circle"></i>
-      <% end %>
-      </div>
+<section class="banner">
+  <div id="RoomImageSlide" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#RoomImageSlide" data-slide-to="0" class="active"></li>
+      <li data-target="#RoomImageSlide" data-slide-to="1" class=""></li>
+      <li data-target="#RoomImageSlide" data-slide-to="2" class=""></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+          <%= image_tag("home-1.png", :style=>'object-fit:cover;height:500px;width:100%;') %>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag("home-2.png", :style=>'object-fit:cover;height:500px;width:100%;') %>
+        </div>
+        <div class="carousel-item">
+          <%= image_tag("home-3.png", :style=>'object-fit:cover;height:500px;width:100%;') %>
+        </div>
     </div>
-<% end %>
+    <a class="carousel-control-prev" href="#RoomImageSlide" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#RoomImageSlide" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  
+  <div id="intro-slogan">
+    <div class="container">
+      <div class="intro">
+        <h1>Quality Rooms at <br>Wallet-Friendly Prices</h1>
+        <h2>33,000 homestays and hotels in over 160 countries</h2>
+      </div>
+      
+      <% if user_signed_in? %>
+        <div class="add-room">
+          <div class="form-background">
+            <h4 class="form-title">Rent your spare room</h4>
+            <h5 class="subtitle">Join our global host community of over 33,000 homestays and hotels in 160 countries</h5>
+              <%= link_to new_room_path(), class: "btn btn-info btn-lg btn-add-room" do %>
+                  <span class="glyphicon glyphicon-plus-sign"></span>
+                  Add new room <i class="fas fa-plus-circle"></i>
+              <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+<br>
 <div class="row">
   <div class="col-md-8 offset-md-1">
-    <h2>New Rooms</h2>
     <!---->
+    <br>
     <div style="text-align: right;">
       <%= search_form_for @search, url: home_index_path do |f|%>
         <%= f.label :show_limit, "Show limit:" %>
@@ -41,8 +80,14 @@
                 <h6 class="col-md-3 right-corner" style="white-space: nowrap; font-weight: bold">
                   $<%= room.cost_per_night %></h6>
                 </div>
+<<<<<<< HEAD
                 <li><%= room.address %></li>
                 <li><%= room.ratings.count %> Reviews</li>
+=======
+                <li>Address: <%= room.address %></li>
+                <li>Contact: <%= room.contact_host %></li>
+                <li>Reviews: <%= room.comments.count %></li>
+>>>>>>> 452d64a3f3a3da7546205d3cd65a9ac4b18a0ccc
                  <!--to fix-->
                 <li><%= link_to "More detail", room_path(room.id) %></li>
                 
