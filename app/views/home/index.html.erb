@@ -88,14 +88,10 @@
                 <h6 class="col-md-3 right-corner" style="white-space: nowrap; font-weight: bold">
                   $<%= room.cost_per_night %></h6>
                 </div>
-<<<<<<< HEAD
-                <li><%= room.address %></li>
-                <li><%= room.ratings.count %> Reviews</li>
-=======
+
                 <li>Address: <%= room.address %></li>
                 <li>Contact: <%= room.contact_host %></li>
                 <li>Reviews: <%= room.comments.count %></li>
->>>>>>> 452d64a3f3a3da7546205d3cd65a9ac4b18a0ccc
                  <!--to fix-->
                 <li><%= link_to "More detail", room_path(room.id) %></li>
                 

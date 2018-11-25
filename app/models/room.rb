@@ -6,7 +6,7 @@ class Room < ApplicationRecord
         record.validate_photo_quota
     end
     
-    mount_uploader :pictures, RoomImageUploader
+    mount_uploaders :pictures, RoomImageUploader
     belongs_to :user
     serialize :pictures, JSON
     
