@@ -5,9 +5,8 @@ $("#comments").prepend("<%= escape_javascript(render partial: 'comment', locals:
 $("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
 $("#edit_form").hide();
 
-$("#comment_<%= @comment.id %> #reply_button").click(function(e){
-    $("#comment_<%= @comment.id %> #reply_form").toggle(500);
-});
+$( '<div id="replies_<%= @comment.id %>"></div>' )
+.insertAfter( $("#comment_<%= @comment.id %>") );
 
 $("#average_rating").empty();
 $("#average_rating").append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");
