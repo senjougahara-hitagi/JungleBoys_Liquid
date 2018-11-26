@@ -18,10 +18,22 @@ class CommentsController < ApplicationController
         end
     end
     
+    def edit 
+        @comment = Comment.find(params[:id])
+        respond_to do |format|
+            
+            format.js {}
+        end
+    end
+    
     def destroy
         @comment = Comment.find(params[:id])
         respond_to do |format|
-            if @comment.rating.destroy && @comment.destroy
+            if !@comment.rating.blank?
+                @comment.rating.destroy
+            end
+            
+            if @comment.destroy
                 format.html { redirect_to room_path(@comment.room_id) }
                 format.js   { }
             end

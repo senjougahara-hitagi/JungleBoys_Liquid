@@ -1,0 +1,11 @@
+console.log('edit');
+<% if @comment.parent_id == nil %>
+$('#comment_<%= @comment.id %>').empty();
+$('#comment_<%= @comment.id %>')
+.append("<%= escape_javascript(render partial: 'comment_edit', locals: {comment: @comment}) %>");
+<% else %>
+$('#reply_<%= @comment.parent_id %>_<%= @comment.id %>').empty();
+$('#reply_<%= @comment.parent_id %>_<%= @comment.id %>')
+.append("<%= escape_javascript(render partial: 'reply_edit', locals: {comment: @comment}) %>")
+.fadeIn(200);
+<% end %>

@@ -16,10 +16,12 @@
         </div>
         <div class="col-md-2">
             <% if user_signed_in? && current_user.id == comment.user_id %>
-            <a href="javascript:void(0)" id="edit_button">
-                <i class="fa fa-edit" aria-hidden="true"></i>
-                <!--<span class="tooltiptext">Edit review</span>-->
-            </a>
+            <%= link_to edit_room_comment_path(comment.room_id, comment),
+                remote: true do %>
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                  <!--<span class="tooltiptext">Remove</span>-->
+            <% end %>
+            
             <%= link_to room_comment_path(comment.room_id, comment),
                 method: :delete, remote: true, data: { confirm: 'Are you sure?' } do %>
                   <i class="fa fa-trash" aria-hidden="true"></i>
@@ -39,43 +41,8 @@
         <i class="fa fa-reply" aria-hidden="true"></i> 
         <!-- FIX: add replies number-->
         Reply
-        <!--<span class="tooltiptext">Edit review</span>-->
     </a>     
     
-    <!-- load form to edit review-->
-    <% if current_user.id == comment.user_id %>
-    <div style="display:none" class="offset-md-1" id="edit_form">
-    <%= form_for [comment.room, comment], method: :patch, html: {class: "form-inline"}, remote:true do |f| %>
-                
-            <div class="form-group" style="width:100%">
-                <%= f.hidden_field :id, value: comment.id %>
-                <%= f.hidden_field :room_id, value: comment.room.id %>
-                <%= f.text_field :text_content, :class => "comment-box form-control", :style=>"width:50%",
-                    :required => true, :autocomplete => 'off', placeholder: "Edit comment" %>
-                <%= f.fields_for :rating, update_ratings_path do |rating_form| %>
-                    <p>
-                        <%= rating_form.hidden_field :id, value: comment.rating.id %>
-                        <%= rating_form.hidden_field :comment_id, value: comment.id %>
-                        <%= rating_form.hidden_field :room_id, value: comment.room.id %>    
-                        <%= rating_form.hidden_field :stars %>                    
-                    </p>
-                    <% end %>
-                <h2 id="your_rating">
-                    <i id="1" class="fas fa-star"></i>
-                    <i id="2" class="fas fa-star"></i>
-                    <i id="3" class="fas fa-star"></i>
-                    <i id="4" class="fas fa-star"></i>
-                    <i id="5" class="fas fa-star"></i>
-                </h2>
-            
-                <p id="value"></p>    
-
-                <%= f.submit "Edit", id: "submit", class: "btn btn-primary" %>
-            </div>
-        <% end %>
-        </div>
-    <% end %>   
-        
     <div style="display:none" class="offset-md-1" id="reply_form">
     <%= form_for [comment.room, Comment.new], html: {class: "form-inline"}, remote:true do |f| %>
                 
