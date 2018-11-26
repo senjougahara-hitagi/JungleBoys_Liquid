@@ -1,6 +1,6 @@
 <div id="reply_<%= comment.parent_id %>_<%= comment.id %>" class="offset-md-1 reply">
     <div class="row">
-    <div class="col-md-1">
+        <div class="col-md-1">
             <% if comment.user.user_pic.present? %>
                 <%= image_tag(comment.user.user_pic, :height=>'50px',
                     :width=>'50px', :style => 'border-radius: 50%') %>
@@ -15,6 +15,21 @@
             </a>
             <%= comment.created_at %>
             <p><%= comment.text_content %></p>
+        </div>
+            <div class="col-md-2">
+            <% if user_signed_in? && current_user.id == comment.user_id %>
+            <%= link_to edit_room_comment_path(comment.room_id, comment),
+                remote: true do %>
+                  <i class="fa fa-edit" aria-hidden="true"></i>
+                  <!--<span class="tooltiptext">Remove</span>-->
+            <% end %>
+            
+            <%= link_to room_comment_path(comment.room_id, comment),
+                method: :delete, remote: true, data: { confirm: 'Are you sure?' } do %>
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                  <!--<span class="tooltiptext">Remove</span>-->
+            <% end %>  
+           <% end %>
         </div>
     </div>
 </div>

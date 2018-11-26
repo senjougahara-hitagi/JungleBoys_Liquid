@@ -1,3 +1,4 @@
+<% if @comment.parent_id == nil %>
 $('#comment_<%= @comment.id %>').remove();
 $('#replies_<%= @comment.id %>').remove();
 $("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
@@ -15,4 +16,8 @@ $("#comment_form").submit(function(){
 $("#average_rating").empty();
 $("#average_rating").append("<%= escape_javascript(render partial: 'average',
     locals: {comment: @comment}) %>");
-
+<% else %>
+console.log('delete reply');
+$("#reply_<%= @comment.parent_id %>_<%= @comment.id %>")
+    .remove();
+<% end %>
