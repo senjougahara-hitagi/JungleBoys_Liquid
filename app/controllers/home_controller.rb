@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  $limit = 6
+  $limit = 12
   def index
     @search = Room.order(id: :desc).ransack params[:q]
     
