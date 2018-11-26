@@ -125,9 +125,9 @@ $(document).on('turbolinks:load', function(){
         }
     });
 
-    $('#comments').children().each(function(e) {
-      
-        $(this).find('#reply_button').click(function(e){
+    $('#comments').on('click', '#reply_button', function(e) {
+    
+        // $(this).on('click', '#reply_button', function(e){
             e.preventDefault();
             console.log('edit');
             var edit_form = $(this).parentsUntil('#comments')
@@ -137,7 +137,7 @@ $(document).on('turbolinks:load', function(){
                    .find('#reply_form')
                    .toggle('200');
 
-        });
+        // });
     });
     
     // $('#reply_form').submit(function(e) {

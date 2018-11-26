@@ -9,6 +9,7 @@
     <% end %>
 </div>
 
+<div id="edit_form" class="col-md-11">
 <%= form_for [comment.room, comment], method: :patch, html: {class: "form-inline"}, remote:true do |f| %>
     <div class="form-group" style="width:100%">
         <%= f.hidden_field :id, value: comment.id %>
@@ -17,4 +18,5 @@
         <%= f.submit "Edit", id: "submit", class: "btn btn-primary" %>
     </div>
 <% end %>
+</div>
 </div>
