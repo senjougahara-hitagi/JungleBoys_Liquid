@@ -1,42 +1,76 @@
-<%= sort_link(@q, :cost_per_night) %>  |
-<%= sort_link(@q, :room_name) %> |
 <br>
-  
-<div class="row">
-  <% @rooms.each do |room| %>
-    <div class="col-md-4">
-      <div class="card border-0" style="width: 100%;">
-        <!--<div class="card-body">-->
-         <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img") %>
-         <ul class="homepage-info">
-            <p class="right-corner" style="font-size: 1rem; font-weight: bold">$<%= room.cost_per_night %>/night </p>
-            <h5 style="font-weight: bold"><%= room.room_name %></h5>
-            <li>Address: <%= room.address %></li>
-            <li>Contact: <%= room.contact_host %></li>
-            <li>Reviews: <%= room.comments.count %> Reviews</li>
-             <!--to fix-->
-            <li><%= link_to "More detail", room_path(room.id) %></li>
-            
-          <br>
-          
-          <li>
-            <% if !room.ratings.blank? %>
-              <% for i in 1..5 %>
-                  <% if i > room.ratings.average(:stars) %>
-                  <i class="fas fa-star"></i>
-                  <% else %>
-                  <i class="fas fa-star rated"></i>
-                  <% end %>
-              <% end %>
-              <%= number_with_precision(room.ratings.average(:stars), :precision => 1) %>
-              <% else %>
-            No ratings.
-            <% end %>
-          </li>
-          </ul>
-        <!--</div>-->
+<div class="row mb-5">
+  <div class="col-md-3 order-md-2 mb-4  px-4">
+    <div class="row">
+      
+    <%= search_form_for @q do |f| %>
+      <h4 class="mb-3 text-center">Filter</h4>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= f.label :cost_per_night_lteq, "Max cost" %>
+          <%= f.number_field :cost_per_night_lteq, :min => 0, autocomplete: "off", class: "form-control" %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= f.label :cost_per_night_lteq, "Min cost" %>
+          <%= f.number_field :cost_per_night_gteq, :min => 0, autocomplete: "off", class: "form-control" %>
+        </div>
       </div>
+
+        <%= f.label :type_of_room_eq, "Type of room:" %>
+        <%= f.select :type_of_room_eq, options_for_select([["Homestay", 0], ["Hotel", 1]], params[:q][:type_of_room_eq]), :include_blank => true, :class=>"form-control" %>
+        <div class="w-100"></div>
+        <%= f.label :province_cont, "Province:" %> 
+        <%= f.select :province_cont, options_for_select($CITYS, :selected => params[:q][:province_cont]), :include_blank => true, :class=>"form-control" %>
+        <div class="w-100"></div>
+        <br>
+        <div class="row justify-content-center">
+          <%= f.submit "Refresh List", class: 'btn' %>
+        </div>
+
+    <% end %>
     </div>
-  <% end %>
+  </div>
+  <div class="col-md-9 order-md-1">
+    <h4 class="mb-3">Find Rooms</h4>
+    <%= sort_link(@q, :cost_per_night) %>
+    <%= sort_link(@q, :id) %>
+      
+    <div class="row">
+      <% @rooms.each do |room| %>
+        <div class="col-md-4">
+          <div class="card border-0" style="width: 100%;">
+            <!--<div class="card-body">-->
+             <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img") %>
+             <ul class="homepage-info">
+                <p class="right-corner" style="font-size: 1rem; font-weight: bold">$<%= room.cost_per_night %>/night </p>
+                <h5 style="font-weight: bold"><%= room.room_name %></h5>
+                <li><%= room.address %></li>
+                <li><%= room.ratings.count %> Reviews</li>
+                 <!--to fix-->
+                <li><%= link_to "More detail", room_path(room.id) %></li>
+              <br>
+              
+              <li>
+                <% if !room.ratings.blank? %>
+                  <% for i in 1..5 %>
+                      <% if i > room.ratings.average(:stars) %>
+                      <i class="fas fa-star"></i>
+                      <% else %>
+                      <i class="fas fa-star rated"></i>
+                      <% end %>
+                  <% end %>
+                  <%= number_with_precision(room.ratings.average(:stars), :precision => 1) %>
+                  <% else %>
+                No ratings.
+                <% end %>
+              </li>
+              </ul>
+            <!--</div>-->
+          </div>
+        </div>
+      <% end %>
   
+    </div>
+  </div>
+
 </div>
