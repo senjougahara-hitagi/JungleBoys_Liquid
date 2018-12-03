@@ -1,10 +1,12 @@
 <% if @comment.parent_id == nil %>
+console.log('update comment');
 $('#comment_<%= @comment.id %>')
 .replaceWith("<%= escape_javascript(render partial: 'comment', locals: {comment: @comment}) %>");
 $("#average_rating").empty();
 $("#average_rating")
     .append("<%= escape_javascript(render partial: 'average', locals: {comment: @comment}) %>");
 <% else %>
+console.log('update reply');
 $('#reply_<%= @comment.parent_id %>_<%= @comment.id %>')
 .replaceWith("<%= escape_javascript(render partial: 'reply', locals: {comment: @comment}) %>");
 <% end %>

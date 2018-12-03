@@ -5,6 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Bookmark.destroy_all
+Rating.destroy_all
+Comment.destroy_all
 Room.destroy_all
 User.destroy_all
 
@@ -32,7 +35,7 @@ end
       num_of_beds: 5,
       amentities: 'Wifi',
       contact_host: Faker::PhoneNumber.phone_number,
-      pictures: File.open(Rails.root + "app/assets/images/rooms/room1.jpg"),
+      pictures: File.open(Rails.root.join("app/assets/images/rooms/room1.jpg")),
       room_info: "Lorem",
       )
 end

@@ -1,5 +1,5 @@
 <% if @comment.parent_id == nil %>
-console.log('review');
+console.log('comment');
 $('#comment_form').empty();
 $("#comments").prepend("<%= escape_javascript(render partial: 'comment', locals: {comment: @comment}) %>");
 $("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
@@ -13,5 +13,11 @@ $("#average_rating").append("<%= escape_javascript(render partial: 'average', lo
 <% else %>
 $('#replies_<%= @comment.parent_id %>')
 .prepend("<%= escape_javascript(render partial: 'reply', locals: {comment: @comment}) %>");
-
+$('#comment_<%= @comment.parent_id %> #reply_button')
+.html("<%= j render 'comments/reply_button', comment: @comment.parent %>");
+console.log('reply');
+$('#comment_<%= @comment.parent_id %> #comment_text_content')
+.val('');
+$('#comment_<%= @comment.parent_id %> #reply_form')
+.toggle();
 <% end %>
