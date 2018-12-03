@@ -1,0 +1,3 @@
+$('#like_<%= @like.comment_id %>').
+  html('<%= j render "comments/like", {comment: @like.comment, room: @like.comment.room} %>');
+console.log("create");
