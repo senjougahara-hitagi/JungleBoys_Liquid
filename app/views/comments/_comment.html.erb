@@ -37,12 +37,13 @@
     <% if user_signed_in? %>    
 
     <!-- display reply button-->
-    <a class="offset-md-1" href="javascript:void(0)" id="reply_button">
-        <i class="fa fa-reply" aria-hidden="true"></i> 
-        <!-- FIX: add replies number-->
-        Reply
-    </a>     
-    
+    <div id="like_<%= comment.id %>" class="d-inline-block offset-md-1">
+      <%= render "comments/like" ,
+       {comment: comment, room: comment.room}  %>
+   </div>
+   <a href="javascript:void(0)" id="reply_button">
+       <%= render "comments/reply_button", comment: comment %>
+    </a>
     <div style="display:none" class="offset-md-1" id="reply_form">
     <%= form_for [comment.room, Comment.new], html: {class: "form-inline"}, remote:true do |f| %>
                 

@@ -1,0 +1,13 @@
+<% if comment.is_liked(current_user).present? %>
+    <%= link_to like_path(comment.is_liked(current_user)), method: :delete,
+        remote: true do %>
+          <i class="fas fa-thumbs-up" aria-hidden="true"></i>
+      <%= comment.likes_amount %>
+    <% end %> 
+<% else %>
+    <%= link_to room_comment_likes_path(comment.room_id, comment), method: :post,
+        remote: true do %>
+          <i class="far fa-thumbs-up" aria-hidden="true"></i>
+      <%= comment.likes_amount %>
+    <% end %> 
+<% end %>

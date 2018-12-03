@@ -1,10 +1,11 @@
 <% if @comment.parent_id == nil %>
+console.log('delete comment');
 $('#comment_<%= @comment.id %>').remove();
 $('#replies_<%= @comment.id %>').remove();
 $("#review_amount").text("<%= Room.find(@comment.room_id).ratings.count %> Reviews");
 $('#comment_form').empty();
 console.log('delete');
-$("#comment_form").prepend("<%= escape_javascript(render partial: 'form', locals: {comment: @comment}) %>");
+$("#comment_form").prepend("<%= escape_javascript(render partial: 'form', locals: {comment: Comment.new}) %>");
 $("#comment_text_content").text('');
 
 $("#comment_form").submit(function(){
@@ -13,11 +14,15 @@ $("#comment_form").submit(function(){
     }
 });
 
+$('#comment_text_content').val('');
+
 $("#average_rating").empty();
 $("#average_rating").append("<%= escape_javascript(render partial: 'average',
     locals: {comment: @comment}) %>");
 <% else %>
-console.log('delete reply');
 $("#reply_<%= @comment.parent_id %>_<%= @comment.id %>")
     .remove();
+$('#comment_<%= @comment.parent_id %> #reply_button')
+.html("<%= j render 'comments/reply_button', comment: @comment.parent %>");
+console.log('delete reply');
 <% end %>

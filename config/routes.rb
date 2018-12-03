@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   
   resources :rooms, :except => [:index] do 
     resources :comments, :except => [:index] do
+        resources :likes, only: [:create, :destroy], shallow: true
     end
     resources :bookmarks, only: [:create, :destroy], shallow: true
   end
