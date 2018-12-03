@@ -38,18 +38,27 @@
         <div class="form-background">
           <h4 class="form-title">Rent your spare room</h4>
           <h5 class="subtitle">Join our global host community of over 33,000 homestays and hotels in 160 countries</h5>
-          <% if user_signed_in? %>  
-            <%= link_to new_room_path(), class: "btn btn-info btn-lg btn-add-room" do %>
-                <span class="glyphicon glyphicon-plus-sign"></span>
-                Add new room <i class="fas fa-plus-circle"></i>
-            <% end %>  
-          <% else %>
-            <div style="width: 50%;float: left;padding:10px 2px 0px 0px;">
-              <%= link_to "Sign in", new_user_session_path, class: "btn btn-info btn-lg nav-link" %>
-            </div>
-            <div style="width: 50%;float: right;padding:10px 0px 0px 2px;">
-              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-info btn-lg nav-link" %>
-            </div>
+          <div>
+            <% if user_signed_in? %>  
+              <%= link_to new_room_path(), class: "btn btn-info btn-lg btn-add-room" do %>
+                  <span class="glyphicon glyphicon-plus-sign"></span>
+                  Add new room <i class="fas fa-plus-circle"></i>
+              <% end %>  
+            <% else %>
+              <div style="width: 50%;float: left;padding:10px 2px 15px 0px;">
+                <%= link_to "Sign in", new_user_session_path, class: "btn btn-info btn-lg nav-link" %>
+              </div>
+              <div style="width: 50%;float: right;padding:10px 0px 15px 2px;">
+                <%= link_to "Sign up", new_user_registration_path, class: "btn btn-info btn-lg nav-link" %>
+              </div>
+            <% end %>
+          </div>
+          
+          <h4 class="search-title" style="padding-top: 15px;">Or Search a room</h4>
+          <%= search_form_for @q, :class => 'form-inline mr-auto' do |f| %>
+            <%= f.search_field :room_name_cont, :class => 'form-control', :style => 'width: 70%;float: left;' %>
+  
+            <%= f.submit "Search", class: 'btn btn-info my-2 my-sm-0', :style => 'width: 30%;float: right;' %>
           <% end %>
         </div>
       </div>
@@ -57,8 +66,45 @@
   </div>
 </section>
 <br>
+
+<h2>Most Popular</h2>
+<div class="owl-carousel owl-theme">
+  <% @top.each do |top| %>
+    <div class="item card" style="width: 100%;">
+      <%= image_tag(top.pictures[0], :alt=>'Room image', :class => 'index-top-img') %>
+      <div class="card-body">
+        <h5 class="card-title"><%= link_to top.room_name, room_path(top) %></a></h5>
+        <p class="card-text">
+          <% if !top.ratings.blank? %>
+            <% for i in 1..5 %>
+              <% if i > top.ratings.average(:stars) %>
+                <i class="fas fa-star"></i>
+              <% else %>
+                <i class="fas fa-star rated"></i>
+              <% end %>
+            <% end %>
+            <%= number_with_precision(top.ratings.average(:stars), :precision => 1) %>
+          <% else %>
+            No ratings.
+          <% end %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
+<script>
+$(document).ready(function(){
+  $('.owl-carousel').owlCarousel({
+    center: true,
+    items:5,
+    loop:true,
+    margin:10
+  })
+});
+</script>
+
 <div class="row">
-  <div class="col-md-8 offset-md-1">
+  <div class="col-md-12">
     <!---->
     <br>
     <div style="text-align: right;">
@@ -68,6 +114,13 @@
         <%= f.submit "search", class: "btn btn-info", style: "display: none; margin-right: 10px"%>
       <% end %>
     </div>
+    <script>
+      $(function(){
+        $("#show-limit").on("change", function(){
+          $(this).closest("form").trigger("submit");
+        });
+      });
+    </script>
     <!---->
     <br>
     <div class="pagination_container">
@@ -77,7 +130,7 @@
     <div class="row">
       
       <% @rooms.each do |room| %>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="card" style="width: 100%;">
             <!--<div class="card-body">-->
              <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img") %>
@@ -123,31 +176,5 @@
     </div>
     <br>
   </div>
-  <div class="col-md-2">
-    <h2>Top</h2>
-    <% @top.each do |top| %>
-    <div class="card" style="width: 100%;">
-      <%= image_tag(top.pictures[0], :alt=>'Room image', :class => 'index-top-img') %>
-      <div class="card-body">
-        <h5 class="card-title"><%= link_to top.room_name, room_path(top) %></a></h5>
-        <p class="card-text">
-          <% if !top.ratings.blank? %>
-                <% for i in 1..5 %>
-                    <% if i > top.ratings.average(:stars) %>
-                    <i class="fas fa-star"></i>
-                    <% else %>
-                    <i class="fas fa-star rated"></i>
-                    <% end %>
-                <% end %>
-                <%= number_with_precision(top.ratings.average(:stars), :precision => 1) %>
-                <% else %>
-                No ratings.
-          <% end %>
-        </p>
-      </div>
-    </div>
-    <br>
-    <% end %>
-    
-  </div>
+  
 </div>
