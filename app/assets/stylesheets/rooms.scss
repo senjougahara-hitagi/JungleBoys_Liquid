@@ -74,7 +74,11 @@
 
 .room-info-hide{
 	height: 150px;
-	overflow: hidden;
+	transition: all 0.3s ease
+}
+
+.room-info-show{
+	transition: all 0.3s ease
 }
 
 	.room-form {

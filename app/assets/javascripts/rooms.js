@@ -144,6 +144,10 @@ $(document).on('turbolinks:load', function(){
     //     e.preventDefault();
     //     $(this).fadeOut('200');
     // })
+    if ($('#room_info').height() > 150){
+        $('#show_link').show();
+        $('#room_info').addClass('room-info-hide').css('overflow','hidden');
+    }
     
     $('#show_link').click(function(e){
         e.preventDefault();
