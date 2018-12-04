@@ -44,8 +44,9 @@
              <ul class="homepage-info">
                 <p class="right-corner" style="font-size: 1rem; font-weight: bold">$<%= room.cost_per_night %>/night </p>
                 <h5 style="font-weight: bold"><%= room.room_name %></h5>
-                <li><%= room.address %></li>
-                <li><%= room.ratings.count %> Reviews</li>
+                <li>Address: <%= room.address %></li>
+                <li>Contact: <%= room.contact_host %></li>
+                <li>Reviews: <%= room.ratings.count %></li>
                  <!--to fix-->
                 <li><%= link_to "More detail", room_path(room.id) %></li>
               <br>

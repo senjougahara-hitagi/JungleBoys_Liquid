@@ -38,18 +38,27 @@
         <div class="form-background">
           <h4 class="form-title">Rent your spare room</h4>
           <h5 class="subtitle">Join our global host community of over 33,000 homestays and hotels in 160 countries</h5>
-          <% if user_signed_in? %>  
-            <%= link_to new_room_path(), class: "btn btn-info btn-lg btn-add-room" do %>
-                <span class="glyphicon glyphicon-plus-sign"></span>
-                Add new room <i class="fas fa-plus-circle"></i>
-            <% end %>  
-          <% else %>
-            <div style="width: 50%;float: left;padding:10px 2px 0px 0px;">
-              <%= link_to "Sign in", new_user_session_path, class: "btn btn-info btn-lg nav-link" %>
-            </div>
-            <div style="width: 50%;float: right;padding:10px 0px 0px 2px;">
-              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-info btn-lg nav-link" %>
-            </div>
+          <div>
+            <% if user_signed_in? %>  
+              <%= link_to new_room_path(), class: "btn btn-info btn-lg btn-add-room" do %>
+                  <span class="glyphicon glyphicon-plus-sign"></span>
+                  Add new room <i class="fas fa-plus-circle"></i>
+              <% end %>  
+            <% else %>
+              <div style="width: 50%;float: left;padding:10px 2px 15px 0px;">
+                <%= link_to "Sign in", new_user_session_path, class: "btn btn-info btn-lg nav-link" %>
+              </div>
+              <div style="width: 50%;float: right;padding:10px 0px 15px 2px;">
+                <%= link_to "Sign up", new_user_registration_path, class: "btn btn-info btn-lg nav-link" %>
+              </div>
+            <% end %>
+          </div>
+          
+          <h4 class="search-title" style="padding-top: 15px;">Or Search a room</h4>
+          <%= search_form_for @q, :class => 'form-inline mr-auto' do |f| %>
+            <%= f.search_field :room_name_cont, :class => 'form-control', :style => 'width: 70%;float: left;' %>
+  
+            <%= f.submit "Search", class: 'btn btn-info my-2 my-sm-0', :style => 'width: 30%;float: right;' %>
           <% end %>
         </div>
       </div>
@@ -57,41 +66,94 @@
   </div>
 </section>
 <br>
+
+<section class="section-tab">
+  <div class="text-center" style="padding-top: 40px;">
+    <h2>Most Popular</h2>
+  </div>
+  <div class="owl-carousel owl-theme">
+    <% @top.each do |top| %>
+      <div class="item card" style="width: 100%;">
+        <%= image_tag(top.pictures[0], :alt=>'Room image', :class => 'index-top-img') %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to top.room_name, room_path(top) %></a></h5>
+          <h6 style="white-space: nowrap; font-weight: bold;">
+            Price: $<%= top.cost_per_night %>/night
+          </h6>
+          <p style="margin-bottom: 2px;">Address: <%= top.address %></p>
+          <p>Reviews: <%= top.ratings.count %></p>
+          <p class="card-text">
+            <% if !top.ratings.blank? %>
+              <% for i in 1..5 %>
+                <% if i > top.ratings.average(:stars) %>
+                  <i class="fas fa-star"></i>
+                <% else %>
+                  <i class="fas fa-star rated"></i>
+                <% end %>
+              <% end %>
+              <%= number_with_precision(top.ratings.average(:stars), :precision => 1) %>
+            <% else %>
+              No ratings.
+            <% end %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <script>
+  $(document).ready(function(){
+    $('.owl-carousel').owlCarousel({
+      center: true,
+      items:5,
+      loop:true,
+      autoPlay: 3000
+    })
+  });
+  </script>
+</section>
+
 <div class="row">
-  <div class="col-md-8 offset-md-1">
-    <!---->
-    <br>
-    <div style="text-align: right;">
-      <%= search_form_for @search, url: home_index_path do |f|%>
-        <%= f.label :show_limit, "Show limit:" %>
-        <%= select_tag :limit, options_from_collection_for_select(Settings.show_limit, :second, :second, selected: params[:limit] || Settings.show_limit.limit),id: "show-limit"%>
-        <%= f.submit "search", class: "btn btn-info", style: "display: none; margin-right: 10px"%>
-      <% end %>
+  <div class="text-center" style="width: 100%; padding-top: 40px;">
+    <h2>All Rooms</h2>
+  </div>
+  <div class="col-md-12">
+    <div style="padding: 15px 0px 15px 0px;">
+      <div class="pagination_container" style="display: inline-block;">
+        <%= paginate @rooms, theme: 'twitter-bootstrap-3'%>
+      </div>
+      <!---->
+      <div style="text-align: right; display: inline-block; float: right;">
+        <%= search_form_for @search, url: home_index_path do |f|%>
+          <%= f.label :show_limit, "Show limit:" %>
+          <%= select_tag :limit, options_from_collection_for_select(Settings.show_limit, :second, :second, selected: params[:limit] || Settings.show_limit.limit),id: "show-limit"%>
+          <%= f.submit "search", class: "btn btn-info", style: "display: none; margin-right: 10px"%>
+        <% end %>
+      </div>
+      <script>
+        $(function(){
+          $("#show-limit").on("change", function(){
+            $(this).closest("form").trigger("submit");
+          });
+        });
+      </script>
+      <!---->
     </div>
-    <!---->
-    <br>
-    <div class="pagination_container">
-      <%= paginate @rooms, theme: 'twitter-bootstrap-3'%>
-    </div>
-    <br>
+    
     <div class="row">
       
       <% @rooms.each do |room| %>
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="card" style="width: 100%;">
             <!--<div class="card-body">-->
              <%= image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img") %>
              <ul class="homepage-info">
-               <div class="row">
+                <p class="right-corner" style="font-size: 1rem; font-weight: bold">$<%= room.cost_per_night %>/night </p>
                 <h5 style="font-weight: bold; text-overflow: ellipsis; white-space: nowrap;
-                overflow: hidden;" class="col-md-9"><%= room.room_name %></h5>
-                <h6 class="col-md-3 right-corner" style="white-space: nowrap; font-weight: bold">
-                  $<%= room.cost_per_night %></h6>
-                </div>
-
+                overflow: hidden;"><%= room.room_name %></h5>
                 <li>Address: <%= room.address %></li>
                 <li>Contact: <%= room.contact_host %></li>
-                <li>Reviews: <%= room.comments.count %></li>
+                <li>Reviews: <%= room.ratings.count %></li>
                  <!--to fix-->
                 <li><%= link_to "More detail", room_path(room.id) %></li>
                 
@@ -118,37 +180,10 @@
       <% end %>
       
     </div>
-    <br>
-    <div class="pagination_container">
+
+    <div class="pagination_container"  style="padding: 15px 0px 15px 0px;">
       <%= paginate @rooms, theme: 'twitter-bootstrap-3'%>
     </div>
-    <br>
   </div>
-  <div class="col-md-2">
-    <h2>Top</h2>
-    <% @top.each do |top| %>
-    <div class="card" style="width: 100%;">
-      <%= image_tag(top.pictures[0], :alt=>'Room image', :class => 'index-top-img') %>
-      <div class="card-body">
-        <h5 class="card-title"><%= link_to top.room_name, room_path(top) %></a></h5>
-        <p class="card-text">
-          <% if !top.ratings.blank? %>
-                <% for i in 1..5 %>
-                    <% if i > top.ratings.average(:stars) %>
-                    <i class="fas fa-star"></i>
-                    <% else %>
-                    <i class="fas fa-star rated"></i>
-                    <% end %>
-                <% end %>
-                <%= number_with_precision(top.ratings.average(:stars), :precision => 1) %>
-                <% else %>
-                No ratings.
-          <% end %>
-        </p>
-      </div>
-    </div>
-    <br>
-    <% end %>
-    
-  </div>
+  
 </div>
