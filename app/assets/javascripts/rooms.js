@@ -151,7 +151,13 @@ $(document).on('turbolinks:load', function(){
     
     $('#show_link').click(function(e){
         e.preventDefault();
-        $(this).parent().find('#room_info').toggleClass('room-info-hide');
+        rInfo = $(this).parent().find('#room_info');
+        rInfo.toggleClass('room-info-hide');
+        if (!rInfo.hasClass('room-info-hide')){
+            $(this).html('Show less <i class="fas fa-chevron-up"></i>');
+        } else {
+            $(this).html('Read more about the space <i class="fas fa-chevron-down"></i>');
+        }
     });
     
     $("#comment_form").submit(function(){
