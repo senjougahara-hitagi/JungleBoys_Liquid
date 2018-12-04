@@ -74,13 +74,25 @@
   <div class="owl-carousel owl-theme">
     <% @top.each do |top| %>
       <div class="item card" style="width: 100%;">
-        <%= link_to image_tag(top.pictures[0], :alt=>'Room image', :class => 'index-top-img'), room_path(top.id) %>
+<!--<<<<<<< HEAD-->
+<!--        <%= link_to image_tag(top.pictures[0], :alt=>'Room image', :class => 'index-top-img'), room_path(top.id) %>-->
+<!--        <div class="card-body">-->
+<!--          <h5 class="card-title"><%= link_to top.room_name, room_path(top) %></a></h5>-->
+<!--          <h6 style="white-space: nowrap; font-weight: bold;">-->
+<!--            Price: $<%= top.cost_per_night %>/night-->
+<!--          </h6>-->
+<!--          <p style="margin-bottom: 2px;">Address: <%= top.address %></p>-->
+<!--=======-->
+        <%= image_tag(top.pictures[0], :alt=>'Room image', :class => 'index-top-img') %>
         <div class="card-body">
-          <h5 class="card-title"><%= link_to top.room_name, room_path(top) %></a></h5>
+          <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap;
+                overflow: hidden;"><%= link_to top.room_name, room_path(top) %></a></h5>
           <h6 style="white-space: nowrap; font-weight: bold;">
             Price: $<%= top.cost_per_night %>/night
           </h6>
-          <p style="margin-bottom: 2px;">Address: <%= top.address %></p>
+          <p style="margin-bottom: 2px;text-overflow: ellipsis; white-space: nowrap;
+                overflow: hidden;">Address: <%= top.address %></p>
+<!-->>>>>>> 2373d0ed8d182be4fcde524953a67a38676503be-->
           <p>Reviews: <%= top.ratings.count %></p>
           <p class="card-text">
             <% if !top.ratings.blank? %>
@@ -149,7 +161,12 @@
                 <p class="right-corner" style="font-size: 1rem; font-weight: bold">$<%= room.cost_per_night %>/night </p>
                 <h5 style="font-weight: bold; text-overflow: ellipsis; white-space: nowrap;
                 overflow: hidden;"><%= room.room_name %></h5>
-                <li>Address: <%= room.address %></li>
+<!--<<<<<<< HEAD-->
+<!--                <li>Address: <%= room.address %></li>-->
+<!--=======-->
+                <li style="text-overflow: ellipsis; white-space: nowrap;
+                overflow: hidden;">Address: <%= room.address %></li>
+<!-->>>>>>> 2373d0ed8d182be4fcde524953a67a38676503be-->
                 <li>Contact: <%= room.contact_host %></li>
                 <li>Reviews: <%= room.ratings.count %></li>
                  <!--to fix-->
