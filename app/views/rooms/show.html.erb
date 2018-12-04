@@ -57,11 +57,14 @@
 <hr />
 <div class="row">
     <div class="offset-md-1 col-md-7">
-        <p id="room_info" style="white-space: pre-line" class="room-info-hide">
+        <p id="room_info" style="overflow-wrap: break-word;">
             <%= @room.room_info %>
         </p>
         
-        <a href="javascript:void(0)" id="show_link">Read more about the space <i class="fas fa-chevron-down"></i></a>
+        <a href="javascript:void(0)" style="display:none" id="show_link">
+            Read more about the space 
+            <i class="fas fa-chevron-down"></i>
+        </a>
         <hr />
         <p style="font-weight: bold">Amentities</p>
             <!-- FIX THIS MESS -->
