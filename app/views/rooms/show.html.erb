@@ -86,6 +86,12 @@
             <% end %>
             <!-- -->
         <hr />
+    
+    <% if user_signed_in? %>
+        <div>
+            <%= social_share_button_tag(@room.room_name, :'data-source' => room_path(@room), desc: @room.room_name) %>
+        </div>
+    <% end %>
 
     <h2 id="review_amount">
         <%= parent_comments(@comments).size == 0 ? 
