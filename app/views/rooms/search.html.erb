@@ -7,12 +7,12 @@
       <h4 class="mb-3 text-center">Filter</h4>
       <div class="row">
         <div class="col-md-6 mb-3">
-          <%= f.label :cost_per_night_lteq, "Max cost" %>
-          <%= f.number_field :cost_per_night_lteq, :min => 0, autocomplete: "off", class: "form-control" %>
-        </div>
-        <div class="col-md-6 mb-3">
           <%= f.label :cost_per_night_lteq, "Min cost" %>
           <%= f.number_field :cost_per_night_gteq, :min => 0, autocomplete: "off", class: "form-control" %>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= f.label :cost_per_night_lteq, "Max cost" %>
+          <%= f.number_field :cost_per_night_lteq, :min => 0, autocomplete: "off", class: "form-control" %>
         </div>
       </div>
 
@@ -34,7 +34,7 @@
     <h4 class="mb-3">Find Rooms</h4>
     <%= sort_link(@q, :cost_per_night) %>
     <%= sort_link(@q, :id) %>
-      
+    
     <div class="row">
       <% @rooms.each do |room| %>
         <div class="col-md-4">
