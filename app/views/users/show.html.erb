@@ -69,7 +69,8 @@
  <div class="profile-tab">
   <nav>
    <div class="nav nav-tabs d-flex justify-content-center" id="nav-tab" role="tablist">
-     <a class="nav-item nav-link active mr-auto" id="nav-saved-tab" data-toggle="tab" href="#nav-saved" role="tab" aria-controls="nav-saved" aria-selected="true">Bookmarks</a>
+     <a class="nav-item nav-link active" id="nav-saved-tab" data-toggle="tab" href="#nav-saved" role="tab" aria-controls="nav-saved" aria-selected="true">Bookmarks</a>
+     <a class="nav-item nav-link mr-auto" id="nav-post-tab" data-toggle="tab" href="#nav-post" role="tab" aria-controls="nav-post" aria-selected="false">Post</a>
    </div>
   </nav>
   <div class="tab-content" id="nav-tabContent">
@@ -79,7 +80,7 @@
        <div class="col-md-4">
           <div class="card border-0" style="width: 100%;">
             <!--<div class="card-body">-->
-             <%= image_tag(save.room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img") %>
+             <%= link_to image_tag(save.room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img"), room_path(save.room) %>
              <ul class="homepage-info">
                <div class="row">
                 <h5 style="font-weight: bold; text-overflow: ellipsis; white-space: nowrap;
@@ -105,6 +106,49 @@
                       <% end %>
                   <% end %>
                   <%= number_with_precision(save.room.ratings.average(:stars), :precision => 1) %>
+                  <% else %>
+                No ratings.
+                <% end %>
+              </li>
+              </ul>
+            <!--</div>-->
+          </div>
+        </div>
+      <% end %>
+     </div>
+    </div>
+    <div class="tab-pane fade" id="nav-post" role="tabpanel" aria-labelledby="nav-post-tab">
+      <div class="row">
+      <% @posts.each do |room| %>
+       <div class="col-md-4">
+          <div class="card border-0" style="width: 100%;">
+            <!--<div class="card-body">-->
+             <%= link_to image_tag(room.pictures[0], :alt=>'Room image', :width=>"100%", :class => "index-room-img"), room_path(room) %>
+             <ul class="homepage-info">
+               <div class="row">
+                <h5 style="font-weight: bold; text-overflow: ellipsis; white-space: nowrap;
+                overflow: hidden;" class="col-md-9"><%= room.room_name %></h5>
+                <h6 class="col-md-3 right-corner" style="white-space: nowrap; font-weight: bold">
+                  $<%= room.cost_per_night %></h6>
+                </div>
+                <li>Address: <%= room.address %></li>
+                <li>Contact: <%= room.contact_host %></li>
+                <li>Reviews: <%= room.comments.count %></li>
+                 <!--to fix-->
+                <li><%= link_to "More detail", room_path(room.id) %></li>
+                
+              <br>
+              
+              <li>
+                <% if !room.ratings.blank? %>
+                  <% for i in 1..5 %>
+                      <% if i > room.ratings.average(:stars) %>
+                      <i class="fas fa-star"></i>
+                      <% else %>
+                      <i class="fas fa-star rated"></i>
+                      <% end %>
+                  <% end %>
+                  <%= number_with_precision(room.ratings.average(:stars), :precision => 1) %>
                   <% else %>
                 No ratings.
                 <% end %>
